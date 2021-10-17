@@ -24,5 +24,9 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
   profiles:
     include: oauth
+

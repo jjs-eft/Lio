@@ -1,8 +1,13 @@
 {
   let header = `<footer class="footer">
-  <span class="footer__content"
-    >2021 © link in one. All rights reserved.</span
-  >
+  <div>
+    <span class="footer__content footer__content-cl"
+      >2021 © link in one. All rights reserved.</span
+    >
+    <p class="footer__content"
+      >문의: lio.email.service@gmail.com</p
+    >
+  </div>
 </footer>`
 document.write(header);
 }

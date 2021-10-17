@@ -13,58 +13,41 @@ public class MemberController {
     private MemberService memberService;
 
     // 메인 페이지
-    @GetMapping("/user/")
+    @GetMapping("/")
     public String index() {
         return "/index";
     }
 
-    // 회원가입 페이지
-    @GetMapping("/user/signup")
-    public String dispSignup() {
-        return "/signup";
+    @GetMapping("/recently-trend.html")
+    public String trend() {
+        return "/recently-trend.html";
     }
 
+    @GetMapping("/service-introduction.html")
+    public String introduction() {
+        return "/service-introduction.html";
+    }
+
+
     // 회원가입 처리
-    @PostMapping("/user/signup")
+    @PostMapping("/login-modal-signup")
     public String execSignup(MemberDto memberDto) {
         memberService.joinUser(memberDto);
 
-        return "redirect:/user/login";
+        return "redirect:/#open-login-modal";
     }
 
-    // 로그인 페이지
-    @GetMapping("/user/login")
-    public String dispLogin() {
-        return "/login";
+    @GetMapping("/user-info-modify.html")
+    public String dispUserInfo(){
+        return "user-info-modify.html";
     }
 
-    // 로그인 결과 페이지
-    @GetMapping("/user/login/result")
-    public String dispLoginResult() {
-        return "/loginSuccess";
+    @GetMapping("/user-info-message.html")
+    public String dispMessage(){
+        return "user-info-message.html";
     }
 
-    // 로그아웃 결과 페이지
-    @GetMapping("/user/logout/result")
-    public String dispLogout() {
-        return "/logout";
-    }
 
-    // 접근 거부 페이지
-    @GetMapping("/user/denied")
-    public String dispDenied() {
-        return "/denied";
-    }
 
-    // 내 정보 페이지
-    @GetMapping("/user/info")
-    public String dispMyInfo() {
-        return "/myinfo";
-    }
 
-    // 어드민 페이지
-    @GetMapping("/admin")
-    public String dispAdmin() {
-        return "/admin";
-    }
 }

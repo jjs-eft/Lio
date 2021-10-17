@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,19 +26,37 @@ public class BoardService {
     private static final int PAGE_POST_COUNT = 4;       // 한 페이지에 존재하는 게시글 수
 
 
+
     @Transactional
     public List<BoardDto> getBoardlist(Integer pageNum) {
-        Page<BoardEntity> page = boardRepository.findAll(PageRequest.of(pageNum - 1, PAGE_POST_COUNT, Sort.by(Sort.Direction.ASC, "createdDate")));
+            Page<BoardEntity> page = boardRepository.findAll(PageRequest.of(pageNum - 1, PAGE_POST_COUNT, Sort.by(Sort.Direction.ASC, "createdDate")));
+            List<BoardEntity> boardEntities = page.getContent();
+            List<BoardDto> boardDtoList = new ArrayList<>();
 
+            for (BoardEntity boardEntity : boardEntities) {
+                if(boardEntity.getBoard_id() == 1) {
+                    boardDtoList.add(this.convertEntityToDto(boardEntity));
+                }
+            }
+
+            return boardDtoList;
+        }
+
+    @Transactional
+    public List<BoardDto> getBoardlist2(Integer pageNum) {
+        Page<BoardEntity> page = boardRepository.findAll(PageRequest.of(pageNum - 1, PAGE_POST_COUNT, Sort.by(Sort.Direction.ASC, "createdDate")));
         List<BoardEntity> boardEntities = page.getContent();
         List<BoardDto> boardDtoList = new ArrayList<>();
 
         for (BoardEntity boardEntity : boardEntities) {
-            boardDtoList.add(this.convertEntityToDto(boardEntity));
+            if(boardEntity.getBoard_id() == 2) {
+                boardDtoList.add(this.convertEntityToDto(boardEntity));
+            }
         }
 
         return boardDtoList;
     }
+
 
     @Transactional
     public Long getBoardCount() {

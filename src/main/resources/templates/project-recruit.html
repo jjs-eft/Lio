@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link In One</title>
+    <link rel="stylesheet" href="../CSS/reset.css" />
+    <link rel="stylesheet" href="../CSS/style.css" />
+    <script src="../plugin/ckeditor.js"></script>
+  </head>
+  <body>
+    <!-- start login-modal -->
+    <script src="../JS/login-modal.js"></script>
+    <!-- end login-modal -->
+    <!-- start header -->
+    <script src="../JS/header.js"></script>
+    <!-- end header -->
+    <!-- start main -->
+    <div class="main">
+      <!-- start tab -->
+      <div class="tab-ly">
+        <ul class="tab">
+          <li class="tab__item">
+            <a href="study-find.html" class="tab__link">스터디 찾기</a>
+          </li>
+          <li class="tab__item">
+            <a href="project-find.html" class="tab__link tab__link_active"
+              >프로젝트 찾기</a
+            >
+          </li>
+        </ul>
+      </div>
+      <!-- end tab -->
+      <div class="main-preview">
+        <h2 class="group-head-title group-head underline underline_size-4">
+          프로젝트 모집 글 작성
+        </h2>
+        <form action="" class="recruit">
+          <h3 class="recruit__header">새로운 프로젝트 만들기</h3>
+          <div class="recruit-content">
+            <label for="" class="recruit-content__label">New Project</label>
+            <input
+              type="text"
+              placeholder="ex) 제목"
+              class="recruit-content__input recruit-content__input_full"
+            />
+            <label for="" class="recruit-content__label"
+              >프로젝트 간략 설명</label
+            >
+            <input
+              type="text"
+              placeholder="ex) python 알고리즘 스터디"
+              class="recruit-content__input recruit-content__input_full"
+            />
+            <label for="" class="recruit-content__label">인원</label>
+            <input
+              type="number"
+              name=""
+              id=""
+              value="0"
+              class="recruit-content__input"
+            />
+            <label for="" class="recruit-content__label">언어</label>
+            <select name="" id="" class="recruit-content__input">
+              <option value="python">python</option>
+              <option value="python">java</option>
+            </select>
+            <label for="" class="recruit-content__label">태그</label>
+            <input
+              type="text"
+              name=""
+              id=""
+              value=""
+              class="recruit-content__input"
+              placeholder="태그1, 태그2 ..."
+            />
+            <label for="" class="recruit-content__label">내용</label>
+            <div id="editor" class="editor-form"></div>
+
+            <div class="recruit-content__btn-group">
+              <input
+                type="submit"
+                class="recruit-content__btn recruit-content__btn_submit"
+                value="등록"
+              />
+              <a
+                href="project-find.html"
+                class="recruit-content__btn recruit-content__btn_cancel"
+                >취소</a
+              >
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- footer -->
+    <script src="../JS/footer.js"></script>
+    <script>
+      ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
+        console.error(error);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link In One</title>
+    <link rel="stylesheet" href="../CSS/reset.css" />
+    <link rel="stylesheet" href="../CSS/style.css" />
+    <script src="../plugin/ckeditor.js"></script>
+  </head>
+  <body>
+    <!-- start login-modal -->
+    <script src="../JS/login-modal.js"></script>
+    <!-- end login-modal -->
+    <!-- start header -->
+    <script src="../JS/header.js"></script>
+    <!-- end header -->
+    <!-- start main -->
+    <div class="main">
+      <div class="main-preview">
+        <h2 class="group-head-title group-head underline underline_size-2">
+          문의 사항 작성
+        </h2>
+        <form action="" class="recruit">
+          <h3 class="recruit__header">문의 사항 작성</h3>
+          <div class="recruit-content">
+            <label for="" class="recruit-content__label">오류 사항 문의</label>
+            <input
+              type="text"
+              placeholder="ex) 자유롭게 작성해주세요."
+              class="recruit-content__input recruit-content__input_full"
+            />
+            <label for="" class="recruit-content__label">첨부 파일</label>
+            <input
+              type="file"
+              placeholder="ex) file.jpg"
+              class="recruit-content__input"
+            />
+            <label for="" class="recruit-content__label">내용</label>
+            <div id="editor" class="editor-form"></div>
+
+            <div class="recruit-content__btn-group">
+              <input
+                type="submit"
+                class="recruit-content__btn recruit-content__btn_submit"
+                value="등록"
+              />
+              <a
+                href="index.html"
+                class="recruit-content__btn recruit-content__btn_cancel"
+                >취소</a
+              >
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- footer -->
+    <script src="../JS/footer.js"></script>
+    <script>
+      ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
+        console.error(error);
+      });
+    </script>
+  </body>
+</html>

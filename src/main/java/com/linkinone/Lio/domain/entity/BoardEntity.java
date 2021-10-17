@@ -30,13 +30,17 @@ public class BoardEntity extends TimeEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    @Column(length = 100, nullable = true)
+    private String tag;
+
     @Builder
-    public BoardEntity(Long post_id, Long board_id, String writer, String title, String content) {
+    public BoardEntity(Long post_id, Long board_id, String writer, String title, String content, String tag) {
         this.post_id = post_id;
         this.board_id = board_id;
         this.writer = writer;
         this.title = title;
         this.content = content;
+        this.tag = tag;
 
     }
 
