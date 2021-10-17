@@ -1,7 +1,6 @@
 package com.linkinone.Lio.data;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -10,25 +9,16 @@ import java.util.ArrayList;
 
 
 public class DataDAO {
-	Connection conn = null;
 
-	public DataDAO() {
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			String url = "jdbc:mysql://localhost:3306/liodb?serverTimezone=UTC&characterEncoding=UTF-8";
-			conn = DriverManager.getConnection(url, "root", "lio1232");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	public ArrayList<DataDTO> getLangList(String type){
 		ArrayList<DataDTO> dataList = null;
+		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String SQL ="select techName, count(*) from "+type+" join tech on "+type+".techID = tech.techID group by tech.techID;";
 		try {
+			conn = DBManager.connect();
 			pstmt = conn.prepareStatement(SQL);
 			rs = pstmt.executeQuery();
 			
@@ -43,19 +33,8 @@ public class DataDAO {
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				
-				if (pstmt != null)
-					pstmt.close();
-				
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+			DBManager.close(conn, pstmt, rs);
 			}
-		}
 		return dataList; 
 	}//getChatList END
 	

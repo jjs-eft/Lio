@@ -1,5 +1,7 @@
 package com.linkinone.Lio.chat;
 
+import com.linkinone.Lio.data.DBManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,18 +12,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class ChatDAO {
-	// 유저 데이터베이스
-	DataSource dataSource;
 
-	public ChatDAO() {
-		try {
-			InitialContext initContext = new InitialContext();
-			Context evnContext = (Context) initContext.lookup("java:/comp/env");
-			dataSource = (DataSource) evnContext.lookup("jdbc//UserChat");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
 	//쳇 가져오기
 	public ArrayList<ChatDTO> getChatListByID(String fromID, String toID,String chatID){
@@ -31,7 +22,7 @@ public class ChatDAO {
 		ResultSet rs = null;
 		String SQL ="SELECT * FROM CHAT WHERE ((fromID = ? AND toID = ?) OR (fromID = ? AND toID = ?)) AND chatID > ? ORDER BY chatTime";
 		try {
-			conn = dataSource.getConnection();
+			conn = DBManager.connect();
 			pstmt =conn.prepareStatement(SQL);
 			pstmt.setString(1, fromID);
 			pstmt.setString(2, toID);
@@ -60,18 +51,7 @@ public class ChatDAO {
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				
-				if (pstmt != null)
-					pstmt.close();
-				
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			DBManager.close(conn, pstmt, rs);
 		}
 		return chatList; // 리스트 반환
 	}//getChatList END
@@ -84,7 +64,7 @@ public class ChatDAO {
 		ResultSet rs = null;
 		String SQL ="SELECT * FROM CHAT WHERE ((fromID = ? AND toID = ?) OR (fromID = ? AND toID = ?)) AND chatID > (SELECT MAX(chatID) - ? FROM CHAT WHERE (fromID = ? AND toID = ?) OR (fromID = ? AND toID = ?)) ORDER BY chatTime";
 		try {
-			conn = dataSource.getConnection();
+			conn = DBManager.connect();
 			pstmt =conn.prepareStatement(SQL);
 			pstmt.setString(1, fromID);
 			pstmt.setString(2, toID);
@@ -117,18 +97,7 @@ public class ChatDAO {
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				
-				if (pstmt != null)
-					pstmt.close();
-				
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			DBManager.close(conn, pstmt, rs);
 		}
 		return chatList; // 리스트 반환
 	}//getChatListRec END
@@ -141,7 +110,7 @@ public class ChatDAO {
 			ResultSet rs = null;
 			String SQL = "SELECT * FROM CHAT WHERE chatID IN(SELECT MAX(chatID) FROM CHAT WHERE toID = ? OR fromID = ? GROUP BY fromID, toID);";
 			try {
-				conn = dataSource.getConnection();
+				conn = DBManager.connect();
 				pstmt =conn.prepareStatement(SQL);
 				pstmt.setString(1, userID);
 				pstmt.setString(2, userID);
@@ -183,18 +152,7 @@ public class ChatDAO {
 			}catch (Exception e) {
 				e.printStackTrace();
 			} finally {
-				try {
-					if (rs != null)
-						rs.close();
-					
-					if (pstmt != null)
-						pstmt.close();
-					
-					if (conn != null)
-						conn.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				DBManager.close(conn, pstmt, rs);
 			}
 			return chatList; // 리스트 반환
 		}//getChatListRec END
@@ -206,7 +164,7 @@ public class ChatDAO {
 		ResultSet rs = null;
 		String SQL ="INSERT INTO CHAT VALUES (NULL, ?, ?, ?, NOW(), 0)";
 		try {
-			conn = dataSource.getConnection();
+			conn = DBManager.connect();
 			pstmt =conn.prepareStatement(SQL);
 			pstmt.setString(1, fromID);
 			pstmt.setString(2, toID);
@@ -215,18 +173,7 @@ public class ChatDAO {
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				
-				if (pstmt != null)
-					pstmt.close();
-				
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			DBManager.close(conn, pstmt, rs);
 		}
 		return -1; // 데이터베이스 오류
 	}//getChatListRec END
@@ -238,7 +185,7 @@ public class ChatDAO {
 		ResultSet rs = null;
 		String SQL ="UPDATE CHAT SET chatRead = 1 WHERE (fromID = ? AND toID =?)";
 		try {
-			conn = dataSource.getConnection();
+			conn = DBManager.connect();
 			pstmt =conn.prepareStatement(SQL);
 			pstmt.setString(1, toID);
 			pstmt.setString(2, fromID);
@@ -246,18 +193,7 @@ public class ChatDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			try {
-				if (rs != null)
-					rs.close();
-				
-				if (pstmt != null)
-					pstmt.close();
-				
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			DBManager.close(conn, pstmt, rs);
 		}
 		return -1; // 데이터베이스 오류
 	}
@@ -269,7 +205,7 @@ public class ChatDAO {
 		ResultSet rs = null;
 		String SQL ="SELECT COUNT(chatID) FROM CHAT WHERE toID = ? AND chatRead =0";
 		try {
-			conn = dataSource.getConnection();
+			conn = DBManager.connect();
 			pstmt =conn.prepareStatement(SQL);
 			pstmt.setString(1, userID);
 			rs = pstmt.executeQuery();
@@ -280,18 +216,7 @@ public class ChatDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			try {
-				if (rs != null)
-					rs.close();
-				
-				if (pstmt != null)
-					pstmt.close();
-				
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			DBManager.close(conn, pstmt, rs);
 		}
 		return -1; // 데이터베이스 오류
 	}
@@ -303,7 +228,7 @@ public class ChatDAO {
 		ResultSet rs = null;
 		String SQL ="SELECT COUNT(chatID) FROM CHAT WHERE fromID = ? AND toID = ? AND chatRead =0";
 		try {
-			conn = dataSource.getConnection();
+			conn = DBManager.connect();
 			pstmt =conn.prepareStatement(SQL);
 			pstmt.setString(1, fromID);
 			pstmt.setString(2, toID);
@@ -315,18 +240,7 @@ public class ChatDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			try {
-				if (rs != null)
-					rs.close();
-				
-				if (pstmt != null)
-					pstmt.close();
-				
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			DBManager.close(conn, pstmt, rs);
 		}
 		return -1; // 데이터베이스 오류
 	}

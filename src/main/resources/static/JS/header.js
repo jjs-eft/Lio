@@ -45,7 +45,7 @@
       </ul>
     </li>
     <li class="nav__item">
-      <a href="/recently-trend.html" class="nav__item-title">최근트렌드</a>
+      <a href="/DataTrendServlet" class="nav__item-title">최근트렌드</a>
     </li>
     <li class="nav__item">
       <a href="#open-login-modal" class="nav__item-title nav__link_login"

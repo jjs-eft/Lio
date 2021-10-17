@@ -45,7 +45,7 @@
       </ul>
     </li>
     <li class="nav__item">
-      <a href="/recently-trend.html" class="nav__item-title">최근트렌드</a>
+      <a href="/DataTrendServlet" class="nav__item-title">최근트렌드</a>
     </li>
     <li class="nav__item" id="user-info">
     <a href="#user-info" class="nav__item-title">회원 정보</a>
@@ -56,7 +56,7 @@
         >
       </li>
       <li class="nav-sub__item">
-        <a href="/user-info-message.html" class="nav__link"
+        <a href="/ChatBoxServlet" class="nav__link"
           >메시지</a
         >
       </li>

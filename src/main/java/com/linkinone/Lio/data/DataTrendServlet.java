@@ -25,12 +25,13 @@ public class DataTrendServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		String a = request.getParameter("contentPage");
 
+		System.out.print("확인");
 		String json = null;
-		if(a.equals("/WEB-INF/jsp/graph/userTrend.jsp")) {
+		if(a.equals("graph/userTrend.jsp")) {
 			json = getLang("Mapping_user");
-		} else if(a.equals("/WEB-INF/jsp/graph/boardTrend.jsp")) {
+		} else if(a.equals("graph/boardTrend.jsp")) {
 			json = getLang("Mapping_board");
-		} else if(a.equals("/WEB-INF/jsp/graph/langUserTrend.jsp")) {
+		} else if(a.equals("graph/langUserTrend.jsp")) {
 			String lang = request.getParameter("languge"); 
 			if(lang.equals("undefined")) {
 				lang="C";
@@ -41,7 +42,7 @@ public class DataTrendServlet extends HttpServlet {
 			json = getLang2("Mapping_user", lang);
 			
 			request.setAttribute("languge", lang);
-		} else if(a.equals("/WEB-INF/jsp/graph/langBoardTrend.jsp")) {
+		} else if(a.equals("graph/langBoardTrend.jsp")) {
 			String lang = request.getParameter("languge"); 
 			if(lang.equals("undefined")) {
 				lang="C";
@@ -71,7 +72,7 @@ public class DataTrendServlet extends HttpServlet {
 			if(i != dataList.size() -1) result.append(",");
 		}
 		result.append("]}");
-		System.out.print(result);
+
 		return result.toString();
 	}
 	
@@ -81,13 +82,14 @@ public class DataTrendServlet extends HttpServlet {
 		result.append("{\"type\":\"string\"},{\"type\":\"number\"}],");
 		result.append("\"rows\":[");
 		ArrayList<LangDTO> dataList = new LangDAO().getLangList(type, lang);
-		if(dataList.size() == 0) return "";
+		if(dataList == null) return "";
 		for(int i = 0; i <dataList.size(); i++) {
 			result.append("{\"c\":[{\"v\":\""+  dataList.get(i).getDate() + "\"},");
 			result.append("{\"v\":"+  dataList.get(i).getData() + "}]}");
 			if(i != dataList.size() -1) result.append(",");
 		}
 		result.append("]}");
+		System.out.print(result);
 		return result.toString();
 	}
 

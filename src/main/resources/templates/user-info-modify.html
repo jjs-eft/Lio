@@ -1,12 +1,16 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:sec="" xmlns:th="http://www.w3.org/1999/xhtml">
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <title>Link In One</title>
     <link rel="stylesheet" href="../CSS/reset.css" />
     <link rel="stylesheet" href="../CSS/style.css" />
+    <script src="/JS/bootstrap.js"></script>
+    <script src="/JS/researchList.js"></script>
     <style></style>
   </head>
   <body>
@@ -140,7 +144,7 @@
         </div>
       </div>
     </form>
-    <form action="" method="POST">
+    <form action="/ResearchAddServlet" method="POST">
       <div
               class="login-modal"
               id="tech-modal"
@@ -161,20 +165,23 @@
           <!-- tech select -->
           <select name="tech" id="tech" class="modal-content__input">
             <option value="선택없음">선택없음</option>
+            <option value="C">C</option>
+            <option value="C++">C++</option>
+            <option value="C#">C#</option>
             <option value="Python">Python</option>
-            <option value="Java">Java</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="Visual_Basic">Visual_Basic</option>
+            <option value="PHP">PHP</option>
+            <option value="R">R</option>
+            <option value="SQL">SQL</option>
+            <option value="Groovy">Groovy</option>
+            <option value="Perl">Perl</option>
+            <option value="Go">Go</option>
+            <option value="Swift">Swift</option>
+            <option value="Ruby">Ruby</option>
+            <option value="Kotlin">Kotlin</option>
           </select>
-          <div class="">
-            <span class="tag"
-            >Python<img
-                    src="/img/close_white_24dp.svg"
-                    class="tag__close-btn"
-            /></span>
-            <span class="tag"
-            >Java<img
-                    src="/img/close_white_24dp.svg"
-                    class="tag__close-btn"
-            /></span>
+          <div class="research_list" id="research_list">
           </div>
           <input
                   type="submit"
@@ -260,10 +267,8 @@
             </div> -->
             <div class="user-info__tech">
               <label class="user-info__label">관심 언어</label>
-              <span class="tag">Java</span>
-              <span class="tag">Python</span>
-              <span class="tag">C</span>
-              <span class="tag">C++</span>
+              <div id="user_research_list">
+              </div>
             </div>
           </div>
           <div class="user-info__content content_right">

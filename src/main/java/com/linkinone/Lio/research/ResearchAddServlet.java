@@ -13,10 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/ResearchAddServlet")
 public class ResearchAddServlet extends HttpServlet {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -28,7 +24,7 @@ public class ResearchAddServlet extends HttpServlet {
 			DB.insertResearch(request, DB.getTechnum(request));
 		}
 		
-		response.sendRedirect("HTML/user-info-modify.html?#tech-modal");
+		response.sendRedirect("/user-info-modify.html#tech-modal");
 	}
 }
 	

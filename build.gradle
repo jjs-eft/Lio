@@ -25,8 +25,8 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lmbok'
 
+	implementation 'org.springframework.security:spring-security-taglibs:4.0.4.RELEASE'
 
-	implementation group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation 'javax.servlet:jstl'
 

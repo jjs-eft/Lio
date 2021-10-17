@@ -2,7 +2,7 @@
 function researchListFunction(){
     	$.ajax({
     		type : "POST",
-    		url : "/LIO/ResearchListServlet",
+    		url : "/ResearchListServlet",
     		success : function(data) {
     			if (data == "")
     				return;
@@ -17,11 +17,25 @@ function researchListFunction(){
     }
 
 function addResearch(userLang) {
-	$('#research_list').append(
-		'<span class="tag">' + userLang +
-		'<img src="/LIO/img/close_white_24dp.svg" class="tag__close-btn" onclick="location.href=\'/LIO/ResearchDeleteServlet?tech='+userLang+'\'"/>' +
-		'</span>'
-	);
+	if(userLang == "C#"){
+		$('#research_list').append(
+			'<span class="tag">' + userLang +
+			'<img src="/img/close_white_24dp.svg" class="tag__close-btn" onclick="location.href=\'/ResearchDeleteServlet?tech=C%23\'"/>' +
+			'</span>'
+		);
+	}else if(userLang == "C++"){
+		$('#research_list').append(
+			'<span class="tag">' + userLang +
+			'<img src="/img/close_white_24dp.svg" class="tag__close-btn" onclick="location.href=\'/ResearchDeleteServlet?tech=C%2B%2B\'"/>' +
+			'</span>'
+		);
+	}else{
+	   $('#research_list').append(
+		   '<span class="tag">' + userLang +
+		   '<img src="/img/close_white_24dp.svg" class="tag__close-btn" onclick="location.href=\'/ResearchDeleteServlet?tech='+userLang+'\'"/>' +
+		   '</span>'
+	   );
+   }
 	
 	$('#user_research_list').append(
 		'<span class="tag">' + userLang + '</span>'

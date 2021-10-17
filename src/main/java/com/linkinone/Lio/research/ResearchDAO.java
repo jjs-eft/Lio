@@ -4,43 +4,29 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
 
 
-import com.linkinone.Lio.data.DataDTO;
+
+import com.linkinone.Lio.data.DBManager;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 public class ResearchDAO {
-	DataSource dataSource;
-	
-
-	public ResearchDAO() {
-		try {
-			InitialContext initContext = new InitialContext();
-			Context evnContext = (Context) initContext.lookup("java:/comp/env");
-			dataSource = (DataSource) evnContext.lookup("jdbc//UserChat");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	public ArrayList<Integer>  getUserLang(HttpServletRequest request) {
 		Connection conn = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
-		
-		HttpSession hs = request.getSession();
-		String userID =(String) hs.getAttribute("userID");
-		
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userID = auth.getName();
+
 		String SQL ="select techID from Mapping_user where userID = ?";
 		ArrayList<Integer> userLang = new ArrayList<Integer>();
 		
 		try {
-			conn = dataSource.getConnection();
+			conn = DBManager.connect();
 			pstmt =conn.prepareStatement(SQL);
 			pstmt.setString(1, userID);
 			rs = pstmt.executeQuery();
@@ -53,18 +39,7 @@ public class ResearchDAO {
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				
-				if (pstmt != null)
-					pstmt.close();
-				
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			DBManager.close(conn,pstmt,rs);
 		}
 		return userLang;
 	}//getChatList END
@@ -73,13 +48,13 @@ public class ResearchDAO {
 		Connection conn = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
-		
-		HttpSession hs = request.getSession();
-		String userID =(String) hs.getAttribute("userID");
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userID = auth.getName();
 		
 		String SQL ="insert into Mapping_user value(?, ?, now())";
 		try {
-			conn = dataSource.getConnection();
+			conn = DBManager.connect();
 			pstmt =conn.prepareStatement(SQL);
 			pstmt =conn.prepareStatement(SQL);
 			pstmt.setString(1, userID);
@@ -96,18 +71,7 @@ public class ResearchDAO {
 			System.out.println("db 에러");
 
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				
-				if (pstmt != null)
-					pstmt.close();
-				
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			DBManager.close(conn,pstmt,rs);
 		}
 	}//getChatList END
 	
@@ -115,14 +79,14 @@ public class ResearchDAO {
 		Connection conn = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
-		
-		HttpSession hs = request.getSession();
-		String userID =(String) hs.getAttribute("userID");
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userID = auth.getName();
 		
 		String SQL ="delete from Mapping_user where userID = ? and techID = ?";
 		ArrayList<String> userLang = new ArrayList<String>();
 		try {
-			conn = dataSource.getConnection();
+			conn = DBManager.connect();
 			pstmt =conn.prepareStatement(SQL);
 			pstmt.setString(1, userID);
 			pstmt.setInt(2, no);
@@ -138,18 +102,7 @@ public class ResearchDAO {
 			e.printStackTrace();
 			System.out.println("db 에러");
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				
-				if (pstmt != null)
-					pstmt.close();
-				
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			DBManager.close(conn,pstmt,rs);
 		}
 	}
 
@@ -157,16 +110,16 @@ public class ResearchDAO {
 		Connection conn = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
-		
-		HttpSession hs = request.getSession();
-		String userID =(String) hs.getAttribute("userID");
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userID = auth.getName();
 
 		
 		String SQL ="select userID,techName from Mapping_user m join tech t on m.techID = t.techID  where userID = ? and techName = ?";
 		ArrayList<Integer> userLang = new ArrayList<Integer>();
 		
 		try {
-			conn = dataSource.getConnection();
+			conn = DBManager.connect();
 			pstmt =conn.prepareStatement(SQL);
 			pstmt.setString(1, userID);
 			pstmt.setString(2, request.getParameter("tech"));
@@ -183,18 +136,7 @@ public class ResearchDAO {
 			e.printStackTrace();
 			return true;
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				
-				if (pstmt != null)
-					pstmt.close();
-				
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			DBManager.close(conn,pstmt,rs);
 		}
 	}
 
@@ -202,16 +144,16 @@ public class ResearchDAO {
 		Connection conn = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
-		
-		HttpSession hs = request.getSession();
-		String userID =(String) hs.getAttribute("userID");
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userID = auth.getName();
 		
 		String SQL ="select techID from tech where techname = ?";
 		ArrayList<Integer> userLang = new ArrayList<Integer>();
 		
 		try {
-			conn = dataSource.getConnection();
-			pstmt =conn.prepareStatement(SQL);
+			conn = DBManager.connect();
+			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, request.getParameter("tech"));
 			rs = pstmt.executeQuery();
 			
@@ -226,18 +168,7 @@ public class ResearchDAO {
 			e.printStackTrace();
 			return -1;
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				
-				if (pstmt != null)
-					pstmt.close();
-				
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			DBManager.close(conn,pstmt,rs);
 		}
 	}
 	
@@ -248,7 +179,7 @@ public class ResearchDAO {
 		ResultSet rs = null;
 		String SQL ="select techName from Mapping_user m join tech t on m.techID = t.techID  where userID = ? order by t.techID";
 		try {
-			conn = dataSource.getConnection();
+			conn = DBManager.connect();
 			pstmt =conn.prepareStatement(SQL);
 			pstmt.setString(1, userID);
 			rs = pstmt.executeQuery();
@@ -258,18 +189,7 @@ public class ResearchDAO {
 		}catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				
-				if (pstmt != null)
-					pstmt.close();
-				
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			DBManager.close(conn,pstmt,rs);
 		}
 		return ResearchList; // 리스트 반환
 	}

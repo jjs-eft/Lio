@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/ChatListServlet")
 public class ChatListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			request.getRequestDispatcher("/WEB-INF/jsp/chat.jsp").forward(request, response);
+	}
    
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
 		request.setCharacterEncoding("UTF-8");

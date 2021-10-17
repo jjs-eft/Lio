@@ -9,10 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 
 import com.linkinone.Lio.chat.ChatDAO;
 import com.linkinone.Lio.chat.ChatDTO;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @WebServlet("/ResearchListServlet")
 public class ResearchListServlet extends HttpServlet {
@@ -24,9 +26,9 @@ public class ResearchListServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		
-		HttpSession hs = request.getSession();
-		String userID =(String) hs.getAttribute("userID");
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userID = auth.getName();
 		
 		//사용자 대상자 메시지중 하나라도 값이 없다면
 		if(userID == null || userID.equals(""))

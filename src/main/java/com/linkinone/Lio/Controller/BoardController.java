@@ -34,15 +34,19 @@ public class BoardController {
 
     //자유게시판
     @GetMapping("/board-free.html")
-    public String board_free(Model model, Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        model.addAttribute("author",userDetails.getUsername());
+    public String board_free(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
+        List<BoardDto> boardList = boardService.getBoardlist(pageNum);
+        Integer[] pageList = boardService.getPageList(pageNum);
 
+        model.addAttribute("boardList", boardList);
+        model.addAttribute("pageList", pageList);
         return "/board-free.html";
     }
 
     @GetMapping("/board-free-write.html")
-    public String board_free_write() {
+    public String board_free_write(Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
         return "/board-free-write.html";
     }
 
@@ -75,6 +79,18 @@ public class BoardController {
     public String board_notice_write() {
         return "/board-notice-write.html";
     }
+
+    @GetMapping("/study-recruit.html")
+    public String study_recruit() {
+        return "/study-recruit.html";
+    }
+
+
+    @GetMapping("/study-project-content.html")
+    public String study_project_content() {
+        return "/study-project-content.html/";
+    }
+
 }
 
     /* 게시글 목록

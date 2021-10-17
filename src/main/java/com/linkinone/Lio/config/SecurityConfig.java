@@ -51,7 +51,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .and()
                 // 403 예외처리 핸들링
-                .exceptionHandling().accessDeniedPage("/user/denied");
+                .exceptionHandling().accessDeniedPage("/user/denied")
+                .and()
+                .csrf()
+                .ignoringAntMatchers("/ChatBoxServlet")
+                .ignoringAntMatchers("/ChatListServlet")
+                .ignoringAntMatchers("/ChatSubmitServlet")
+                .ignoringAntMatchers("/ChatUnreadServlet")
+                .ignoringAntMatchers("/ResearchAddServlet")
+                .ignoringAntMatchers("/ResearchListServlet")
+                .ignoringAntMatchers("/user-info-modify.html");
+
+
     }
 
     @Override
