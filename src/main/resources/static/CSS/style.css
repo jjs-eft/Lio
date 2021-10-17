@@ -1,6 +1,32 @@
 @font-face {
   font-family: noto-sans;
+  src: url(../Noto_Sans_KR/NotoSansKR-Thin.otf);
+  font-weight: 100;
+}
+@font-face {
+  font-family: noto-sans;
+  src: url(../Noto_Sans_KR/NotoSansKR-Light.otf);
+  font-weight: 300;
+}
+@font-face {
+  font-family: noto-sans;
   src: url(../Noto_Sans_KR/NotoSansKR-Regular.otf);
+  font-weight: 400;
+}
+@font-face {
+  font-family: noto-sans;
+  src: url(../Noto_Sans_KR/NotoSansKR-Medium.otf);
+  font-weight: 500;
+}
+@font-face {
+  font-family: noto-sans;
+  src: url(../Noto_Sans_KR/NotoSansKR-Bold.otf);
+  font-weight: 700;
+}
+@font-face {
+  font-family: noto-sans;
+  src: url(../Noto_Sans_KR/NotoSansKR-Black.otf);
+  font-weight: 900;
 }
 body {
   font-family: noto-sans;
@@ -828,6 +854,10 @@ body {
   padding: 0.1em 1em;
   color: white;
   width: fit-content;
+  margin: 0 5px 5px 0;
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
 }
 .tag__close-btn {
   width: 14px;
@@ -1220,4 +1250,151 @@ body {
   border-bottom: 0.5px solid #707070;
   padding-bottom: 10px;
   margin-bottom: 40px;
+}
+/* service-introduction block */
+.intro {
+  padding: 0;
+}
+.intro-content-top {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: ; */
+  text-align: center;
+  background-color: #195090;
+  padding: 120px 0 60px 0;
+  color: white;
+}
+.intro-content-top__img {
+  width: 100%;
+  max-width: 800px;
+}
+.intro-content-top__sub-title {
+  font-size: 28px;
+  line-height: 28px;
+  margin-bottom: 10px;
+}
+.intro-content-top__main-title {
+  font-size: 48px;
+  line-height: 48px;
+  letter-spacing: 10px;
+  margin-bottom: 50px;
+}
+.intro-content-top__desc {
+  font-size: 24px;
+  line-height: 32px;
+}
+.intro-content-middle__container {
+  margin-top: 120px;
+  padding: 0 100px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 150px;
+}
+.intro-content-middle__title {
+  color: #195090;
+  font-size: 24px;
+}
+.intro-content-middle__img {
+  width: 100%;
+  max-width: 100px;
+  margin: 30px 0;
+}
+.intro-content-middle__desc {
+  color: #195090;
+  font-size: 18px;
+  line-height: 26px;
+}
+.intro-content-middle__main-title {
+  font-size: 48px;
+  line-height: 48px;
+  letter-spacing: 10px;
+  margin-bottom: 50px;
+  text-align: center;
+  color: #195090;
+}
+.intro-content-middle__img2-group {
+  display: flex;
+}
+.intro-content-middle__img2 {
+  width: 50%;
+  max-width: 1000px;
+}
+.intro-content-bottom {
+  display: flex;
+  flex-wrap: wrap;
+}
+.intro-content-bottom__link1 {
+  display: block;
+  width: 50%;
+  padding: 125px 0 90px 0;
+  text-align: center;
+  text-decoration: none;
+}
+.intro-content-bottom__link1:nth-child(1) {
+  background-color: #195090;
+  color: white;
+}
+.intro-content-bottom__link1:nth-child(2) {
+  background-color: #f2f5fa;
+  color: #195090;
+}
+.intro-content-bottom__link1-desc {
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 30px;
+}
+.intro-content-bottom__link1-strong {
+  font-size: 24px;
+  font-weight: bold;
+}
+.intro-content-bottom__link2 {
+  background-image: url(../img/find_people.jpg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+  padding: 100px 0;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+}
+@media (max-width: 1023px) {
+  .intro-content-middle__container {
+    padding: 0 50px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .intro-content-middle__item {
+    text-align: center;
+    margin-bottom: 100px;
+  }
+  .intro-content-top__img {
+    max-width: 400px;
+  }
+}
+@media (max-width: 767px) {
+  .intro-content-middle__container {
+    padding: 0 1rem;
+  }
+}
+
+.label {
+  padding: 0.2em 0.6em 0.3em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25em;
+  background-color: #dd0000;
+  box-sizing: border-box;
+  margin-left: 10px;
+}
+.label:empty {
+  display: none;
 }

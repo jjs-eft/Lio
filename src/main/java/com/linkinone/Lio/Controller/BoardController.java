@@ -34,9 +34,25 @@ public class BoardController {
 
     //자유게시판
     @GetMapping("/board-free.html")
-    public String board_free() {
+    public String board_free(Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
+
         return "/board-free.html";
     }
+
+    @GetMapping("/board-free-write.html")
+    public String board_free_write() {
+        return "/board-free-write.html";
+    }
+
+    @PostMapping("/board-free-write.html")
+    public String write(BoardDto boardDto) {
+        boardService.savePost(boardDto);
+
+        return "redirect:/board-free.html";
+    }
+
 
     //질문게시판
     @GetMapping("/board-question.html")
@@ -44,12 +60,20 @@ public class BoardController {
         return "/board-question.html";
     }
 
-    //
+    @GetMapping("/board-question-write.html")
+    public String board_question_write() {
+        return "/board-question-write.html";
+    }
 
     //공지사항
     @GetMapping("/board-notice.html")
     public String board_notice() {
         return "/board-notice.html";
+    }
+
+    @GetMapping("/board-notice-write.html")
+    public String board_notice_write() {
+        return "/board-notice-write.html";
     }
 }
 

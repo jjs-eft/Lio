@@ -27,7 +27,7 @@ public class BoardEntity extends TimeEntity {
     @Column(length = 100, nullable = false)
     private String title;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     @Column(length = 100, nullable = true)
