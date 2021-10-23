@@ -1,6 +1,7 @@
 package com.linkinone.Lio.Controller;
 
 
+import com.linkinone.Lio.domain.entity.BoardEntity;
 import com.linkinone.Lio.dto.BoardDto;
 import com.linkinone.Lio.dto.CommentDto;
 import com.linkinone.Lio.service.BoardService;
@@ -34,12 +35,12 @@ public class BoardController {
 
     //자유게시판
     @GetMapping("/board-free.html")
-    public String board_free(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
-        List<BoardDto> boardList = boardService.getBoardlist(pageNum);
-        Integer[] pageList = boardService.getPageList(pageNum);
+    public String board_free(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum, BoardEntity boardEntity) {
+            List<BoardDto> boardList = boardService.getBoardlist(pageNum);
+            Integer[] pageList = boardService.getPageList(pageNum);
+            model.addAttribute("boardList", boardList);
+            model.addAttribute("pageList", pageList);
 
-        model.addAttribute("boardList", boardList);
-        model.addAttribute("pageList", pageList);
         return "/board-free.html";
     }
 
@@ -51,16 +52,32 @@ public class BoardController {
     }
 
     @PostMapping("/board-free-write.html")
-    public String write(BoardDto boardDto) {
+    public String board_free_writeEx(BoardDto boardDto) {
         boardService.savePost(boardDto);
 
         return "redirect:/board-free.html";
     }
 
+    @GetMapping("/board-free.html/{no}")
+    public String board_free_detail(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        BoardDto boardDTO = boardService.getPost(no);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
+        model.addAttribute("boardDto", boardDTO);
+
+        return "/board-free-content.html";
+    }
+
 
     //질문게시판
     @GetMapping("/board-question.html")
-    public String board_question() {
+    public String board_question(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
+        List<BoardDto> boardList2 = boardService.getBoardlist2(pageNum);
+        Integer[] pageList = boardService.getPageList(pageNum);
+
+        model.addAttribute("boardList", boardList2);
+        model.addAttribute("pageList", pageList);
+
         return "/board-question.html";
     }
 
@@ -68,6 +85,26 @@ public class BoardController {
     public String board_question_write() {
         return "/board-question-write.html";
     }
+
+    @PostMapping("/board-question-write.html")
+    public String board_question_writeEx(BoardDto boardDto) {
+        boardService.savePost(boardDto);
+
+        return "redirect:/board-question.html";
+    }
+
+    @GetMapping("/board-question.html/{no}")
+    public String board_question_detail(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        BoardDto boardDTO = boardService.getPost(no);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
+        model.addAttribute("boardDto", boardDTO);
+
+        return "/board-free-content.html";
+    }
+
+
+
 
     //공지사항
     @GetMapping("/board-notice.html")

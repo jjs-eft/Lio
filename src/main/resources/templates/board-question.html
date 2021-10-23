@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="" xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -281,7 +281,7 @@
           <h2 class="group-head-title underline underline_size-1">
             질문 게시판
           </h2>
-          <a href="../HTML/board-question-write.html" class="more-btn"
+          <a href="../board-question-write.html" class="more-btn"
             >글 쓰기</a
           >
         </div>
@@ -306,83 +306,26 @@
         </form>
         <!-- end filter-bar -->
         <!-- start board-group -->
-        <div class="card-group">
-          <div class="card-item card-item_board-ly">
-            <a href="#" class="card card_board-ly card_board-border">
-              <div class="">
-                <h3 class="card__head card__head_board_ly">
-                  제목을 입력합니다.
-                </h3>
-                <span class="card__date">2021.09.25</span>
-                <div class="tag-group">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
+
+          <div class="card-group" >
+            <div th:each="board : ${boardList}" class="card-item card-item_board-ly" >
+              <a th:href="@{'/board-question.html/' + ${board.post_id}}" class="card card_board-ly card_board-border">
+                <div class="">
+                  <h3 class="card__head card__head_board_ly">
+                    <span th:text="${board.title}"></span>
+                  </h3>
+                  <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+                  <div class="tag-group">
+                    <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
+                  </div>
                 </div>
-              </div>
-              <ul class="bulletien-info bulletien-info_board_ly">
-                <li class="bulletien-info__item">- 작성자: 신현균신현균신현</li>
-                <li class="bulletien-info__item">- 추천수: 190</li>
-                <li class="bulletien-info__item">- 조회수: 2400</li>
-                <li class="bulletien-info__item">- 댓글: 11</li>
-              </ul>
-            </a>
-          </div>
-          <div class="card-item card-item_board-ly">
-            <a href="#" class="card card_board-ly card_board-border">
-              <div class="">
-                <h3 class="card__head card__head_board_ly">
-                  제목을 입력합니다.
-                </h3>
-                <span class="card__date">2021.09.25</span>
-                <div class="tag-group">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </div>
-              <ul class="bulletien-info bulletien-info_board_ly">
-                <li class="bulletien-info__item">- 작성자: 신현균신현균신현</li>
-                <li class="bulletien-info__item">- 추천수: 190</li>
-                <li class="bulletien-info__item">- 조회수: 2400</li>
-                <li class="bulletien-info__item">- 댓글: 11</li>
-              </ul>
-            </a>
-          </div>
-          <div class="card-item card-item_board-ly">
-            <a href="#" class="card card_board-ly card_board-border">
-              <div class="">
-                <h3 class="card__head card__head_board_ly">
-                  제목을 입력합니다.
-                </h3>
-                <span class="card__date">2021.09.25</span>
-                <div class="tag-group">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </div>
-              <ul class="bulletien-info bulletien-info_board_ly">
-                <li class="bulletien-info__item">- 작성자: 신현균신현균신현</li>
-                <li class="bulletien-info__item">- 추천수: 190</li>
-                <li class="bulletien-info__item">- 조회수: 2400</li>
-                <li class="bulletien-info__item">- 댓글: 11</li>
-              </ul>
-            </a>
-          </div>
-          <div class="card-item card-item_board-ly">
-            <a href="#" class="card card_board-ly card_board-border">
-              <div class="">
-                <h3 class="card__head card__head_board_ly">
-                  제목을 입력합니다.
-                </h3>
-                <span class="card__date">2021.09.25</span>
-                <div class="tag-group">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </div>
-              <ul class="bulletien-info bulletien-info_board_ly">
-                <li class="bulletien-info__item">- 작성자: 신현균신현균신현</li>
-                <li class="bulletien-info__item">- 추천수: 190</li>
-                <li class="bulletien-info__item">- 조회수: 2400</li>
-                <li class="bulletien-info__item">- 댓글: 11</li>
-              </ul>
-            </a>
-          </div>
+                <ul class="bulletien-info bulletien-info_board_ly">
+                  <li class="bulletien-info__item">-  <span th:text="${board.writer}"></span></li>
+                  <li class="bulletien-info__item">- 추천수: 190</li>
+                  <li class="bulletien-info__item">- 조회수: 2400</li>
+                  <li class="bulletien-info__item">- 댓글: 11</li>
+                </ul>
+              </a>
         </div>
         <!-- end card-group -->
         <!-- start pagenation -->

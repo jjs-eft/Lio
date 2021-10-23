@@ -1398,3 +1398,10 @@ body {
 .label:empty {
   display: none;
 }
+
+.content__message-btn-ly {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px 0;
+}

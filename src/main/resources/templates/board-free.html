@@ -307,85 +307,33 @@
         </form>
         <!-- end filter-bar -->
         <!-- start card-group -->
-        <div class="card-group">
-          <div class="card-item card-item_board-ly">
-            <a href="#" class="card card_board-ly card_board-border">
+
+      <div class="card-group" >
+
+          <div th:each="board : ${boardList}" class="card-item card-item_board-ly" >
+            <a th:href="@{'/board-free.html/' + ${board.post_id}}" class="card card_board-ly card_board-border">
               <div class="">
                 <h3 class="card__head card__head_board_ly">
-                  제목을 입력합니다.
+                  <span th:text="${board.title}"></span>
                 </h3>
-                <span class="card__date">2021.09.25</span>
+                <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
                 <div class="tag-group">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
+                  <span th:text="${board.tag}"></span>
                 </div>
               </div>
               <ul class="bulletien-info bulletien-info_board_ly">
-                <li class="bulletien-info__item">- 작성자: 신현균신현균신현</li>
-                <li class="bulletien-info__item">- 추천수: 190</li>
-                <li class="bulletien-info__item">- 조회수: 2400</li>
+                <li class="bulletien-info__item">-  <span th:text="${board.writer}"></span></li>
+                <li class="bulletien-info__item">- 추천수: <span th:text="${board.hits}" ></span></li>
+                <li class="bulletien-info__item">- 조회수: <span th:text="${board.recommend}" ></span></li>
                 <li class="bulletien-info__item">- 댓글: 11</li>
               </ul>
             </a>
-          </div>
-          <div class="card-item card-item_board-ly">
-            <a href="#" class="card card_board-ly card_board-border">
-              <div class="">
-                <h3 class="card__head card__head_board_ly">
-                  제목을 입력합니다.
-                </h3>
-                <span class="card__date">2021.09.25</span>
-                <div class="tag-group">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </div>
-              <ul class="bulletien-info bulletien-info_board_ly">
-                <li class="bulletien-info__item">- 작성자: 신현균신현균신현</li>
-                <li class="bulletien-info__item">- 추천수: 190</li>
-                <li class="bulletien-info__item">- 조회수: 2400</li>
-                <li class="bulletien-info__item">- 댓글: 11</li>
-              </ul>
-            </a>
-          </div>
-          <div class="card-item card-item_board-ly">
-            <a href="#" class="card card_board-ly card_board-border">
-              <div class="">
-                <h3 class="card__head card__head_board_ly">
-                  제목을 입력합니다.
-                </h3>
-                <span class="card__date">2021.09.25</span>
-                <div class="tag-group">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </div>
-              <ul class="bulletien-info bulletien-info_board_ly">
-                <li class="bulletien-info__item">- 작성자: 신현균신현균신현</li>
-                <li class="bulletien-info__item">- 추천수: 190</li>
-                <li class="bulletien-info__item">- 조회수: 2400</li>
-                <li class="bulletien-info__item">- 댓글: 11</li>
-              </ul>
-            </a>
-          </div>
-          <div class="card-item card-item_board-ly">
-            <a href="#" class="card card_board-ly card_board-border">
-              <div class="">
-                <h3 class="card__head card__head_board_ly">
-                  제목을 입력합니다.
-                </h3>
-                <span class="card__date">2021.09.25</span>
-                <div class="tag-group">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </div>
-              <ul class="bulletien-info bulletien-info_board_ly">
-                <li class="bulletien-info__item">- 작성자: 신현균신현균신현</li>
-                <li class="bulletien-info__item">- 추천수: 190</li>
-                <li class="bulletien-info__item">- 조회수: 2400</li>
-                <li class="bulletien-info__item">- 댓글: 11</li>
-              </ul>
-            </a>
-          </div>
+
         </div>
+
         <!-- end card-group -->
+
+
         <!-- start pagenation -->
         <div class="pagenation">
           <img
@@ -399,11 +347,11 @@
             class="pagenation__btn"
           />
           <ul class="pagenation-list">
-            <li class="pagenation-list__item pagenation-list__item_active">
-              <span>01</span>
+            <span th:each="pageNum : ${pageList}" th:inline="text">
+              <li class="pagenation-list__item pagenation-list__item_active">
+              <a th:href="@{'/board-free.html/?page=' + ${pageNum}}">[[${pageNum}]]</a>
+            </span>
             </li>
-            <li class="pagenation-list__item"><span>02</span></li>
-            <li class="pagenation-list__item"><span>03</span></li>
           </ul>
           <img
             src="../img/pagenation-right.svg"

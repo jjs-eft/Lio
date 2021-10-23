@@ -283,24 +283,18 @@
       <div class="main-preview">
         <div class="main-group-head group-head">
           <h2 class="group-head-title underline underline_size-1">
-            자유 게시판
+          게시판
           </h2>
         </div>
         <div class="content">
-          <h3 class="content__header">제목</h3>
+          <h3 class="content__header">
+            <span th:text="${boardDto.title}"></span>
+          </h3>
           <div class="content__info">
-            <!-- 유저 아이콘 -->
-            <!-- <img
-              src=""
-              alt=""
-              class="content__info-ico"
-              width="30px"
-              height="30px"
-            /> -->
             <!-- 유저 닉네임 -->
-            <span class="content__info-nickname">nickname1234</span>
+            작성자 : <span th:text="${boardDto.writer}"> </span>
             <!-- 작성 날짜 -->
-            <span class="content__info-date">2021. 10. 11.</span>
+            <span th:inline="text"> 작성일 : [[${#temporals.format(boardDto.createdDate, 'yyyy-MM-dd HH:mm')}]] </span>
           </div>
           <div class="content__tag-group">
             <span class="tag">알고리즘</span>
@@ -310,32 +304,16 @@
         </div>
         <!-- 실제 글 내용 -->
         <article class="content__article">
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus id
-            obcaecati ullam eligendi blanditiis odio, aut adipisci nostrum ipsa
-            consequatur repellendus rerum deserunt? Voluptatibus facilis tenetur
-            quisquam culpa reiciendis, eveniet aliquam laboriosam voluptate,
-            animi rem dignissimos consequatur. Magni accusantium natus aut quos
-            provident, deleniti magnam minus nemo consequuntur omnis? Sit harum
-            ullam quasi a totam ipsam mollitia assumenda vel minus, aspernatur
-            hic accusamus molestias officia saepe pariatur cumque nulla eaque
-            quidem deserunt rem, quisquam laborum delectus earum ipsum? Corrupti
-            impedit quae accusantium esse ut veritatis sed nihil culpa sint
-            assumenda, perferendis blanditiis numquam alias repudiandae
-            consequuntur enim voluptatem. Doloribus, assumenda?
-          </p>
-          <img src="../img/ex1.jpg" alt="" width="100%" />
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
-          cupiditate iusto aut, saepe illum suscipit magni quas libero dolorum
-          eos!
+          <p th:text="${boardDto.content}" ></p>
+
         </article>
         <div class="content__article-end">
           <div class="content__article-end__left"></div>
           <div class="content__article-end__right">
             <img src="../img/visibility_black_24dp.svg" alt="" />
-            <span>조회수: 186</span>
+            조회수 : <span th:text="${boardDto.hits}"> </span>
             <img src="../img/favorite_border_black_24dp.svg" alt="" />
-            <span>추선수: 56</span>
+            추천수 : <span th:text="${boardDto.recommend}"> </span>
           </div>
         </div>
         <div class="comments-write">

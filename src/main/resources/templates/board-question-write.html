@@ -283,24 +283,28 @@
         <h2 class="group-head-title group-head underline underline_size-5">
           질문 게시글 작성
         </h2>
-        <form action="" class="recruit">
+        <form action="/board-question-write.html" class="recruit" method="post">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+          <input type="hidden" name="board_id" th:value="2">
           <h3 class="recruit__header">질문 게시글 작성</h3>
           <div class="recruit-content">
             <label for="" class="recruit-content__label">제목</label>
             <input
-              type="text"
-              placeholder="ex) 자유롭게 작성해주세요."
-              class="recruit-content__input recruit-content__input_full"
+                    type="text"
+                    name="title"
+                    placeholder="ex) 자유롭게 작성해주세요."
+                    class="recruit-content__input recruit-content__input_full"
             />
             <label for="" class="recruit-content__label">태그</label>
             <input
-              type="text"
-              name=""
-              id=""
-              value=""
-              class="recruit-content__input"
-              placeholder="태그1, 태그2 ..."
+                    type="text"
+                    name="tag"
+                    id=""
+                    value=""
+                    class="recruit-content__input"
+                    placeholder="태그1, 태그2 ..."
             />
+
             <input type="hidden" name="writer" class="form-control" id="inputAuthor" th:value="${author}">
             <label for="" class="recruit-content__label">내용</label>
             <div id="editor" class="editor-form"></div>
@@ -323,7 +327,7 @@
                       id="submit"
               />
               <a
-                      href="/board-free.html"
+                      href="/board-question.html"
                       class="recruit-content__btn recruit-content__btn_cancel"
               >취소</a
               >
