@@ -1,5 +1,6 @@
 package com.linkinone.Lio.domain.entity;
 
+import com.linkinone.Lio.domain.Role;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,8 +31,9 @@ public class MemberEntity extends TimeEntity {
     @Column(length = 50, nullable = true)
     private String nickname;
 
-    @Column(length = 100, nullable = true)
-    private String user_auth;
+    @Column(name = "userrole")
+    @Enumerated(EnumType.STRING)
+    private Role userrole = Role.MEMBER;
 
 
 
@@ -39,13 +41,13 @@ public class MemberEntity extends TimeEntity {
 
 
     @Builder
-    public MemberEntity(long mem_id, String name, String password, String email, String nickname, String user_auth) {
+    public MemberEntity(long mem_id, String name, String password, String email, String nickname, Role userrole) {
         this.mem_id = mem_id;
         this.name = name;
         this.password = password;
         this.email = email;
         this.nickname = nickname;
-        this.user_auth = user_auth;
+        this.userrole = userrole;
 
     }
 }

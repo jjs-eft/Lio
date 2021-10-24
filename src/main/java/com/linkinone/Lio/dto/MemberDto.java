@@ -1,5 +1,6 @@
 package com.linkinone.Lio.dto;
 
+import com.linkinone.Lio.domain.Role;
 import com.linkinone.Lio.domain.entity.MemberEntity;
 import lombok.*;
 
@@ -16,7 +17,7 @@ public class MemberDto {
     private String password;
     private String email;
     private String nickname;
-    private String user_auth;
+    private Role userrole;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
@@ -28,18 +29,18 @@ public class MemberDto {
                 .password(password)
                 .email(email)
                 .nickname(nickname)
-                .user_auth(user_auth)
+                .userrole(userrole)
                 .build();
     }
 
     @Builder
-    public MemberDto(long mem_id, String name, String password, String email, String nickname, String user_auth, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public MemberDto(long mem_id, String name, String password, String email, String nickname, Role userrole, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.mem_id = mem_id;
         this.name = name;
         this.password = password;
         this.email = email;
         this.nickname = nickname;
-        this.user_auth = user_auth;
+        this.userrole = userrole;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
 
