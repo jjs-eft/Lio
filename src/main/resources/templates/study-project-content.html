@@ -314,7 +314,7 @@
              추천수 : <span th:text="${boardDto.recommend}"> </span>
           </div>
         </div>
-        <div class="content_message-btn-ly">
+        <div class="content__message-btn-ly">
           <a th:with = "baseUrl=@{../ChatListServlet?toID=}" th:href="${baseUrl + boardDto.writer}" class="more-btn">작성자에게 메세지</a>
 
         </div>

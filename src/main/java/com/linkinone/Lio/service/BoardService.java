@@ -22,8 +22,8 @@ public class BoardService {
 
     private BoardRepository boardRepository;
 
-    private static final int BLOCK_PAGE_NUM_COUNT = 5;  // 블럭에 존재하는 페이지 번호 수
-    private static final int PAGE_POST_COUNT = 10;       // 한 페이지에 존재하는 게시글 수(자유, 질문, 공지)
+    private static final int BLOCK_PAGE_NUM_COUNT = 4;  // 블럭에 존재하는 페이지 번호 수
+    private static final int PAGE_POST_COUNT = 5;       // 한 페이지에 존재하는 게시글 수(자유, 질문, 공지)
     private static final int SP_PAGE_POST_COUNT = 6;       // 한 페이지에 존재하는 게시글 수(인덱스 추천수, 프로젝트, 스터디)
     private static final int INDEX_PAGE_POST_COUNT = 3;       // 인덱스 프로젝트, 스터디
 
@@ -248,7 +248,7 @@ public class BoardService {
         return boardRepository.countByBoardtype(BT);
     }
 
-    public Integer[] getProjectPageList(Integer curPageNum) { //자유게시판 페이징
+    public Integer[] getProjectPageList(Integer curPageNum) { //프로젝트 게시판 페이징
         Integer[] pageProjectList = new Integer[BLOCK_PAGE_NUM_COUNT];
 
         // 총 게시글 갯수

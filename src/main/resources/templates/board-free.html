@@ -265,15 +265,15 @@
       <div class="tab-ly">
         <ul class="tab">
           <li class="tab__item">
-            <a href="./board-free.html" class="tab__link tab__link_active"
+            <a href="../board-free.html" class="tab__link tab__link_active"
               >자유 게시판</a
             >
           </li>
           <li class="tab__item">
-            <a href="./board-question.html" class="tab__link">질문 게시판</a>
+            <a href="../board-question.html" class="tab__link">질문 게시판</a>
           </li>
           <li class="tab__item">
-            <a href="./board-notice.html" class="tab__link">공지 사항</a>
+            <a href="../board-notice.html" class="tab__link">공지 사항</a>
           </li>
         </ul>
       </div>
@@ -346,13 +346,16 @@
             alt=""
             class="pagenation__btn"
           />
+
+
           <ul class="pagenation-list">
-            <span th:each="pageNum : ${pageList}" th:inline="text">
-              <li class="pagenation-list__item pagenation-list__item_active">
-              <a th:href="@{'/board-free.html/?page=' + ${pageNum}}">[[${pageNum}]]</a>
-            </span>
+            <li th:each="pageNum : ${pageList}" class="pagenation-list__item pagenation-list__item_active">
+                <a th:href="@{'/board-free.html/?page=' + ${pageNum}}">[[${#numbers.formatInteger(pageNum, 2)}]]</a>
             </li>
           </ul>
+
+
+
           <img
             src="../img/pagenation-right.svg"
             alt=""

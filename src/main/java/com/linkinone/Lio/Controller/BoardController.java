@@ -73,6 +73,25 @@ public class BoardController {
         return "/board-free-content.html";
     }
 
+    //자유게시판 수정, 업데이트
+    @GetMapping("/board-free-update.html/{no}")
+    public String board_free_edit(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        BoardDto boardDTO = boardService.getPost(no);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
+        model.addAttribute("boardDto", boardDTO);
+        return "/board-free-update.html";
+    }
+
+    @PutMapping("/board-free-update.html/{no}")
+    public String board_free_update(BoardDto boardDTO) {
+        boardService.savePost(boardDTO);
+
+        return "redirect:/board-free.html";
+    }
+
+
+
 
     //질문게시판
     @GetMapping("/board-question.html")
@@ -224,6 +243,7 @@ public class BoardController {
 
         return "/study-project-content.html";
     }
+
 
 
 }
