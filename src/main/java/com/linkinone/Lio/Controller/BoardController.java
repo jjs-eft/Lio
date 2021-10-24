@@ -21,29 +21,32 @@ public class BoardController {
     private BoardService boardService;
     private CommentService commentService;
 
-    //스터디찾기
-    @GetMapping("/study-find.html")
-    public String study_find() {
-        return "/study-find.html";
-    }
+    // 메인 페이지
+    @GetMapping("/")
+    public String index(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
+        List<BoardDto> boardList = boardService.getFreeBoardlist(pageNum);
+        List<BoardDto> boardList2 = boardService.getIndexStudyboardlist(pageNum);
+        List<BoardDto> boardList3 = boardService.getIndexProjectboardlist(pageNum);
 
-    //프로젝트찾기
-    @GetMapping("/project-find.html")
-    public String project_find() {
-        return "/project-find.html";
+        model.addAttribute("boardList", boardList);
+        model.addAttribute("boardList2", boardList2);
+        model.addAttribute("boardList3", boardList3);
+
+        return "/index";
     }
 
     //자유게시판
     @GetMapping("/board-free.html")
-    public String board_free(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum, BoardEntity boardEntity) {
-            List<BoardDto> boardList = boardService.getBoardlist(pageNum);
-            Integer[] pageList = boardService.getPageList(pageNum);
+    public String board_free(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
+            List<BoardDto> boardList = boardService.getFreeBoardlist(pageNum);
+            Integer[] pageList = boardService.getFreePageList(pageNum);
             model.addAttribute("boardList", boardList);
             model.addAttribute("pageList", pageList);
 
         return "/board-free.html";
     }
 
+    //자유게시판 글작성
     @GetMapping("/board-free-write.html")
     public String board_free_write(Model model, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -51,6 +54,7 @@ public class BoardController {
         return "/board-free-write.html";
     }
 
+    //자유 게시판 글 작성
     @PostMapping("/board-free-write.html")
     public String board_free_writeEx(BoardDto boardDto) {
         boardService.savePost(boardDto);
@@ -58,6 +62,7 @@ public class BoardController {
         return "redirect:/board-free.html";
     }
 
+    //자유게시판 상세조회
     @GetMapping("/board-free.html/{no}")
     public String board_free_detail(@PathVariable("no") Long no, Model model, Authentication authentication) {
         BoardDto boardDTO = boardService.getPost(no);
@@ -72,8 +77,8 @@ public class BoardController {
     //질문게시판
     @GetMapping("/board-question.html")
     public String board_question(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
-        List<BoardDto> boardList2 = boardService.getBoardlist2(pageNum);
-        Integer[] pageList = boardService.getPageList(pageNum);
+        List<BoardDto> boardList2 = boardService.getQuestionBoardList(pageNum);
+        Integer[] pageList = boardService.getQuestionPageList(pageNum);
 
         model.addAttribute("boardList", boardList2);
         model.addAttribute("pageList", pageList);
@@ -82,7 +87,9 @@ public class BoardController {
     }
 
     @GetMapping("/board-question-write.html")
-    public String board_question_write() {
+    public String board_question_write(Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
         return "/board-question-write.html";
     }
 
@@ -102,31 +109,122 @@ public class BoardController {
 
         return "/board-free-content.html";
     }
-
-
-
-
+    
     //공지사항
     @GetMapping("/board-notice.html")
-    public String board_notice() {
-        return "/board-notice.html";
+    public String board_notice(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
+        List<BoardDto> boardList3 = boardService.getNoticeBoardList(pageNum);
+        Integer[] pageList = boardService.getNoticePageList(pageNum);
+
+        model.addAttribute("boardList", boardList3);
+        model.addAttribute("pageList", pageList);
+
+            return "/board-notice.html";
     }
 
+    //공지사항 글 작성
     @GetMapping("/board-notice-write.html")
-    public String board_notice_write() {
+    public String board_notice_write(Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
         return "/board-notice-write.html";
     }
 
+    @PostMapping("/board-notice-write.html")
+    public String board_notice_writeEx(BoardDto boardDto) {
+        boardService.savePost(boardDto);
+
+        return "redirect:/board-notice.html";
+    }
+
+    @GetMapping("/board-notice.html/{no}")
+    public String board_notice_detail(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        BoardDto boardDTO = boardService.getPost(no);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
+        model.addAttribute("boardDto", boardDTO);
+
+        return "/board-free-content.html";
+    }
+
+    
+
+
+    //스터디 게시판
+    @GetMapping("/study-find.html")
+    public String study_find(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
+        List<BoardDto> boardList4 = boardService.getStudyBoardlist(pageNum);
+        Integer[] pageList = boardService.getStudyPageList(pageNum);
+
+        model.addAttribute("boardList", boardList4);
+        model.addAttribute("pageList", pageList);
+
+        return "/study-find.html";
+    }
+
+    //글 작성
     @GetMapping("/study-recruit.html")
-    public String study_recruit() {
+    public String study_recruit(Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
         return "/study-recruit.html";
     }
 
+    @PostMapping("/study-recruit.html")
+    public String study_recruitEx(BoardDto boardDto) {
+        boardService.savePost(boardDto);
 
-    @GetMapping("/study-project-content.html")
-    public String study_project_content() {
-        return "/study-project-content.html/";
+        return "redirect:/study-find.html";
     }
+
+    //상세조회 ( 스터디 )
+    @GetMapping("/study-content.html/{no}")
+    public String study_detail(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        BoardDto boardDTO = boardService.getPost(no);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
+        model.addAttribute("boardDto", boardDTO);
+
+        return "/study-project-content.html";
+    }
+
+
+    //프로젝트 찾기 게시판
+    @GetMapping("/project-find.html")
+    public String project_find(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
+        List<BoardDto> boardList5 = boardService.getProjectBoardlist(pageNum);
+        Integer[] pageList = boardService.getProjectPageList(pageNum);
+
+        model.addAttribute("boardList", boardList5);
+        model.addAttribute("pageList", pageList);
+
+        return "/project-find.html";
+    }
+    //글 작성
+    @GetMapping("/project-recruit.html")
+    public String project_recruit(Model model, Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
+        return "/project-recruit.html";
+    }
+
+    @PostMapping("/project-recruit.html")
+    public String project_recruitEx(BoardDto boardDto) {
+        boardService.savePost(boardDto);
+
+        return "redirect:/project-find.html";
+    }
+
+    @GetMapping("/project-content.html/{no}")
+    public String project_detail(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        BoardDto boardDTO = boardService.getPost(no);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
+        model.addAttribute("boardDto", boardDTO);
+
+        return "/study-project-content.html";
+    }
+
 
 }
 

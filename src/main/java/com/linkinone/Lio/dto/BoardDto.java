@@ -11,14 +11,15 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 public class BoardDto {
-    private Long board_id;
     private Long post_id;
+    private String boardtype;
     private String writer;
     private String title;
     private String content;
     private String tag;
     private Integer hits;
     private Integer recommend;
+    private Integer NOP;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
@@ -27,28 +28,30 @@ public class BoardDto {
     public BoardEntity toEntity() {
         BoardEntity build = BoardEntity.builder()
                 .post_id(post_id)
-                .board_id(board_id)
+                .boardtype(boardtype)
                 .writer(writer)
                 .title(title)
                 .content(content)
                 .tag(tag)
                 .hits(hits)
                 .recommend(recommend)
+                .NOP(NOP)
                 .build();
         return build;
 
     }
 
     @Builder
-    public BoardDto(Long post_id, Long board_id, String title, String writer, String content, String tag, Integer hits, Integer recommend, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public BoardDto(Long post_id, String boardtype, String title, String writer, String content, String tag, Integer hits, Integer recommend, Integer NOP, LocalDateTime createdDate, LocalDateTime modifiedDate) {
         this.post_id = post_id;
-        this.board_id = board_id;
+        this.boardtype = boardtype;
         this.title = title;
         this.content = content;
         this.writer = writer;
         this.tag = tag;
         this.hits = hits;
         this.recommend = recommend;
+        this.NOP = NOP;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
 

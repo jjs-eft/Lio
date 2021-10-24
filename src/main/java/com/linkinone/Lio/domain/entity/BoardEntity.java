@@ -20,8 +20,8 @@ public class BoardEntity extends TimeEntity {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long post_id;
 
-    @Column(length = 10, nullable = true)
-    private Long board_id;
+    @Column(length = 10, nullable = false)
+    private String boardtype;
 
     @Column(length = 50, nullable = false)
     private String writer;
@@ -32,7 +32,7 @@ public class BoardEntity extends TimeEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    @Column(length = 100)
+    @Column(length = 100, nullable = true)
     private String tag;
 
     @Column(length = 10)
@@ -43,17 +43,21 @@ public class BoardEntity extends TimeEntity {
     @ColumnDefault("0")
     private Integer recommend;
 
+    @Column(length = 10, nullable = true)
+    private Integer NOP;
+
 
     @Builder
-    public BoardEntity(Long post_id, Long board_id, String writer, String title, String content, String tag, Integer hits, Integer recommend) {
+    public BoardEntity(Long post_id, String boardtype, String writer, String title, String content, String tag, Integer hits, Integer recommend, Integer NOP) {
         this.post_id = post_id;
-        this.board_id = board_id;
+        this.boardtype = boardtype;
         this.writer = writer;
         this.title = title;
         this.content = content;
         this.tag = tag;
         this.hits = hits;
         this.recommend = recommend;
+        this.NOP = NOP;
 
     }
 

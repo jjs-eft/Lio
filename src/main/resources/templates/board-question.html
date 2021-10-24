@@ -316,49 +316,49 @@
                   </h3>
                   <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
                   <div class="tag-group">
-                    <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
+                    <span th:text="${board.tag}"></span>
                   </div>
                 </div>
                 <ul class="bulletien-info bulletien-info_board_ly">
                   <li class="bulletien-info__item">-  <span th:text="${board.writer}"></span></li>
-                  <li class="bulletien-info__item">- 추천수: 190</li>
-                  <li class="bulletien-info__item">- 조회수: 2400</li>
+                  <li class="bulletien-info__item">- 추천수: <span th:text="${board.hits}" ></span></li>
+                  <li class="bulletien-info__item">- 조회수: <span th:text="${board.recommend}" ></span></li>
                   <li class="bulletien-info__item">- 댓글: 11</li>
                 </ul>
               </a>
         </div>
         <!-- end card-group -->
-        <!-- start pagenation -->
-        <div class="pagenation">
-          <img
-            src="../img/pagenation-left-end.svg"
-            alt=""
-            class="pagenation__btn"
-          />
-          <img
-            src="../img/pagenation-left.svg"
-            alt=""
-            class="pagenation__btn"
-          />
-          <ul class="pagenation-list">
-            <li class="pagenation-list__item pagenation-list__item_active">
-              <span>01</span>
-            </li>
-            <li class="pagenation-list__item"><span>02</span></li>
-            <li class="pagenation-list__item"><span>03</span></li>
-          </ul>
-          <img
-            src="../img/pagenation-right.svg"
-            alt=""
-            class="pagenation__btn"
-          />
-          <img
-            src="../img/pagenation-right-end.svg"
-            alt=""
-            class="pagenation__btn"
-          />
-        </div>
-        <!-- end pagenation -->
+            <!-- start pagenation -->
+            <div class="pagenation">
+              <img
+                      src="../img/pagenation-left-end.svg"
+                      alt=""
+                      class="pagenation__btn"
+              />
+              <img
+                      src="../img/pagenation-left.svg"
+                      alt=""
+                      class="pagenation__btn"
+              />
+              <ul class="pagenation-list">
+            <span th:each="pageNum : ${pageList}" th:inline="text">
+              <li class="pagenation-list__item pagenation-list__item_active">
+              <a th:href="@{'/board-question.html/?page=' + ${pageNum}}">[[${pageNum}]]</a>
+            </span>
+                </li>
+              </ul>
+              <img
+                      src="../img/pagenation-right.svg"
+                      alt=""
+                      class="pagenation__btn"
+              />
+              <img
+                      src="../img/pagenation-right-end.svg"
+                      alt=""
+                      class="pagenation__btn"
+              />
+            </div>
+            <!-- end pagenation -->
       </div>
     </div>
     <!-- footer -->

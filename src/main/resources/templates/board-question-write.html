@@ -285,7 +285,7 @@
         </h2>
         <form action="/board-question-write.html" class="recruit" method="post">
           <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-          <input type="hidden" name="board_id" th:value="2">
+          <input type="hidden" name="boardtype" th:value="question">
           <h3 class="recruit__header">질문 게시글 작성</h3>
           <div class="recruit-content">
             <label for="" class="recruit-content__label">제목</label>

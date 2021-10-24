@@ -266,44 +266,37 @@
       <div class="tab-ly">
         <ul class="tab">
           <li class="tab__item">
-            <a href="./study-find.html" class="tab__link">스터디 찾기</a>
+            <a href="/study-find.html" class="tab__link tab__link_active"
+            >스터디 찾기</a
+            >
           </li>
           <li class="tab__item">
-            <a href="./project-find.html" class="tab__link tab__link_active"
-              >프로젝트 찾기</a
-            >
+            <a href="/project-find.html" class="tab__link">프로젝트 찾기</a>
           </li>
         </ul>
       </div>
       <!-- end tab -->
       <div class="main-preview">
-        <h2 class="group-head-title group-head underline underline_size-4">
+        <h2 class="group-head-title group-head underline underline_size-6">
           프로젝트 모집 글 작성
         </h2>
-        <form action="" class="recruit">
+        <form action="/project-recruit.html" class="recruit" method="post">
           <h3 class="recruit__header">새로운 프로젝트 만들기</h3>
           <div class="recruit-content">
             <label for="" class="recruit-content__label">New Project</label>
             <input
-              type="text"
-              placeholder="ex) 제목"
-              class="recruit-content__input recruit-content__input_full"
-            />
-            <label for="" class="recruit-content__label"
-              >프로젝트 간략 설명</label
-            >
-            <input
-              type="text"
-              placeholder="ex) python 알고리즘 스터디"
-              class="recruit-content__input recruit-content__input_full"
+                    type="text"
+                    name="title"
+                    placeholder="ex) 제목"
+                    class="recruit-content__input recruit-content__input_full"
             />
             <label for="" class="recruit-content__label">인원</label>
             <input
-              type="number"
-              name=""
-              id=""
-              value="0"
-              class="recruit-content__input"
+                    type="number"
+                    name="NOP"
+                    id=""
+                    value="0"
+                    class="recruit-content__input"
             />
             <label for="" class="recruit-content__label">언어</label>
             <select name="" id="" class="recruit-content__input">
@@ -312,14 +305,16 @@
             </select>
             <label for="" class="recruit-content__label">태그</label>
             <input
-              type="text"
-              name=""
-              id=""
-              value=""
-              class="recruit-content__input"
-              placeholder="태그1, 태그2 ..."
+                    type="text"
+                    name="tag"
+                    id=""
+                    value=""
+                    class="recruit-content__input"
+                    placeholder="태그1, 태그2 ..."
             />
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <input type="hidden" name="writer" class="form-control" id="inputAuthor" th:value="${author}">
+            <input type="hidden" name="boardtype" th:value="project">
             <label for="" class="recruit-content__label">내용</label>
             <div id="editor" class="editor-form"></div>
 
@@ -341,7 +336,7 @@
                       id="submit"
               />
               <a
-                      href="/board-free.html"
+                      href="/project-find.html"
                       class="recruit-content__btn recruit-content__btn_cancel"
               >취소</a
               >

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="" xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -265,12 +265,12 @@
       <div class="tab-ly">
         <ul class="tab">
           <li class="tab__item">
-            <a href="./study-find.html" class="tab__link">스터디 찾기</a>
+            <a href="/study-find.html" class="tab__link tab__link_active"
+            >스터디 찾기</a
+            >
           </li>
           <li class="tab__item">
-            <a href="./project-find.html" class="tab__link tab__link_active"
-              >프로젝트 찾기</a
-            >
+            <a href="/project-find.html" class="tab__link">프로젝트 찾기</a>
           </li>
         </ul>
       </div>
@@ -278,23 +278,21 @@
       <!-- start main-preview -->
       <div class="main-preview">
         <div class="main-group-head group-head">
-          <h2 class="group-head-title underline underline_size-2">
+          <h2 class="group-head-title underline underline_size-1">
             프로젝트 찾기
           </h2>
-          <a href="../project-recruit.html" class="more-btn"
-            >프로젝트 모집</a
-          >
+          <a href="../project-recruit.html" class="more-btn">프로젝트 모집</a>
         </div>
         <!-- start filter-bar -->
         <form action="">
           <div class="filter-bar">
             <img
-              src="../img/filter_list_white_24dp.svg"
-              alt="filter-ico"
-              class="filter-bar__filter-ico"
+                    src="../img/filter_list_white_24dp.svg"
+                    alt="filter-ico"
+                    class="filter-bar__filter-ico"
             />
             <span class="vertical-line"></span>
-            <select name="" id="" class="filter-bar__select">
+            <select name="NOP" id="" class="filter-bar__select">
               <option value="">인원</option>
               <option value="">1</option>
               <option value="">2</option>
@@ -305,16 +303,16 @@
               <option value="">java</option>
             </select>
             <input
-              type="search"
-              name=""
-              id=""
-              class="filter-bar__search-field"
+                    type="search"
+                    name=""
+                    id=""
+                    class="filter-bar__search-field"
             />
             <label for="search-btn">
               <img
-                src="../img/search_white_24dp.svg"
-                alt="search-ico"
-                class="filter-bar__search-ico"
+                      src="../img/search_white_24dp.svg"
+                      alt="search-ico"
+                      class="filter-bar__search-ico"
               />
             </label>
             <input type="submit" value="search" id="search-btn" />
@@ -323,136 +321,57 @@
         <!-- end filter-bar -->
         <!-- start card-group -->
         <ul class="card-group">
-          <!-- start card -->
-          <li class="card-item">
-            <div class="card-ly1">
-              <a href="#" class="card card_big">
-                <h3 class="card__head fs_28">제목을 입력합니다.</h3>
-                <span class="card__date">2021. 09. 24.</span>
+          <li th:each="board : ${boardList}"  class="card-item">
+            <div  class="card-ly1">
+              <a th:href="@{'/project-content.html/' + ${board.post_id}}"  class="card card_big">
+                <h3 class="card__head fs_28"><span th:text="${board.title}"></span></h3>
+                <span class="card__date" th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
                 <div class="card__content">
                   <p class="card__p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nulla, voluptate. Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Magnam, necessitatibus.
+                    <span th:text="${board.content}"></span>
                   </p>
                   <ul class="bulletien-info">
-                    <li class="bulletien-info__item">- 작성자: 신현균</li>
-                    <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                    <li class="bulletien-info__item">- 추천수: 190</li>
+                    <li class="bulletien-info__item">- 작성자: <span th:text="${board.writer}"></span></li>
+                    <li class="bulletien-info__item">- 추천수: <span th:text="${board.hits}" ></span></li>
+                    <li class="bulletien-info__item">- 조회수: <span th:text="${board.recommend}" ></span></li>
                   </ul>
                 </div>
                 <div class="tag-group tag_18">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
+                  <!--                  <span th:text=언어></span>-->
                 </div>
               </a>
             </div>
           </li>
-          <!-- end card -->
-          <!-- start card -->
-          <li class="card-item">
-            <div class="card-ly1">
-              <a href="#" class="card card_big">
-                <h3 class="card__head fs_28">제목을 입력합니다.</h3>
-                <span class="card__date">2021. 09. 24.</span>
-                <div class="card__content">
-                  <p class="card__p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nulla, voluptate. Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Magnam, necessitatibus.
-                  </p>
-                  <ul class="bulletien-info">
-                    <li class="bulletien-info__item">- 작성자: 신현균</li>
-                    <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                    <li class="bulletien-info__item">- 추천수: 190</li>
-                  </ul>
-                </div>
-                <div class="tag-group tag_18">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </a>
-            </div>
-          </li>
-          <!-- end card -->
-          <!-- start card -->
-          <li class="card-item">
-            <div class="card-ly1">
-              <a href="#" class="card card_big">
-                <h3 class="card__head fs_28">제목을 입력합니다.</h3>
-                <span class="card__date">2021. 09. 24.</span>
-                <div class="card__content">
-                  <p class="card__p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nulla, voluptate. Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Magnam, necessitatibus.
-                  </p>
-                  <ul class="bulletien-info">
-                    <li class="bulletien-info__item">- 작성자: 신현균</li>
-                    <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                    <li class="bulletien-info__item">- 추천수: 190</li>
-                  </ul>
-                </div>
-                <div class="tag-group tag_18">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </a>
-            </div>
-          </li>
-          <!-- end card -->
-          <!-- start card -->
-          <li class="card-item">
-            <div class="card-ly1">
-              <a href="#" class="card card_big">
-                <h3 class="card__head fs_28">제목을 입력합니다.</h3>
-                <span class="card__date">2021. 09. 24.</span>
-                <div class="card__content">
-                  <p class="card__p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nulla, voluptate. Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Magnam, necessitatibus.
-                  </p>
-                  <ul class="bulletien-info">
-                    <li class="bulletien-info__item">- 작성자: 신현균</li>
-                    <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                    <li class="bulletien-info__item">- 추천수: 190</li>
-                  </ul>
-                </div>
-                <div class="tag-group tag_18">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </a>
-            </div>
-          </li>
-          <!-- end card -->
         </ul>
         <!-- end card-group -->
         <!-- start pagenation -->
         <div class="pagenation">
           <img
-            src="../img/pagenation-left-end.svg"
-            alt=""
-            class="pagenation__btn"
+                  src="../img/pagenation-left-end.svg"
+                  alt=""
+                  class="pagenation__btn"
           />
           <img
-            src="../img/pagenation-left.svg"
-            alt=""
-            class="pagenation__btn"
+                  src="../img/pagenation-left.svg"
+                  alt=""
+                  class="pagenation__btn"
           />
           <ul class="pagenation-list">
-            <li class="pagenation-list__item pagenation-list__item_active">
-              <span>01</span>
+            <span th:each="pageNum : ${pageList}" th:inline="text">
+              <li class="pagenation-list__item pagenation-list__item_active">
+              <a th:href="@{'/project-find.html/?page=' + ${pageNum}}">[[${pageNum}]]</a>
+            </span>
             </li>
-            <li class="pagenation-list__item"><span>02</span></li>
-            <li class="pagenation-list__item"><span>03</span></li>
           </ul>
           <img
-            src="../img/pagenation-right.svg"
-            alt=""
-            class="pagenation__btn"
+                  src="../img/pagenation-right.svg"
+                  alt=""
+                  class="pagenation__btn"
           />
           <img
-            src="../img/pagenation-right-end.svg"
-            alt=""
-            class="pagenation__btn"
+                  src="../img/pagenation-right-end.svg"
+                  alt=""
+                  class="pagenation__btn"
           />
         </div>
         <!-- end pagenation -->

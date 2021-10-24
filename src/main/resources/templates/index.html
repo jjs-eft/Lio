@@ -281,7 +281,7 @@
           </p>
           <h1 class="banner-ly2__header">하나로 연결하다</h1>
           <a
-            href="../HTML/service-introduction.html"
+            href="../service-introduction.html"
             class="banner-ly2__link more-btn"
             >서비스 소개</a
           >
@@ -298,113 +298,23 @@
           <h2 class="group-head-title underline underline_size-1">
             주간 인기글
           </h2>
-          <a href="../HTML/board-free.html" class="more-btn">더보기</a>
+          <a href="../board-free.html" class="more-btn">더보기</a>
         </div>
         <div class="card-group">
-          <div class="card-item">
-            <a href="#" class="card">
+          <div th:each="board : ${boardList}" class="card-item">
+            <a th:href="@{'/board-free.html/' + ${board.post_id}}" class="card">
               <span class="card__rank">01</span>
               <h3 class="card__head card__head_preview-board">
-                제목을 입력합니다.
+                <span th:text="${board.title}"></span>
               </h3>
               <div class="card__ly1">
                 <ul class="bulletien-info">
-                  <li class="bulletien-info__item">- 작성자: 신현균</li>
-                  <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                  <li class="bulletien-info__item">- 추천수: 190</li>
+                  <li class="bulletien-info__item">- 작성자: <span th:text="${board.writer}"></span></li>
+                  <li class="bulletien-info__item">- 작성일: <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+                  <li class="bulletien-info__item">- 추천수: <span th:text="${board.hits}" ></span></li>
                 </ul>
                 <div class="tag-group">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="card-item">
-            <a href="#" class="card">
-              <span class="card__rank">01</span>
-              <h3 class="card__head card__head_preview-board">
-                제목을 입력합니다.
-              </h3>
-              <div class="card__ly1">
-                <ul class="bulletien-info">
-                  <li class="bulletien-info__item">- 작성자: 신현균</li>
-                  <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                  <li class="bulletien-info__item">- 추천수: 190</li>
-                </ul>
-                <div class="tag-group">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="card-item">
-            <a href="#" class="card">
-              <span class="card__rank">01</span>
-              <h3 class="card__head card__head_preview-board">
-                제목을 입력합니다.
-              </h3>
-              <div class="card__ly1">
-                <ul class="bulletien-info">
-                  <li class="bulletien-info__item">- 작성자: 신현균</li>
-                  <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                  <li class="bulletien-info__item">- 추천수: 190</li>
-                </ul>
-                <div class="tag-group">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="card-item">
-            <a href="#" class="card">
-              <span class="card__rank">01</span>
-              <h3 class="card__head card__head_preview-board">
-                제목을 입력합니다.
-              </h3>
-              <div class="card__ly1">
-                <ul class="bulletien-info">
-                  <li class="bulletien-info__item">- 작성자: 신현균</li>
-                  <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                  <li class="bulletien-info__item">- 추천수: 190</li>
-                </ul>
-                <div class="tag-group">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="card-item">
-            <a href="#" class="card">
-              <span class="card__rank">01</span>
-              <h3 class="card__head card__head_preview-board">
-                제목을 입력합니다.
-              </h3>
-              <div class="card__ly1">
-                <ul class="bulletien-info">
-                  <li class="bulletien-info__item">- 작성자: 신현균</li>
-                  <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                  <li class="bulletien-info__item">- 추천수: 190</li>
-                </ul>
-                <div class="tag-group">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="card-item">
-            <a href="#" class="card">
-              <span class="card__rank">01</span>
-              <h3 class="card__head card__head_preview-board">
-                제목을 입력합니다.
-              </h3>
-              <div class="card__ly1">
-                <ul class="bulletien-info">
-                  <li class="bulletien-info__item">- 작성자: 신현균</li>
-                  <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                  <li class="bulletien-info__item">- 추천수: 190</li>
-                </ul>
-                <div class="tag-group">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
+                  <span th:text="${board.tag}" ></span>
                 </div>
               </div>
             </a>
@@ -419,75 +329,26 @@
           <h2 class="group-head-title underline underline_size-1">
             최신 스터디
           </h2>
-          <a href="../HTML/study-find.html" class="more-btn">팀 찾기</a>
+          <a href="../study-find.html" class="more-btn">팀 찾기</a>
         </div>
         <div class="card-group">
-          <div class="card-item card-item_main">
+          <div th:each="board : ${boardList2}" class="card-item card-item_main">
             <div class="card-ly1">
-              <a href="#" class="card card_big">
-                <h3 class="card__head fs_28">제목을 입력합니다.</h3>
-                <span class="card__date">2021. 09. 24.</span>
+              <a th:href="@{'/study-content.html/' + ${board.post_id}}"   class="card card_big">
+                <h3 class="card__head fs_28"><span th:text="${board.title}"></span></h3>
+                <span class="card__date" th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
                 <div class="card__content">
                   <p class="card__p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nulla, voluptate. Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Magnam, necessitatibus.
+                    <span th:text="${board.content}"></span>
                   </p>
                   <ul class="bulletien-info">
-                    <li class="bulletien-info__item">- 작성자: 신현균</li>
-                    <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                    <li class="bulletien-info__item">- 추천수: 190</li>
+                    <li class="bulletien-info__item">- 작성자: <span th:text="${board.writer}"></span></li>
+                    <li class="bulletien-info__item">- 추천수: <span th:text="${board.hits}" ></span></li>
+                    <li class="bulletien-info__item">- 조회수: <span th:text="${board.recommend}" ></span></li>
                   </ul>
                 </div>
                 <div class="tag-group tag_18">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="card-item card-item_main">
-            <div class="card-ly1">
-              <a href="#" class="card card_big">
-                <h3 class="card__head fs_28">제목을 입력합니다.</h3>
-                <span class="card__date">2021. 09. 24.</span>
-                <div class="card__content">
-                  <p class="card__p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nulla, voluptate. Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Magnam, necessitatibus.
-                  </p>
-                  <ul class="bulletien-info">
-                    <li class="bulletien-info__item">- 작성자: 신현균</li>
-                    <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                    <li class="bulletien-info__item">- 추천수: 190</li>
-                  </ul>
-                </div>
-                <div class="tag-group tag_18">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="card-item card-item_main">
-            <div class="card-ly1">
-              <a href="#" class="card card_big">
-                <h3 class="card__head fs_28">제목을 입력합니다.</h3>
-                <span class="card__date">2021. 09. 24.</span>
-                <div class="card__content">
-                  <p class="card__p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nulla, voluptate. Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Magnam, necessitatibus.
-                  </p>
-                  <ul class="bulletien-info">
-                    <li class="bulletien-info__item">- 작성자: 신현균</li>
-                    <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                    <li class="bulletien-info__item">- 추천수: 190</li>
-                  </ul>
-                </div>
-
-                <div class="tag-group tag_18">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
+                  <!--                  <span th:text=언어></span>-->
                 </div>
               </a>
             </div>
@@ -504,76 +365,28 @@
           <h2 class="group-head-title underline underline_size-2">
             최신 프로젝트
           </h2>
-          <a href="../HTML/project-find.html" class="more-btn">팀찾기</a>
+          <a href="../project-find.html" class="more-btn">팀찾기</a>
         </div>
         <!-- end group-head -->
         <!-- start card-group -->
         <div class="card-group">
-          <div class="card-item card-item_main">
+          <div th:each="board : ${boardList3}"  class="card-item card-item_main">
             <div class="card-ly1">
-              <a href="#" class="card card_big">
-                <h3 class="card__head fs_28">제목을 입력합니다.</h3>
-                <span class="card__date">2021. 09. 24.</span>
+              <a  th:href="@{'/project-content.html/' + ${board.post_id}}"  class="card card_big">
+                <h3 class="card__head fs_28"><span th:text="${board.title}"></span></h3>
+                <span class="card__date" th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
                 <div class="card__content">
                   <p class="card__p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nulla, voluptate. Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Magnam, necessitatibus.
+                    <span th:text="${board.content}"></span>
                   </p>
                   <ul class="bulletien-info">
-                    <li class="bulletien-info__item">- 작성자: 신현균</li>
-                    <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                    <li class="bulletien-info__item">- 추천수: 190</li>
+                    <li class="bulletien-info__item">- 작성자: <span th:text="${board.writer}"></span></li>
+                    <li class="bulletien-info__item">- 추천수: <span th:text="${board.hits}" ></span></li>
+                    <li class="bulletien-info__item">- 조회수: <span th:text="${board.recommend}" ></span></li>
                   </ul>
                 </div>
                 <div class="tag-group tag_18">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="card-item card-item_main">
-            <div class="card-ly1">
-              <a href="#" class="card card_big">
-                <h3 class="card__head fs_28">제목을 입력합니다.</h3>
-                <span class="card__date">2021. 09. 24.</span>
-                <div class="card__content">
-                  <p class="card__p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nulla, voluptate. Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Magnam, necessitatibus.
-                  </p>
-                  <ul class="bulletien-info">
-                    <li class="bulletien-info__item">- 작성자: 신현균</li>
-                    <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                    <li class="bulletien-info__item">- 추천수: 190</li>
-                  </ul>
-                </div>
-                <div class="tag-group tag_18">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="card-item card-item_main">
-            <div class="card-ly1">
-              <a href="#" class="card card_big">
-                <h3 class="card__head fs_28">제목을 입력합니다.</h3>
-                <span class="card__date">2021. 09. 24.</span>
-                <div class="card__content">
-                  <p class="card__p">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nulla, voluptate. Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Magnam, necessitatibus.
-                  </p>
-                  <ul class="bulletien-info">
-                    <li class="bulletien-info__item">- 작성자: 신현균</li>
-                    <li class="bulletien-info__item">- 작성일: 2021.09.25</li>
-                    <li class="bulletien-info__item">- 추천수: 190</li>
-                  </ul>
-                </div>
-                <div class="tag-group tag_18">
-                  <span>#태그1</span> <span>#태그2</span> <span>#태그3</span>
+                  <!--                  <span th:text=언어></span>-->
                 </div>
               </a>
             </div>

@@ -263,24 +263,22 @@
       <div class="tab-ly">
         <ul class="tab">
           <li class="tab__item">
-            <a href="./board-free.html" class="tab__link tab__link_active"
-              >자유 게시판</a
+            <a href="../study-find.html" class="tab__link tab__link_active"
+            >스터디 찾기</a
             >
           </li>
           <li class="tab__item">
-            <a href="./board-question.html" class="tab__link">질문 게시판</a>
-          </li>
-          <li class="tab__item">
-            <a href="./board-notice.html" class="tab__link">공지 사항</a>
+            <a href="../project-find.html" class="tab__link">프로젝트 찾기</a>
           </li>
         </ul>
       </div>
       <!-- end tab -->
       <!-- start main-preview -->
+
       <div class="main-preview">
         <div class="main-group-head group-head">
           <h2 class="group-head-title underline underline_size-1">
-            자유 게시판
+            게시판
           </h2>
         </div>
         <div class="content">
@@ -317,7 +315,8 @@
           </div>
         </div>
         <div class="content_message-btn-ly">
-          <a href="#" class="more-btn">작성자에게 메세지</a>
+          <a th:with = "baseUrl=@{../ChatListServlet?toID=}" th:href="${baseUrl + boardDto.writer}" class="more-btn">작성자에게 메세지</a>
+
         </div>
         <div class="comments-write">
           <h4 class="comments-write__header">2개의 댓글</h4>

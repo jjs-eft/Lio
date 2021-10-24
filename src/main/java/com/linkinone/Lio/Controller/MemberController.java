@@ -12,12 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MemberController {
     private MemberService memberService;
 
-    // 메인 페이지
-    @GetMapping("/")
-    public String index() {
-        return "/index";
-    }
-
     @GetMapping("/recently-trend.html")
     public String trend() {
         return "/recently-trend.html";

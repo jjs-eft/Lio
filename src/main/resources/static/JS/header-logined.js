@@ -1,7 +1,7 @@
 {
   let header = `<header class="header">
   <a href="/" class="header__logo"
-    ><img src="img/LIO_Link_In_One.svg" alt="LIO_logo"
+    ><img src="/img/LIO_Link_In_One.svg" alt="LIO_logo"
   /></a>
   <input type="checkbox" name="chk" id="nav-toggle" />
   <label for="nav-toggle" class="open-menu-btn">
