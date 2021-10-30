@@ -323,7 +323,7 @@
           </div>
         </div>
 
-        <form th:action="@{'/board-free.html/' + ${boardDto.postid}}" method="post">
+        <form th:action="${boardDto.postid}" method="post">
           <input type="hidden" name="writer" class="form-control" id="inputAuthor" th:value="${author}">
           <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
           <input type="hidden" name="postid" class="form-control" th:value="${boardDto.postid}" >
@@ -339,9 +339,17 @@
         </form>
 
         <div th:each = "comment : ${commentDto}" class="user-comments">
-          <h4 class="user-comments__header">
-            <span th:text = "${comment.writer}"></span>
-          </h4>
+          <div class="user-comments__header-ly">
+            <h4 class="user-comments__header">
+              <span th:text = "${comment.writer}"></span>
+            </h4>
+            <form th:action="${comment.commentid}" method="post">
+              <input type="hidden" name="_method" value="delete"/>
+              <div>
+                <input type="submit" class="content__btn" value="X" />
+              </div>
+            </form>
+          </div>
           <div class="user-comments__info">
             <span th:text="${#temporals.format(comment.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
           </div>

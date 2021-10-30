@@ -48,6 +48,10 @@ public class CommentService {
         return commentRepository.save(commentDto.toEntity()).getCommentid();
     }
 
+    @Transactional
+    public void deleteComment(Long id) {
+        commentRepository.deleteById(id);
+    }
 
 
 }

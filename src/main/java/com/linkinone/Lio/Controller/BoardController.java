@@ -83,8 +83,17 @@ public class BoardController {
         commentService.savePost(commentDto);
 
         return "redirect:/board-free.html/{no}";
-
     }
+    
+    //자유게시판 댓글 삭제
+    @DeleteMapping("/board-free.html/{no}")
+    public String delete_free_comment(@PathVariable("no") Long no) {
+
+        commentService.deleteComment(no);
+
+        return "redirect:/board-free.html/";
+    }
+    
 
     //자유게시판 수정, 업데이트
     @GetMapping("/board-free-update.html/{no}")
@@ -145,7 +154,26 @@ public class BoardController {
 
         return "/board-free-content.html";
     }
-    
+
+    //질문게시판 댓글 작성
+    @PostMapping("/board-question.html/{no}")
+    public String board_question_comment(CommentDto commentDto) {
+        commentService.savePost(commentDto);
+
+        return "redirect:/board-question.html/{no}";
+    }
+
+    //질문게시판 댓글 삭제
+    @DeleteMapping("/board-question.html/{no}")
+    public String delete_question_comment(@PathVariable("no") Long no) {
+
+        commentService.deleteComment(no);
+
+        return "redirect:/board-question.html/";
+    }
+
+
+
     //공지사항
     @GetMapping("/board-notice.html")
     public String board_notice(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
@@ -187,7 +215,24 @@ public class BoardController {
         return "/board-free-content.html";
     }
 
-    
+    //공지 게시판 댓글 작성
+    @PostMapping("/board-notice.html/{no}")
+    public String board_notice_comment(CommentDto commentDto) {
+        commentService.savePost(commentDto);
+
+        return "redirect:/board-notice.html/{no}";
+    }
+
+    //공지 게시판 댓글 삭제
+    @DeleteMapping("/board-notice.html/{no}")
+    public String delete_notice_comment(@PathVariable("no") Long no) {
+
+        commentService.deleteComment(no);
+
+        return "redirect:/board-notice.html/";
+    }
+
+
 
 
     //스터디 게시판
@@ -234,6 +279,24 @@ public class BoardController {
 
     }
 
+    //스터디 게시판 댓글 작성
+    @PostMapping("/study-content.html/{no}")
+    public String board_study_comment(CommentDto commentDto) {
+        commentService.savePost(commentDto);
+
+        return "redirect:/study-content.html/{no}";
+    }
+
+    //스터디 게시판 댓글 삭제
+    @DeleteMapping("/study-content.html/{no}")
+    public String delete_study_comment(@PathVariable("no") Long no) {
+
+        commentService.deleteComment(no);
+
+        return "redirect:/study-find.html/";
+    }
+
+
 
     //프로젝트 찾기 게시판
     @GetMapping("/project-find.html")
@@ -274,6 +337,25 @@ public class BoardController {
 
         return "/study-project-content.html";
     }
+
+    //프로젝트 게시판 댓글 작성
+    @PostMapping("/project-content.html/{no}")
+    public String board_project_comment(CommentDto commentDto) {
+        commentService.savePost(commentDto);
+
+        return "redirect:/project-content.html/{no}";
+    }
+
+    //프로젝트 게시판 댓글 삭제
+    @DeleteMapping("/project-content.html/{no}")
+    public String delete_project_comment(@PathVariable("no") Long no) {
+
+        commentService.deleteComment(no);
+
+        return "redirect:/project-find.html/";
+    }
+
+
 
 
 

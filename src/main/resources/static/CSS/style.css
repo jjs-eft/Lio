@@ -1431,4 +1431,14 @@ body {
   display: inline-block;
   height: 20px;
   line-height: 20px;
+  border: 0;
+  cursor: pointer;
+}
+.user-comments__header-ly {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-comments {
+  margin-top: 20px;
 }
