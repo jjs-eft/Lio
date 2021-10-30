@@ -109,9 +109,16 @@ public class BoardController {
     public String board_free_update(BoardDto boardDTO) {
         boardService.savePost(boardDTO);
 
-        return "redirect:/board-free.html";
+        return "redirect:/board-free.html/{no}";
     }
 
+    //자유게시판 삭제
+    @DeleteMapping("/board-free-update.html/{no}")
+    public String delete_free_board(@PathVariable("no") Long no) {
+        boardService.deletePost(no);
+
+        return "redirect:/board-free.html/";
+    }
 
 
 
