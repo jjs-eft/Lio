@@ -77,6 +77,15 @@ public class BoardController {
         return "/board-free-content.html";
     }
 
+    //자유게시판 댓글 작성
+    @PostMapping("/board-free.html/{no}")
+    public String board_free_comment(CommentDto commentDto) {
+        commentService.savePost(commentDto);
+
+        return "redirect:/board-free.html/{no}";
+
+    }
+
     //자유게시판 수정, 업데이트
     @GetMapping("/board-free-update.html/{no}")
     public String board_free_edit(@PathVariable("no") Long no, Model model, Authentication authentication) {

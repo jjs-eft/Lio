@@ -322,15 +322,22 @@
             추천수 : <span th:text="${boardDto.recommend}"> </span>
           </div>
         </div>
+
+        <form th:action="@{'/board-free.html/' + ${boardDto.postid}}" method="post">
+          <input type="hidden" name="writer" class="form-control" id="inputAuthor" th:value="${author}">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+          <input type="hidden" name="postid" class="form-control" th:value="${boardDto.postid}" >
         <div class="comments-write">
           <textarea
-            name=""
+            name="content"
             id=""
             class="comments-write__textform"
             placeholder="댓글을 작성하세요"
           ></textarea>
-          <input type="button" value="작성" class="comments-write__btn" />
+          <input type="submit" value="작성" class="comments-write__btn" />
         </div>
+        </form>
+
         <div th:each = "comment : ${commentDto}" class="user-comments">
           <h4 class="user-comments__header">
             <span th:text = "${comment.writer}"></span>
