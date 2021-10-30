@@ -70,6 +70,10 @@ public class BoardController {
         model.addAttribute("author",userDetails.getUsername());
         model.addAttribute("boardDto", boardDTO);
 
+        //댓글
+        List<CommentDto> commentList = commentService.getComment(no);
+        model.addAttribute("commentDto", commentList);
+
         return "/board-free-content.html";
     }
 
@@ -119,12 +123,16 @@ public class BoardController {
         return "redirect:/board-question.html";
     }
 
-    @GetMapping("/board-question.html/{no}")
+    @GetMapping("/board-question.html/{no}") //질문게시판 상세조회
     public String board_question_detail(@PathVariable("no") Long no, Model model, Authentication authentication) {
         BoardDto boardDTO = boardService.getPost(no);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("author",userDetails.getUsername());
         model.addAttribute("boardDto", boardDTO);
+
+        List<CommentDto> commentList = commentService.getComment(no);
+        model.addAttribute("commentDto", commentList);
+
 
         return "/board-free-content.html";
     }
@@ -156,12 +164,16 @@ public class BoardController {
         return "redirect:/board-notice.html";
     }
 
-    @GetMapping("/board-notice.html/{no}")
+    @GetMapping("/board-notice.html/{no}") // 공지사항 상세조회
     public String board_notice_detail(@PathVariable("no") Long no, Model model, Authentication authentication) {
         BoardDto boardDTO = boardService.getPost(no);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("author",userDetails.getUsername());
         model.addAttribute("boardDto", boardDTO);
+
+        List<CommentDto> commentList = commentService.getComment(no);
+        model.addAttribute("commentDto", commentList);
+
 
         return "/board-free-content.html";
     }
@@ -204,7 +216,13 @@ public class BoardController {
         model.addAttribute("author",userDetails.getUsername());
         model.addAttribute("boardDto", boardDTO);
 
+
+        List<CommentDto> commentList = commentService.getComment(no);
+        model.addAttribute("commentDto", commentList);
+
         return "/study-project-content.html";
+
+
     }
 
 
@@ -240,6 +258,10 @@ public class BoardController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("author",userDetails.getUsername());
         model.addAttribute("boardDto", boardDTO);
+
+        List<CommentDto> commentList = commentService.getComment(no);
+        model.addAttribute("commentDto", commentList);
+
 
         return "/study-project-content.html";
     }

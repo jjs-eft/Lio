@@ -309,7 +309,7 @@
 
           <div class="card-group" >
             <div th:each="board : ${boardList}" class="card-item card-item_board-ly" >
-              <a th:href="@{'/board-question.html/' + ${board.post_id}}" class="card card_board-ly card_board-border">
+              <a th:href="@{'/board-question.html/' + ${board.postid}}" class="card card_board-ly card_board-border">
                 <div class="">
                   <h3 class="card__head card__head_board_ly">
                     <span th:text="${board.title}"></span>

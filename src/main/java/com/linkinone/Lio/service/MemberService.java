@@ -32,7 +32,7 @@ public class MemberService implements UserDetailsService {
         memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
         memberDto.setUserrole(Role.MEMBER);
 
-        return memberRepository.save(memberDto.toEntity()).getMem_id();
+        return memberRepository.save(memberDto.toEntity()).getMemid();
     }
 
     @Override

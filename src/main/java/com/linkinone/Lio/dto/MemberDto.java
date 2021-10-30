@@ -12,7 +12,7 @@ import java.util.Map;
 @ToString
 @NoArgsConstructor
 public class MemberDto {
-    private long mem_id;
+    private long memid;
     private String name;
     private String password;
     private String email;
@@ -24,7 +24,7 @@ public class MemberDto {
 
     public MemberEntity toEntity() {
         return MemberEntity.builder()
-                .mem_id(mem_id)
+                .memid(memid)
                 .name(name)
                 .password(password)
                 .email(email)
@@ -34,8 +34,8 @@ public class MemberDto {
     }
 
     @Builder
-    public MemberDto(long mem_id, String name, String password, String email, String nickname, Role userrole, LocalDateTime createdDate, LocalDateTime modifiedDate) {
-        this.mem_id = mem_id;
+    public MemberDto(long memid, String name, String password, String email, String nickname, Role userrole, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+        this.memid = memid;
         this.name = name;
         this.password = password;
         this.email = email;

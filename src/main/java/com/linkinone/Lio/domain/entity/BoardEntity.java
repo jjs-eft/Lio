@@ -18,7 +18,7 @@ public class BoardEntity extends TimeEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long post_id;
+    private Long postid;
 
     @Column(length = 10, nullable = false)
     private String boardtype;
@@ -48,8 +48,8 @@ public class BoardEntity extends TimeEntity {
 
 
     @Builder
-    public BoardEntity(Long post_id, String boardtype, String writer, String title, String content, String tag, Integer hits, Integer recommend, Integer NOP) {
-        this.post_id = post_id;
+    public BoardEntity(Long postid, String boardtype, String writer, String title, String content, String tag, Integer hits, Integer recommend, Integer NOP) {
+        this.postid = postid;
         this.boardtype = boardtype;
         this.writer = writer;
         this.title = title;

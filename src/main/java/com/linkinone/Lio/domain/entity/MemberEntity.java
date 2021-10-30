@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class MemberEntity extends TimeEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private long mem_id;
+    private long memid;
 
     @Column(length = 50, nullable = true)
     private String name;
@@ -41,8 +41,8 @@ public class MemberEntity extends TimeEntity {
 
 
     @Builder
-    public MemberEntity(long mem_id, String name, String password, String email, String nickname, Role userrole) {
-        this.mem_id = mem_id;
+    public MemberEntity(long memid, String name, String password, String email, String nickname, Role userrole) {
+        this.memid = memid;
         this.name = name;
         this.password = password;
         this.email = email;

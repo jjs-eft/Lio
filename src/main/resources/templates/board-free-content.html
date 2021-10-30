@@ -304,7 +304,7 @@
             <span class="tag">백준</span>
           </div>
           <div>
-            <a th:href="'/board-free-update.html/' + '${boardDto.post_id}'" class="content__btn">수정</a>
+            <a th:href="'/board-free-update.html/' + '${boardDto.postid}'" class="content__btn">수정</a>
             <a href="" class="content__btn">삭제</a>
           </div>
         </div>
@@ -323,7 +323,6 @@
           </div>
         </div>
         <div class="comments-write">
-          <h4 class="comments-write__header">2개의 댓글</h4>
           <textarea
             name=""
             id=""
@@ -332,33 +331,16 @@
           ></textarea>
           <input type="button" value="작성" class="comments-write__btn" />
         </div>
-        <div class="user-comments">
-          <h4 class="user-comments__header">댓글 작성자</h4>
+        <div th:each = "comment : ${commentDto}" class="user-comments">
+          <h4 class="user-comments__header">
+            <span th:text = "${comment.writer}"></span>
+          </h4>
           <div class="user-comments__info">
-            <span>2021. 10. 11.</span>
-            <span>15:39:22</span>
+            <span th:text="${#temporals.format(comment.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
           </div>
           <div class="user-comments__content">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At, totam
-            impedit illo repellat laborum quasi incidunt distinctio sequi
-            aliquam dolorem facilis vitae minima perspiciatis sunt corrupti. At
-            non molestias hic.
+            <span th:text="${comment.content}"></span>
           </div>
-          <!-- <div class="user-comments__reply">답글 달기</div> -->
-        </div>
-        <div class="user-comments">
-          <h4 class="user-comments__header">댓글 작성자</h4>
-          <div class="user-comments__info">
-            <span>2021. 10. 11.</span>
-            <span>15:39:22</span>
-          </div>
-          <div class="user-comments__content">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. At, totam
-            impedit illo repellat laborum quasi incidunt distinctio sequi
-            aliquam dolorem facilis vitae minima perspiciatis sunt corrupti. At
-            non molestias hic.
-          </div>
-          <!-- <div class="user-comments__reply">답글 달기</div> -->
         </div>
       </div>
       <!-- end main-preview -->

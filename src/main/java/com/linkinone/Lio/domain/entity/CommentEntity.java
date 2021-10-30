@@ -16,22 +16,21 @@ public class CommentEntity extends TimeEntity  {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long comment_id;
+    private Long commentid;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_id")
-    private BoardEntity post_id;
+    @Column(length = 10, nullable = false)
+    private Long postid;
 
     @Column(length = 50, nullable = false)
     private String writer;
 
     @Builder
-    public CommentEntity(Long comment_id, String content, BoardEntity post_id, String writer){
-        this.comment_id = comment_id;
-        this.post_id = post_id;
+    public CommentEntity(Long commentid, String content, Long postid, String writer){
+        this.commentid = commentid;
+        this.postid = postid;
         this.content = content;
         this.writer = writer;
     }

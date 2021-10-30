@@ -1,12 +1,19 @@
 package com.linkinone.Lio.service;
 
+import com.linkinone.Lio.domain.entity.BoardEntity;
 import com.linkinone.Lio.domain.entity.CommentEntity;
 import com.linkinone.Lio.domain.repository.CommentRepository;
+import com.linkinone.Lio.dto.BoardDto;
 import com.linkinone.Lio.dto.CommentDto;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import org.yaml.snakeyaml.tokens.CommentToken;
 
 import javax.transaction.Transactional;
+import javax.xml.stream.events.Comment;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -16,26 +23,29 @@ public class CommentService {
     private CommentRepository commentRepository;
 
     @Transactional
-    public CommentDto getComment(Long post_id) {
+    public List<CommentDto> getComment(Long no)
         {
-            Optional<CommentEntity> commentEntityWrapper = commentRepository.findById(post_id);
-            CommentEntity commentEntity = commentEntityWrapper.get();
+            List<CommentEntity> commentEntities = commentRepository.findAllByPostid(no);
+            List<CommentDto> commentDtoList = new ArrayList<>();
 
-            CommentDto commentDTO = CommentDto.builder()
-                    .comment_id(commentEntity.getComment_id())
-                    .post_id(commentEntity.getPost_id())
-                    .content(commentEntity.getContent())
-                    .writer(commentEntity.getWriter())
-                    .createdDate(commentEntity.getCreatedDate())
-                    .build();
+            for( CommentEntity commentEntity : commentEntities) {
+                CommentDto commentDTO = CommentDto.builder()
+                        .commentid(commentEntity.getCommentid())
+                        .postid(commentEntity.getPostid())
+                        .content(commentEntity.getContent())
+                        .writer(commentEntity.getWriter())
+                        .createdDate(commentEntity.getCreatedDate())
+                        .build();
 
-            return commentDTO;
-        }
+                commentDtoList.add(commentDTO);
+            }
+
+            return commentDtoList;
     }
 
     @Transactional
     public Long savePost(CommentDto commentDto) {
-        return commentRepository.save(commentDto.toEntity()).getComment_id();
+        return commentRepository.save(commentDto.toEntity()).getCommentid();
     }
 
 

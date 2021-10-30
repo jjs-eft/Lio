@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CommentDto {
 
-    private Long comment_id;
-    private BoardEntity post_id;
+    private Long commentid;
+    private Long postid;
     private String writer;
     private String content;
     private LocalDateTime createdDate;
@@ -22,8 +22,8 @@ public class CommentDto {
 
     public CommentEntity toEntity() {
         CommentEntity build = CommentEntity.builder()
-                .comment_id(comment_id)
-                .post_id(post_id)
+                .commentid(commentid)
+                .postid(postid)
                 .writer(writer)
                 .content(content)
                 .build();
@@ -32,9 +32,9 @@ public class CommentDto {
     }
 
     @Builder
-    public CommentDto(Long comment_id, String content, BoardEntity post_id, String writer, LocalDateTime createdDate, LocalDateTime modifiedDate){
-            this.comment_id = comment_id;
-            this.post_id = post_id;
+    public CommentDto(Long commentid, String content, Long postid, String writer, LocalDateTime createdDate, LocalDateTime modifiedDate){
+            this.commentid = commentid;
+            this.postid = postid;
             this.content = content;
             this.writer = writer;
             this.createdDate = createdDate;

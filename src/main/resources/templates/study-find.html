@@ -324,7 +324,7 @@
         <ul class="card-group">
           <li th:each="board : ${boardList}"  class="card-item">
             <div  class="card-ly1">
-              <a th:href="@{'/study-content.html/' + ${board.post_id}}"  class="card card_big">
+              <a th:href="@{'/study-content.html/' + ${board.postid}}"  class="card card_big">
                 <h3 class="card__head fs_28"><span th:text="${board.title}"></span></h3>
                 <span class="card__date" th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
                 <div class="card__content">

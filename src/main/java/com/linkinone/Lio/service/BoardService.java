@@ -317,12 +317,12 @@ public class BoardService {
 
     @Transactional
     public Long savePost(BoardDto boardDto) {
-        return boardRepository.save(boardDto.toEntity()).getPost_id();
+        return boardRepository.save(boardDto.toEntity()).getPostid();
     }
 
     @Transactional
-    public void deletePost(Long post_id) {
-            boardRepository.deleteById(post_id);
+    public void deletePost(Long postid) {
+            boardRepository.deleteById(postid);
     }
 
     @Transactional
@@ -343,7 +343,7 @@ public class BoardService {
 
     private BoardDto convertEntityToDto(BoardEntity boardEntity) {
         return BoardDto.builder()
-                .post_id(boardEntity.getPost_id())
+                .postid(boardEntity.getPostid())
                 .boardtype(boardEntity.getBoardtype())
                 .title(boardEntity.getTitle())
                 .content(boardEntity.getContent())
