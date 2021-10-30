@@ -283,10 +283,13 @@
         <h2 class="group-head-title group-head underline underline_size-5">
             자유 게시글 수정
         </h2>
-        <form th:action="@{'board-free-update/' + ${boardDto.postid}}" method="post">
+        <form th:action="@{'/board-free-update.html/' + ${boardDto.postid}}" method="post">
             <input type="hidden" name="_method" value="put"/>
+            <input type="hidden" name="postid" th:value="${boardDto.postid}"/>
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <input type="hidden" name="boardtype" th:value="free">
+            <input type="hidden" name="writer" class="form-control" id="inputAuthor" th:value="${author}">
+
             <h3 class="recruit__header">자유 게시글 수정</h3>
             <div class="recruit-content">
                 <label for="" class="recruit-content__label">제목</label>
@@ -300,31 +303,28 @@
                 <input
                         type="text"
                         name="tag"
-                        id=""
                         th:value="${boardDto.tag}"
                         class="recruit-content__input"
                 />
 
-                <input type="hidden" name="writer" class="form-control" id="inputAuthor" th:value="${author}">
+
                 <label for="" class="recruit-content__label">내용</label>
                 <div id="editor" class="editor-form"></div>
+
                 <textarea
                         name="content"
                         id="hidden-txt"
                         cols="30"
                         rows="10"
-                        th:value="${boardDto.content}"
                         style="visibility: hidden; height: 0"
                 >
             </textarea>
-
 
                 <div class="recruit-content__btn-group">
                     <input
                             type="submit"
                             class="recruit-content__btn recruit-content__btn_submit"
                             value="수정 완료"
-                            id="submit"
                     />
                     <a
                             href="/board-free.html"
@@ -334,6 +334,12 @@
                 </div>
             </div>
         </form>
+
+        <form id="delete-form" th:action="@{'/board-free-update.html/' + ${boardDto.postid}}" method="post">
+            <input type="hidden" name="_method" value="delete"/>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <button id="delete-btn">삭제</button>
+        </form>
     </div>
 </div>
 <!-- footer -->
@@ -341,7 +347,6 @@
 <!-- start editor js -->
 <script>
     {
-
         let submit = document.querySelector("#submit");
         let txtarea = document.querySelector("#hidden-txt");
         var myEditor;
@@ -360,8 +365,9 @@
             // e.target.style.backgroundColor = "black";
             txtarea.value = myEditor.getData();
         });
+
         setInterval(() => {
-            myEditor.setData(boardDto.content);
+            myEditor.config.autoParagraph = false;
         }, 1000);
     }
 </script>

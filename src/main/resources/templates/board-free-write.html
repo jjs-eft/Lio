@@ -359,6 +359,10 @@
           // e.target.style.backgroundColor = "black";
           txtarea.value = myEditor.getData();
         });
+
+        setInterval(() => {
+          myEditor.config.autoParagraph = false;
+        }, 1000);
       }
     </script>
     <!-- end editor js -->
