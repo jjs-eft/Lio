@@ -2,12 +2,15 @@ package com.linkinone.Lio.service;
 
 
 import com.linkinone.Lio.domain.Role;
+import com.linkinone.Lio.domain.entity.BoardEntity;
 import com.linkinone.Lio.domain.entity.MemberEntity;
 import com.linkinone.Lio.domain.repository.MemberRepository;
+import com.linkinone.Lio.dto.BoardDto;
 import com.linkinone.Lio.dto.MemberDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -49,5 +52,36 @@ public class MemberService implements UserDetailsService {
         }
 
         return new User(userEntity.getEmail(), userEntity.getPassword(), authorities);
+    }
+
+    @Transactional
+    public MemberDto getInfo(String email) {
+        Optional<MemberEntity> memberEntityWrapper = memberRepository.findByEmail(email);
+        MemberEntity memberEntity = memberEntityWrapper.get();
+
+        return this.convertEntityToDto(memberEntity);
+    }
+
+    @Transactional
+    public Long updateInfo(MemberDto memberDto) {
+        return memberRepository.save(memberDto.toEntity()).getMemid();
+    }
+
+    @Transactional
+    public void deleteUser(String email) {
+        memberRepository.deleteByEmail(email);
+
+    }
+
+
+    private MemberDto convertEntityToDto(MemberEntity memberEntity) {
+        return MemberDto.builder()
+                .memid(memberEntity.getMemid())
+                .name(memberEntity.getName())
+                .email(memberEntity.getEmail())
+                .nickname(memberEntity.getNickname())
+                .password(memberEntity.getPassword())
+                .userrole(memberEntity.getUserrole())
+                .build();
     }
 }

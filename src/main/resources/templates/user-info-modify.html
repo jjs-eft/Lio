@@ -259,8 +259,10 @@
             class="user-info__img"
             style="background-color: black; width: 300px; height: 300px"
           /> -->
+
           <div class="user-info__content content_left">
-            <span class="user-info__nickname">nickname1234</span>
+            <span class="user-info__nickname"><span th:text="${memberDto.nickname}"></span></span>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <!-- <div class="user-info__tech">
               <label class="user-info__label">주언어</label>
               <span class="tag">JavaScript</span>
@@ -276,9 +278,9 @@
               <label class="user-info__label" for="email">이메일</label>
               <input
                 type="email"
-                name=""
+                name="email"
                 id=""
-                value="사용자이메일@email.com"
+                th:value="${memberDto.email}"
                 class="user-info__input-item"
                 disabled
               />
@@ -287,9 +289,9 @@
               <label class="user-info__label" for="name">이름</label>
               <input
                 type="text"
-                name=""
+                name="name"
                 id=""
-                value="신현균"
+                th:value="${memberDto.name}"
                 class="user-info__input-item"
                 disabled
               />
@@ -298,21 +300,27 @@
               <label class="user-info__label" for="nickname">닉네임</label>
               <input
                 type="text"
-                name=""
+                name="nickname"
                 id=""
-                value="nickname1234"
+                th:value="${memberDto.nickname}"
                 class="user-info__input-item"
               />
             </div>
           </div>
         </div>
         <!-- end user-info-ly -->
-        <form action="" class="user-info__btn-group">
+        <form action="/user-info-modify.html" class="user-info__btn-group" method="post">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+          <input type="hidden" name="_method" value="put"/>
+          <input type="hidden" name="memid" th:value="${memberDto.memid}"/>
+          <input type="hidden" name="password" th:value="${memberDto.password}"/>
+          <input type="hidden" name="userrole" th:value="${memberDto.userrole}"/>
           <input type="submit" class="more-btn btn-color_sb" value="수정사항 저장">
           <a href="#modify-pw-modal" class="more-btn btn-color_sb">비밀번호 변경</a>
           <a href="#tech-modal" class="more-btn btn-color_sb">언어 변경</a>
         </form>
-        <form action="" class="user-info__btn-group mar-top-50">
+        <form action="/user-info-modify.html" class="user-info__btn-group mar-top-50" method="post">
+          <input type="hidden" name="_method" value="delete"/>
           <input type="submit" class="more-btn btn-color_gr" value="회원 탈퇴">
         </form>
       </div>
