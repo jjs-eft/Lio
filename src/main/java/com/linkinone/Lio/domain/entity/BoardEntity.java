@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@DynamicInsert
 @Table(name ="board")
 public class BoardEntity extends TimeEntity {
 

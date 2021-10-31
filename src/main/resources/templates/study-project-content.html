@@ -292,9 +292,8 @@
             <span th:inline="text">작성일 : [[${#temporals.format(boardDto.createdDate, 'yyyy-MM-dd HH:mm')}]] </span>
           </div>
           <div class="content__tag-group">
-            <span class="tag">알고리즘</span>
-            <span class="tag">파이썬</span>
-            <span class="tag">백준</span>
+            <span class="tag"><span th:text="${boardDto.tag}"></span>
+
           </div>
         </div>
         <!-- 실제 글 내용 -->
@@ -304,7 +303,7 @@
         </article>
         <div class="content__article-end">
           <div class="content__article-end__left">
-            <span>모집인원: <span>3</span></span>
+            <span>모집인원: <span th:text="${boardDto.NOP}"></span></span>
             <span>언어: <span>python</span></span>
           </div>
           <div class="content__article-end__right">

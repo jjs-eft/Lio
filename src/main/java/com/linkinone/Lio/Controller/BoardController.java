@@ -67,6 +67,7 @@ public class BoardController {
     //자유게시판 상세조회
     @GetMapping("/board-free.html/{no}")
     public String board_free_detail(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        model.addAttribute("view", boardService.increaseHits(no));
         BoardDto boardDTO = boardService.getPost(no);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("author",userDetails.getUsername());
@@ -75,6 +76,8 @@ public class BoardController {
         //댓글
         List<CommentDto> commentList = commentService.getComment(no);
         model.addAttribute("commentDto", commentList);
+
+
 
         return "/board-free-content.html";
     }
@@ -152,6 +155,7 @@ public class BoardController {
 
     @GetMapping("/board-question.html/{no}") //질문게시판 상세조회
     public String board_question_detail(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        model.addAttribute("view", boardService.increaseHits(no));
         BoardDto boardDTO = boardService.getPost(no);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("author",userDetails.getUsername());
@@ -212,6 +216,7 @@ public class BoardController {
 
     @GetMapping("/board-notice.html/{no}") // 공지사항 상세조회
     public String board_notice_detail(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        model.addAttribute("view", boardService.increaseHits(no));
         BoardDto boardDTO = boardService.getPost(no);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("author",userDetails.getUsername());
@@ -278,6 +283,7 @@ public class BoardController {
     //상세조회 ( 스터디 )
     @GetMapping("/study-content.html/{no}")
     public String study_detail(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        model.addAttribute("view", boardService.increaseHits(no));
         BoardDto boardDTO = boardService.getPost(no);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("author",userDetails.getUsername());
@@ -328,7 +334,6 @@ public class BoardController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("author",userDetails.getUsername());
 
-
         List<TechDto> techlist = boardService.getTech();
         model.addAttribute("techlist", techlist);
 
@@ -336,16 +341,17 @@ public class BoardController {
     }
 
     @PostMapping("/project-recruit.html") // 프로젝트 글 작성 포스트매핑
-    public String project_recruitEx(BoardDto boardDto, BoardTechDto boardTechDto) {
+    public String project_recruitEx(BoardDto boardDto) {
 
         boardService.savePost(boardDto);
-        boardService.saveTech(boardTechDto);
+//        boardService.saveTech(boardTechDto);
 
         return "redirect:/project-find.html";
     }
 
-    @GetMapping("/project-content.html/{no}")
+    @GetMapping("/project-content.html/{no}") // 프로젝트 상세 조회
     public String project_detail(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        model.addAttribute("view", boardService.increaseHits(no));
         BoardDto boardDTO = boardService.getPost(no);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("author",userDetails.getUsername());

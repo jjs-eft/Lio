@@ -365,6 +365,16 @@ public class BoardService {
 
     }
 
+    @Transactional
+    public int increaseHits(Long postid){
+        return boardRepository.increaseHits(postid);
+    }
+
+    @Transactional
+    public int increaseRecom(Long postid){
+        return boardRepository.increaseRecom(postid);
+    }
+
 
 
     private BoardDto convertEntityToDto(BoardEntity boardEntity) {
@@ -373,6 +383,10 @@ public class BoardService {
                 .boardtype(boardEntity.getBoardtype())
                 .title(boardEntity.getTitle())
                 .content(boardEntity.getContent())
+                .hits(boardEntity.getHits())
+                .recommend(boardEntity.getRecommend())
+                .tag(boardEntity.getTag())
+                .NOP(boardEntity.getNOP())
                 .writer(boardEntity.getWriter())
                 .createdDate(boardEntity.getCreatedDate())
                 .build();
