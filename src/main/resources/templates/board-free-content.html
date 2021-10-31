@@ -298,11 +298,11 @@
             <!-- 작성 날짜 -->
             <span th:inline="text"> 작성일 : [[${#temporals.format(boardDto.createdDate, 'yyyy-MM-dd HH:mm')}]] </span>
           </div>
+
           <div class="content__tag-group">
             <span class="tag">알고리즘</span>
-            <span class="tag">파이썬</span>
-            <span class="tag">백준</span>
           </div>
+
           <div>
             <a th:href="@{'/board-free-update.html/' + ${boardDto.postid}}" class="content__btn">글 수정/삭제</a>
           </div>

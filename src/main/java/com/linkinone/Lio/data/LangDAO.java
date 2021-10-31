@@ -14,7 +14,7 @@ public class LangDAO {
 		    ResultSet rs = null;
 			String SQL ="select b.date, ifnull(cnt,0) cnt "
 					+ "from("
-					+ "        select DATE_FORMAT(mapping_Date,\"%Y-%m\") as date, count(*) as cnt"
+					+ "        select DATE_FORMAT(created_Date,\"%Y-%m\") as date, count(*) as cnt"
 					+ "        from "+type+" join tech"
 					+ "        on "+type+".techID = tech.techID"
 					+ "        where tech.techName =  \""+lang+"\""

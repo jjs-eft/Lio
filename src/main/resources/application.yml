@@ -29,5 +29,10 @@ spring:
       suffix: .jsp
   profiles:
     include: oauth
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
 
 

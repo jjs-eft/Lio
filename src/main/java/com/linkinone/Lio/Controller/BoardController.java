@@ -50,7 +50,7 @@ public class BoardController {
     @GetMapping("/board-free-write.html")
     public String board_free_write(Model model, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        model.addAttribute("author",userDetails.getUsername());
+        model.addAttribute("author", userDetails.getUsername());
         return "/board-free-write.html";
     }
 
