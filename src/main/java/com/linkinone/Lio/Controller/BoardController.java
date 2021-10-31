@@ -3,7 +3,9 @@ package com.linkinone.Lio.Controller;
 
 import com.linkinone.Lio.domain.entity.BoardEntity;
 import com.linkinone.Lio.dto.BoardDto;
+import com.linkinone.Lio.dto.BoardTechDto;
 import com.linkinone.Lio.dto.CommentDto;
+import com.linkinone.Lio.dto.TechDto;
 import com.linkinone.Lio.service.BoardService;
 import com.linkinone.Lio.service.CommentService;
 import org.springframework.security.core.Authentication;
@@ -259,6 +261,10 @@ public class BoardController {
     public String study_recruit(Model model, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("author",userDetails.getUsername());
+
+        List<TechDto> techlist = boardService.getTech();
+        model.addAttribute("techlist", techlist);
+
         return "/study-recruit.html";
     }
 
@@ -321,12 +327,19 @@ public class BoardController {
     public String project_recruit(Model model, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("author",userDetails.getUsername());
+
+
+        List<TechDto> techlist = boardService.getTech();
+        model.addAttribute("techlist", techlist);
+
         return "/project-recruit.html";
     }
 
-    @PostMapping("/project-recruit.html")
-    public String project_recruitEx(BoardDto boardDto) {
+    @PostMapping("/project-recruit.html") // 프로젝트 글 작성 포스트매핑
+    public String project_recruitEx(BoardDto boardDto, BoardTechDto boardTechDto) {
+
         boardService.savePost(boardDto);
+        boardService.saveTech(boardTechDto);
 
         return "redirect:/project-find.html";
     }

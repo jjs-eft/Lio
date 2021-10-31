@@ -2,13 +2,17 @@ package com.linkinone.Lio.service;
 
 
 import com.linkinone.Lio.domain.entity.BoardEntity;
+import com.linkinone.Lio.domain.entity.TechEntity;
 import com.linkinone.Lio.domain.repository.BoardRepository;
+import com.linkinone.Lio.domain.repository.BoardTechRepository;
+import com.linkinone.Lio.domain.repository.TechRepository;
 import com.linkinone.Lio.dto.BoardDto;
+import com.linkinone.Lio.dto.BoardTechDto;
+import com.linkinone.Lio.dto.TechDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,6 +25,8 @@ import java.util.Optional;
 public class BoardService {
 
     private BoardRepository boardRepository;
+    private BoardTechRepository boardTechRepository;
+    private TechRepository techRepository;
 
     private static final int BLOCK_PAGE_NUM_COUNT = 4;  // 블럭에 존재하는 페이지 번호 수
     private static final int PAGE_POST_COUNT = 5;       // 한 페이지에 존재하는 게시글 수(자유, 질문, 공지)
@@ -339,6 +345,26 @@ public class BoardService {
         return boardDtoList;
     }
 
+    @Transactional
+    public int saveTech(BoardTechDto boardTechDto) {
+        return boardTechRepository.save(boardTechDto.toEntity()).getPostID();
+    }
+
+    @Transactional
+    public List<TechDto> getTech() {
+        List<TechEntity> techEntities = techRepository.findAll();
+        List<TechDto> techDtolist =  new ArrayList<>();
+
+        if (techEntities.isEmpty()) return techDtolist;
+
+        for (TechEntity techEntity : techEntities) {
+            techDtolist.add(this.techconvertEntityToDto(techEntity));
+        }
+
+        return techDtolist;
+
+    }
+
 
 
     private BoardDto convertEntityToDto(BoardEntity boardEntity) {
@@ -351,4 +377,13 @@ public class BoardService {
                 .createdDate(boardEntity.getCreatedDate())
                 .build();
     }
+
+    private TechDto techconvertEntityToDto(TechEntity techEntity) {
+        return TechDto.builder()
+                .techID(techEntity.getTechID())
+                .techName(techEntity.getTechName())
+                .build();
+    }
+
+
 }

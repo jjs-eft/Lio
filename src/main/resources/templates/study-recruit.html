@@ -59,7 +59,7 @@
             "
             value="로그인"
           />
-          <a
+  <!--        <a
             href=""
             class="
               modal-content__box modal-content__box_big modal-content__google
@@ -72,7 +72,7 @@
               modal-content__box modal-content__box_big modal-content__naver
             "
             >네이버로 로그인</a
-          >
+          >-->
         </div>
       </div>
     </form>
@@ -300,8 +300,7 @@
             />
             <label for="" class="recruit-content__label">언어</label>
             <select name="" id="" class="recruit-content__input">
-              <option value="python">python</option>
-              <option value="python">java</option>
+              <option th:each="tech : ${techlist}" th:text="${tech.techName}"></option>
             </select>
             <label for="" class="recruit-content__label">태그</label>
             <input
