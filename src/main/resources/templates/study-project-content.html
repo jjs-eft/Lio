@@ -301,6 +301,15 @@
           <p th:text="${boardDto.content}" ></p>
 
         </article>
+
+        <div class="content__article-recommend">
+          <a th:with = "baseUrl=@{../ChatListServlet?toID=}" th:href="${baseUrl + boardDto.writer}" class="more-btn">작성자에게 메세지</a>
+        </div>
+
+        <div class="content__article-recommend">
+          <button class="more-btn btn-color_sb">추천</button>
+        </div>
+
         <div class="content__article-end">
           <div class="content__article-end__left">
             <span>모집인원: <span th:text="${boardDto.NOP}"></span></span>
@@ -313,6 +322,9 @@
              추천수 : <span th:text="${boardDto.recommend}"> </span>
           </div>
         </div>
+
+
+
 
 
         <form th:action="${boardDto.postid}" method="post">
