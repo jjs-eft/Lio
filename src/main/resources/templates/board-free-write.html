@@ -7,7 +7,12 @@
     <title>Link In One</title>
     <link rel="stylesheet" href="../CSS/reset.css" />
     <link rel="stylesheet" href="../CSS/style.css" />
-    <script src="../plugin/ckeditor.js"></script>
+    <script src="../plugin/ckeditor/ckeditor.js"></script>
+    <script>
+      var ckedtior_config = {
+        resize_enaleb : false,
+      };
+    </script>
   </head>
   <body>
     <!-- start login-modal -->
@@ -307,16 +312,10 @@
 
             <input type="hidden" name="writer" class="form-control" id="inputAuthor" th:value="${author}">
             <label for="" class="recruit-content__label">내용</label>
-            <div id="editor" class="editor-form"></div>
-
-            <textarea
-                    name="content"
-                    id="hidden-txt"
-                    cols="30"
-                    rows="10"
-                    style="visibility: hidden; height: 0"
-            >
-            </textarea>
+            <textarea name="content" id="content_textarea" cols="30" rows="10"></textarea>
+            <script>
+              CKEDITOR.replace("content_textarea", ckedtior_config);
+            </script>
 
 
             <div class="recruit-content__btn-group">
@@ -338,38 +337,6 @@
     </div>
     <!-- footer -->
     <script src="../JS/footer.js"></script>
-    <!-- start editor js -->
-    <script>
-      {
-
-
-        let submit = document.querySelector("#submit");
-        let txtarea = document.querySelector("#hidden-txt");
-        var myEditor;
-        // #editor위치에 에디터 추가
-        ClassicEditor.create(document.querySelector("#editor"))
-                .then((editor) => {
-                  console.log("Editor was initialized", editor);
-                  myEditor = editor;
-                })
-                .catch((err) => {
-                  console.error(err.stack);
-                });
-        // 등록에 마우스 올리면 값전달 준비
-        submit.addEventListener("mouseover", (e) => {
-          // console.log(myEditor.getData());
-          // e.target.style.backgroundColor = "black";
-          txtarea.value = myEditor.getData();
-        });
-
-        setInterval(() => {
-          myEditor.config.autoParagraph = false;
-        }, 1000);
-      }
-
-
-    </script>
-    <!-- end editor js -->
 
   </body>
 </html>

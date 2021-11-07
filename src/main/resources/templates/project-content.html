@@ -278,7 +278,7 @@
       <div class="main-preview">
         <div class="main-group-head group-head">
           <h2 class="group-head-title underline underline_size-1">
-            게시판
+            프로젝트 찾기
           </h2>
         </div>
         <div class="content">
@@ -293,8 +293,12 @@
           </div>
           <div class="content__tag-group">
             <span class="tag"><span th:text="${boardDto.tag}"></span>
-
           </div>
+
+          <div>
+            <a th:href="@{'/project-recruit-update.html/' + ${boardDto.postid}}" class="content__btn">글 수정/삭제</a>
+          </div>
+
         </div>
         <!-- 실제 글 내용 -->
         <article class="content__article">

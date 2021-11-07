@@ -77,8 +77,6 @@ public class BoardController {
         List<CommentDto> commentList = commentService.getComment(no);
         model.addAttribute("commentDto", commentList);
 
-
-
         return "/board-free-content.html";
     }
 
@@ -93,7 +91,6 @@ public class BoardController {
     //자유게시판 댓글 삭제
     @DeleteMapping("/board-free.html/{no}")
     public String delete_free_comment(@PathVariable("no") Long no) {
-
         commentService.deleteComment(no);
 
         return "redirect:/board-free.html/";
@@ -176,7 +173,7 @@ public class BoardController {
         model.addAttribute("commentDto", commentList);
 
 
-        return "/board-free-content.html";
+        return "/board-question-content.html";
     }
 
     //질문게시판 댓글 작성
@@ -192,6 +189,32 @@ public class BoardController {
     public String delete_question_comment(@PathVariable("no") Long no) {
 
         commentService.deleteComment(no);
+
+        return "redirect:/board-question.html/";
+    }
+
+
+    //질문게시판 수정, 업데이트
+    @GetMapping("/board-question-update.html/{no}")
+    public String board_question_edit(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        BoardDto boardDTO = boardService.getPost(no);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
+        model.addAttribute("boardDto", boardDTO);
+        return "/board-question-update.html";
+    }
+
+    @PutMapping("/board-question-update.html/{no}")
+    public String board_question_update(BoardDto boardDTO) {
+        boardService.savePost(boardDTO);
+
+        return "redirect:/board-question.html/{no}";
+    }
+
+    //질문게시판 삭제
+    @DeleteMapping("/board-question-update.html/{no}")
+    public String delete_question_board(@PathVariable("no") Long no) {
+        boardService.deletePost(no);
 
         return "redirect:/board-question.html/";
     }
@@ -237,7 +260,7 @@ public class BoardController {
         model.addAttribute("commentDto", commentList);
 
 
-        return "/board-free-content.html";
+        return "/board-notice-content.html";
     }
 
     //공지 게시판 댓글 작성
@@ -257,6 +280,30 @@ public class BoardController {
         return "redirect:/board-notice.html/";
     }
 
+    //공지게시판 수정, 업데이트
+    @GetMapping("/board-notice-update.html/{no}")
+    public String board_notice_edit(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        BoardDto boardDTO = boardService.getPost(no);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
+        model.addAttribute("boardDto", boardDTO);
+        return "/board-notice-update.html";
+    }
+
+    @PutMapping("/board-notice-update.html/{no}")
+    public String board_notice_update(BoardDto boardDTO) {
+        boardService.savePost(boardDTO);
+
+        return "redirect:/board-notice.html/{no}";
+    }
+
+    //공지게시판 삭제
+    @DeleteMapping("/board-notice-update.html/{no}")
+    public String delete_notice_board(@PathVariable("no") Long no) {
+        boardService.deletePost(no);
+
+        return "redirect:/board-notice.html/";
+    }
 
 
 
@@ -304,7 +351,7 @@ public class BoardController {
         List<CommentDto> commentList = commentService.getComment(no);
         model.addAttribute("commentDto", commentList);
 
-        return "/study-project-content.html";
+        return "/study-content.html";
 
 
     }
@@ -324,6 +371,35 @@ public class BoardController {
         commentService.deleteComment(no);
 
         return "redirect:/study-find.html/";
+    }
+
+    //스터디 게시판 수정, 업데이트
+    @GetMapping("/study-recruit-update.html/{no}")
+    public String board_study_edit(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        BoardDto boardDTO = boardService.getPost(no);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
+        model.addAttribute("boardDto", boardDTO);
+
+        List<TechDto> techlist = boardService.getTech();
+        model.addAttribute("techlist", techlist);
+
+        return "/study-recruit-update.html";
+    }
+
+    @PutMapping("/study-recruit-update.html/{no}")
+    public String board_study_update(BoardDto boardDTO) {
+        boardService.savePost(boardDTO);
+
+        return "redirect:/study-content.html/{no}";
+    }
+
+    //스터디 게시판 삭제
+    @DeleteMapping("/study-recruit-update.html/{no}")
+    public String delete_study_board(@PathVariable("no") Long no) {
+        boardService.deletePost(no);
+
+        return "redirect:/study-find.html";
     }
 
 
@@ -372,7 +448,7 @@ public class BoardController {
         model.addAttribute("commentDto", commentList);
 
 
-        return "/study-project-content.html";
+        return "/project-content.html";
     }
 
     //프로젝트 게시판 댓글 작성
@@ -390,6 +466,35 @@ public class BoardController {
         commentService.deleteComment(no);
 
         return "redirect:/project-find.html/";
+    }
+
+    //프로젝트 게시판 수정, 업데이트
+    @GetMapping("/project-recruit-update.html/{no}")
+    public String board_project_edit(@PathVariable("no") Long no, Model model, Authentication authentication) {
+        BoardDto boardDTO = boardService.getPost(no);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        model.addAttribute("author",userDetails.getUsername());
+        model.addAttribute("boardDto", boardDTO);
+
+        List<TechDto> techlist = boardService.getTech();
+        model.addAttribute("techlist", techlist);
+
+        return "/project-recruit-update.html";
+    }
+
+    @PutMapping("/project-recruit-update.html/{no}")
+    public String board_project_update(BoardDto boardDTO) {
+        boardService.savePost(boardDTO);
+
+        return "redirect:/project-content.html/{no}";
+    }
+
+    //프로젝트 게시판 삭제
+    @DeleteMapping("/project-recruit-update.html/{no}")
+    public String delete_project_board(@PathVariable("no") Long no) {
+        boardService.deletePost(no);
+
+        return "redirect:/project-find.html";
     }
 
 
