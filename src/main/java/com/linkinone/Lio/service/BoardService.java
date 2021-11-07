@@ -37,6 +37,21 @@ public class BoardService {
 
     // 자유게시판
     @Transactional
+    public List<BoardDto> getRecommendFreeBoardlist(Integer pageNum) {
+        String BT = "free";
+        Page<BoardEntity> page = boardRepository.findAllByBoardtype(BT, PageRequest.of(pageNum - 1, INDEX_PAGE_POST_COUNT, Sort.by(Sort.Direction.DESC, "recommend")));
+        List<BoardEntity> boardEntities = page.getContent();
+        List<BoardDto> boardDtoList = new ArrayList<>();
+
+        for (BoardEntity boardEntity : boardEntities) {
+            boardDtoList.add(this.convertEntityToDto(boardEntity));
+        }
+
+        return boardDtoList;
+    }
+
+    // 자유게시판
+    @Transactional
     public List<BoardDto> getFreeBoardlist(Integer pageNum) {
             String BT = "free";
             Page<BoardEntity> page = boardRepository.findAllByBoardtype(BT, PageRequest.of(pageNum - 1, PAGE_POST_COUNT, Sort.by(Sort.Direction.DESC, "createdDate")));
@@ -333,18 +348,50 @@ public class BoardService {
     }
 
     @Transactional
-    public List<BoardDto> searchPosts(String keyword) {
-        List<BoardEntity> boardEntities = boardRepository.findByTitleContaining(keyword);
-        List<BoardDto> boardDtoList = new ArrayList<>();
+    public List<BoardDto> free_searchPosts(String keyword) {
+        String BT = "free";
+        List<BoardEntity> boardEntities = boardRepository.findByTitleContainingAndBoardtype(keyword, BT);
+        List<BoardDto> boardDtoList1 = new ArrayList<>();
 
-        if (boardEntities.isEmpty()) return boardDtoList;
+        if (boardEntities.isEmpty()) return boardDtoList1;
 
         for (BoardEntity boardEntity : boardEntities) {
-            boardDtoList.add(this.convertEntityToDto(boardEntity));
+            boardDtoList1.add(this.convertEntityToDto(boardEntity));
         }
 
-        return boardDtoList;
+        return boardDtoList1;
     }
+
+    @Transactional
+    public List<BoardDto> question_searchPosts(String keyword) {
+        String BT = "question";
+        List<BoardEntity> boardEntities = boardRepository.findByTitleContainingAndBoardtype(keyword, BT);
+        List<BoardDto> boardDtoList2 = new ArrayList<>();
+
+        if (boardEntities.isEmpty()) return boardDtoList2;
+
+        for (BoardEntity boardEntity : boardEntities) {
+            boardDtoList2.add(this.convertEntityToDto(boardEntity));
+        }
+
+        return boardDtoList2;
+    }
+
+    @Transactional
+    public List<BoardDto> notice_searchPosts(String keyword) {
+        String BT = "notice";
+        List<BoardEntity> boardEntities = boardRepository.findByTitleContainingAndBoardtype(keyword, BT);
+        List<BoardDto> boardDtoList3 = new ArrayList<>();
+
+        if (boardEntities.isEmpty()) return boardDtoList3;
+
+        for (BoardEntity boardEntity : boardEntities) {
+            boardDtoList3.add(this.convertEntityToDto(boardEntity));
+        }
+
+        return boardDtoList3;
+    }
+
 
     @Transactional
     public int saveTech(BoardTechDto boardTechDto) {
@@ -370,6 +417,13 @@ public class BoardService {
     public int increaseHits(Long postid){
         return boardRepository.increaseHits(postid);
     }
+
+    @Transactional
+    public int decreaseHits(Long postid){
+        return boardRepository.decreaseHits(postid);
+    }
+
+
 
     @Transactional
     public int increaseRecom(Long postid){

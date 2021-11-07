@@ -26,7 +26,7 @@ public class BoardController {
     // 메인 페이지
     @GetMapping("/")
     public String index(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
-        List<BoardDto> boardList = boardService.getFreeBoardlist(pageNum);
+        List<BoardDto> boardList = boardService.getRecommendFreeBoardlist(pageNum);
         List<BoardDto> boardList2 = boardService.getIndexStudyboardlist(pageNum);
         List<BoardDto> boardList3 = boardService.getIndexProjectboardlist(pageNum);
 
@@ -80,6 +80,17 @@ public class BoardController {
         return "/board-free-content.html";
     }
 
+
+    //자유게시판 추천
+    @GetMapping("/board-free.html/{no}/recom")
+    public String board_free_recommend(@PathVariable("no") Long no, Model model) {
+        model.addAttribute("view", boardService.increaseRecom(no));
+        model.addAttribute("view", boardService.decreaseHits(no));
+
+        return "redirect:/board-free.html/{no}";
+    }
+
+
     //자유게시판 댓글 작성
     @PostMapping("/board-free.html/{no}")
     public String board_free_comment(CommentDto commentDto) {
@@ -122,15 +133,16 @@ public class BoardController {
         return "redirect:/board-free.html/";
     }
 
-/*    // 자유게시판 검색
-    @GetMapping("/board/search")
-    public String search(@RequestParam(value="keyword") String keyword, Model model) {
-        List<BoardDto> boardDtoList = boardService.searchPosts(keyword);
 
-        model.addAttribute("boardList", boardDtoList);
+    //자유게시판검색
+    @GetMapping("/board-free.html/search")
+    public String free_search(@RequestParam(value="keyword") String keyword, Model model) {
+        List<BoardDto> boardDtoList1 = boardService.free_searchPosts(keyword);
 
-        return "board/list.html";
-    }*/
+        model.addAttribute("boardList", boardDtoList1);
+
+        return "/board-free.html";
+    }
 
 
 
@@ -174,6 +186,15 @@ public class BoardController {
 
 
         return "/board-question-content.html";
+    }
+    
+    //질문게시판 추천
+    @GetMapping("/board-question.html/{no}/recom")
+    public String board_question_recommend(@PathVariable("no") Long no, Model model) {
+        model.addAttribute("view", boardService.increaseRecom(no));
+        model.addAttribute("view", boardService.decreaseHits(no));
+
+        return "redirect:/board-question.html/{no}";
     }
 
     //질문게시판 댓글 작성
@@ -220,6 +241,16 @@ public class BoardController {
     }
 
 
+    //질문게시판검색
+    @GetMapping("/board-question.html/search")
+    public String question_search(@RequestParam(value="keyword") String keyword, Model model) {
+        List<BoardDto> boardDtoList2 = boardService.question_searchPosts(keyword);
+
+        model.addAttribute("boardList", boardDtoList2);
+
+        return "/board-question.html";
+    }
+
 
     //공지사항
     @GetMapping("/board-notice.html")
@@ -263,6 +294,16 @@ public class BoardController {
         return "/board-notice-content.html";
     }
 
+    //공지게시판 추천
+    @GetMapping("/board-notice.html/{no}/recom")
+    public String board_notice_recommend(@PathVariable("no") Long no, Model model) {
+        model.addAttribute("view", boardService.increaseRecom(no));
+        model.addAttribute("view", boardService.decreaseHits(no));
+
+        return "redirect:/board-notice.html/{no}";
+    }
+
+
     //공지 게시판 댓글 작성
     @PostMapping("/board-notice.html/{no}")
     public String board_notice_comment(CommentDto commentDto) {
@@ -303,6 +344,16 @@ public class BoardController {
         boardService.deletePost(no);
 
         return "redirect:/board-notice.html/";
+    }
+
+    //공지게시판 검색
+    @GetMapping("/board-notice.html/search")
+    public String notice_search(@RequestParam(value="keyword") String keyword, Model model) {
+        List<BoardDto> boardDtoList3 = boardService.notice_searchPosts(keyword);
+
+        model.addAttribute("boardList", boardDtoList3);
+
+        return "/board-notice.html";
     }
 
 
@@ -354,6 +405,16 @@ public class BoardController {
         return "/study-content.html";
 
 
+    }
+
+
+    //스터디 게시판 추천
+    @GetMapping("/study-content.html/{no}/recom")
+    public String board_study_recommend(@PathVariable("no") Long no, Model model) {
+        model.addAttribute("view", boardService.increaseRecom(no));
+        model.addAttribute("view", boardService.decreaseHits(no));
+
+        return "redirect:/study-content.html/{no}";
     }
 
     //스터디 게시판 댓글 작성
@@ -451,6 +512,14 @@ public class BoardController {
         return "/project-content.html";
     }
 
+    //프로젝트 게시판 추천
+    @GetMapping("/project-content.html/{no}/recom")
+    public String board_project_recommend(@PathVariable("no") Long no, Model model) {
+        model.addAttribute("view", boardService.increaseRecom(no));
+        model.addAttribute("view", boardService.decreaseHits(no));
+        return "redirect:/project-content.html/{no}";
+    }
+
     //프로젝트 게시판 댓글 작성
     @PostMapping("/project-content.html/{no}")
     public String board_project_comment(CommentDto commentDto) {
@@ -496,7 +565,6 @@ public class BoardController {
 
         return "redirect:/project-find.html";
     }
-
 
 
 

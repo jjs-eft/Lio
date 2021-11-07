@@ -317,10 +317,12 @@
           <a th:with = "baseUrl=@{../ChatListServlet?toID=}" th:href="${baseUrl + boardDto.writer}" class="more-btn">작성자에게 메세지</a>
         </div>
 
+
+        <form th:action="@{'/board-free.html/' + ${boardDto.postid} + '/recom'}" method="GET">
         <div class="content__article-recommend">
           <button class="more-btn btn-color_sb">추천</button>
         </div>
-
+        </form>
 
 
         <div class="content__article-end">

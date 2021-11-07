@@ -13,12 +13,17 @@ import java.util.List;
 
 public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
     List<BoardEntity> findByTitleContaining(String keyword);
+    List<BoardEntity> findByTitleContainingAndBoardtype(String keyword, String BT);
     Page<BoardEntity> findAllByBoardtype(String BT, Pageable pageable);
     Long countByBoardtype(String BT);
 
     @Modifying
     @Query("update BoardEntity p set p.hits = p.hits + 1 where p.postid = :postid")
     int increaseHits(@Param("postid") Long postid);
+
+    @Modifying
+    @Query("update BoardEntity p set p.hits = p.hits - 1 where p.postid = :postid")
+    int decreaseHits(@Param("postid") Long postid);
 
     @Modifying
     @Query("update BoardEntity p set p.recommend = p.recommend + 1 where p.postid = :postid")

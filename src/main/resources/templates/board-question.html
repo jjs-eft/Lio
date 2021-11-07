@@ -286,13 +286,13 @@
           >
         </div>
         <!-- start filter-bar -->
-        <form action="">
+        <form action="/board-question.html/search" method="GET">
           <div class="filter-bar">
             <input
-              type="search"
-              name=""
-              id=""
-              class="filter-bar__search-field"
+                    type="text"
+                    name="keyword"
+                    id=""
+                    class="filter-bar__search-field"
             />
             <label for="search-btn">
               <img
@@ -321,9 +321,8 @@
                 </div>
                 <ul class="bulletien-info bulletien-info_board_ly">
                   <li class="bulletien-info__item">-  <span th:text="${board.writer}"></span></li>
-                  <li class="bulletien-info__item">- 추천수: <span th:text="${board.hits}" ></span></li>
-                  <li class="bulletien-info__item">- 조회수: <span th:text="${board.recommend}" ></span></li>
-                  <li class="bulletien-info__item">- 댓글: 11</li>
+                  <li class="bulletien-info__item">- 추천수: <span th:text="${board.recommend}" ></span></li>
+                  <li class="bulletien-info__item">- 조회수: <span th:text="${board.hits}" ></span></li>
                 </ul>
               </a>
         </div>

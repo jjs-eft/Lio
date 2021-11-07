@@ -314,7 +314,7 @@
             <label for="" class="recruit-content__label">내용</label>
             <textarea name="content" id="content_textarea" cols="30" rows="10"></textarea>
             <script>
-              CKEDITOR.replace("content_textarea", ckedtior_config);
+              CKEDITOR.replace("content_textarea", {filebrowserUploadUrl:'/mine/imageUpload.do'}, ckedtior_config);
             </script>
 
 

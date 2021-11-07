@@ -287,11 +287,11 @@
           <a href="/board-free-write.html" class="more-btn">글 쓰기</a>
         </div>
         <!-- start filter-bar -->
-        <form action="">
+        <form action="/board-free.html/search" method="GET">
           <div class="filter-bar">
             <input
-              type="search"
-              name=""
+              type="text"
+              name="keyword"
               id=""
               class="filter-bar__search-field"
             />
@@ -323,9 +323,8 @@
               </div>
               <ul class="bulletien-info bulletien-info_board_ly">
                 <li class="bulletien-info__item">- 작성자: <span th:text="${board.writer}"></span></li>
-                <li class="bulletien-info__item">- 추천수: <span th:text="${board.hits}" ></span></li>
-                <li class="bulletien-info__item">- 조회수: <span th:text="${board.recommend}" ></span></li>
-                <li class="bulletien-info__item">- 댓글: 11</li>
+                <li class="bulletien-info__item">- 추천수: <span th:text="${board.recommend}" ></span></li>
+                <li class="bulletien-info__item">- 조회수: <span th:text="${board.hits}" ></span></li>
               </ul>
             </a>
 
