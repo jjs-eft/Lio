@@ -124,37 +124,7 @@
 	        </div>
 	        <div id="boxTable">
 	        </div>
-        <!-- start pagenation -->
-        <div class="pagenation">
-          <img
-            src="../img/pagenation-left-end.svg"
-            alt=""
-            class="pagenation__btn"
-          />
-          <img
-            src="../img/pagenation-left.svg"
-            alt=""
-            class="pagenation__btn"
-          />
-          <ul class="pagenation-list">
-            <li class="pagenation-list__item pagenation-list__item_active">
-              <span>01</span>
-            </li>
-            <li class="pagenation-list__item"><span>02</span></li>
-            <li class="pagenation-list__item"><span>03</span></li>
-          </ul>
-          <img
-            src="../img/pagenation-right.svg"
-            alt=""
-            class="pagenation__btn"
-          />
-          <img
-            src="../img/pagenation-right-end.svg"
-            alt=""
-            class="pagenation__btn"
-          />
-        </div>
-        <!-- end pagenation -->
+
       </div>
     </div>
     <!-- end main -->

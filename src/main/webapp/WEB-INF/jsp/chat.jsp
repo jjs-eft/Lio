@@ -32,17 +32,20 @@
 <link rel="stylesheet" href="/CSS/style.css" />
 <script src="/JS/bootstrap.js"></script>
 <script type="text/javascript">
+
+
 	function autoClosingAlert(selector, delay) {
 		var alert =$(selector).alert();
 		alert.show();
 		window.setTimeout(function() { alert.hide() }, delay)
 	}
-	
+
+
 	function submitFunction() {
 		var fromID = '<%=userID%>';
 		var toID = '<%=toID%>';
 		var chatContent = $('#chatContent').val();
-		
+
 		$.ajax({
 				type: "POST",
 				url: "/ChatSubmitServlet",
