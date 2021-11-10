@@ -8,13 +8,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @AllArgsConstructor
+@ResponseBody
 public class MemberController {
     private MemberService memberService;
 
@@ -32,9 +30,11 @@ public class MemberController {
     // 회원가입 처리
     @PostMapping("/login-modal-signup")
     public String execSignup(MemberDto memberDto) {
-        memberService.joinUser(memberDto);
 
-        return "redirect:/#open-login-modal";
+        memberService.joinUser(memberDto);
+        String resultmsg="<script>alert('입력한 이메일로 전송된 URL을 통해 회원가입을 완료하신후 로그인해주세요!');location.href='/#open-login-modal'</script>";
+
+        return resultmsg;
     }
 
     @GetMapping("/user-info-modify.html")
