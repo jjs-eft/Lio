@@ -341,7 +341,7 @@
                 class="recruit-content__btn recruit-content__btn_cancel"
                 >취소</a
               >
-
+        </form>
               <form id="delete-form" th:action="@{'/board-free-update.html/' + ${boardDto.postid}}" method="post">
                 <input type="hidden" name="_method" value="delete" />
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
@@ -349,7 +349,6 @@
               </form>
             </div>
           </div>
-        </form>
       </div>
     </div>
     <!-- footer -->

@@ -12,7 +12,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
-    List<BoardEntity> findByTitleContaining(String keyword);
     List<BoardEntity> findByTitleContainingAndBoardtype(String keyword, String BT);
     Page<BoardEntity> findAllByBoardtype(String BT, Pageable pageable);
     Long countByBoardtype(String BT);

@@ -303,7 +303,7 @@
         <div class="card-group">
           <div th:each="board : ${boardList}" class="card-item">
             <a th:href="@{'/board-free.html/' + ${board.postid}}" class="card">
-              <span class="card__rank">01</span>
+              <span class="card__rank" th:text="${board.recommend}" ></span>
               <h3 class="card__head card__head_preview-board">
                 <span th:text="${board.title}"></span>
               </h3>
@@ -311,7 +311,7 @@
                 <ul class="bulletien-info">
                   <li class="bulletien-info__item">- 작성자: <span th:text="${board.writer}"></span></li>
                   <li class="bulletien-info__item">- 작성일: <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
-                  <li class="bulletien-info__item">- 추천수: <span th:text="${board.recommend}" ></span></li>
+                  <li class="bulletien-info__item">- 조회수: <span th:text="${board.hits}" ></span></li>
                 </ul>
                 <div class="tag-group">
                   <span th:text="${board.tag}" ></span>

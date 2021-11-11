@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @AllArgsConstructor
-@ResponseBody
 public class MemberController {
     private MemberService memberService;
 
@@ -28,11 +27,12 @@ public class MemberController {
 
 
     // 회원가입 처리
+    @ResponseBody
     @PostMapping("/login-modal-signup")
     public String execSignup(MemberDto memberDto) {
 
         memberService.joinUser(memberDto);
-        String resultmsg="<script>alert('입력한 이메일로 전송된 URL을 통해 회원가입을 완료하신후 로그인해주세요!');location.href='/#open-login-modal'</script>";
+        String resultmsg="<script>alert('입력한 이메일로 전송된 URL을 통해 회원가입을 완료하신후 로그인해주세요.');location.href='/#open-login-modal'</script>";
 
         return resultmsg;
     }
@@ -46,7 +46,7 @@ public class MemberController {
 
         model.addAttribute("memberDto", memberDto);
 
-        return "user-info-modify.html";
+        return "/user-info-modify.html";
     }
 
     @PutMapping("/user-info-modify.html")
@@ -56,6 +56,7 @@ public class MemberController {
         return "redirect:/user-info-modify.html";
     }
 
+    @ResponseBody
     @DeleteMapping("/user-info-modify.html")
     public String delete_user(Authentication authentication, Model model){
         String email;
@@ -63,7 +64,9 @@ public class MemberController {
         email = userDetails.getUsername();
 
         memberService.deleteUser(email);
-        return "redirect:/";
+        String resultmsg="<script>alert('서비스 이용해주셔서 감사합니다.');location.href='/'</script>";
+
+        return resultmsg;
     }
 
 }
