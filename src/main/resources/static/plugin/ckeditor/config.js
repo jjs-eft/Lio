@@ -11,6 +11,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.htmlEncodeOutput = false;
 	config.basicEntities = false;
 	config.fillEmptyBlocks = false;
+	config.filebrowserImageUploadUrl = '/upload.do';
 
 
 

@@ -211,7 +211,15 @@
     </div>
   </div>
 </form>
-<form action="" method="POST">
+<form action="/user-info-modify.html#modify-pw-modal" method="POST">
+  <input type="hidden" name="_method" value="put" />
+  <input type="hidden" name="memid" th:value="${memberDto.memid}"/>
+  <input type="hidden" name="password" th:value="${memberDto.password}"/>
+  <input type="hidden" name="email" th:value="${memberDto.email}"/>
+  <input type="hidden" name="name" th:value="${memberDto.name}"/>
+  <input type="hidden" name="userrole" th:value="${memberDto.userrole}"/>
+  <input type="hidden" name="nickname" th:value="${memberDto.nickname}"/>
+
   <div class="login-modal" id="modify-pw-modal">
     <div class="login-modal__content modal-content">
       <a href="#">
@@ -241,6 +249,7 @@
               class="modal-content__input"
       />
       <input
+              href="#"
               type="submit"
               class="
                 modal-content__box

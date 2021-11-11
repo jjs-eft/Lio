@@ -8,6 +8,7 @@ import com.linkinone.Lio.domain.repository.MemberRepository;
 import com.linkinone.Lio.dto.BoardDto;
 import com.linkinone.Lio.dto.MemberDto;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,9 +17,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -71,6 +74,13 @@ public class MemberService implements UserDetailsService {
     public void deleteUser(String email) {
         memberRepository.deleteByEmail(email);
 
+    }
+
+
+    @Transactional
+    public Long changePassword(MemberDto memberDto) {
+
+        return memberRepository.save(memberDto.toEntity()).getMemid();
     }
 
 

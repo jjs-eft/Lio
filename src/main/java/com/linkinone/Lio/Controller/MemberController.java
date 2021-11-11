@@ -56,6 +56,14 @@ public class MemberController {
         return "redirect:/user-info-modify.html";
     }
 
+    //비번 변경
+    @PutMapping("/user-info-modify.html#modify-pw-modal")
+    public String update_user_pw(MemberDto memberDto){
+        memberService.changePassword(memberDto);
+
+        return "redirect:/user-info-modify.html";
+    }
+
     @ResponseBody
     @DeleteMapping("/user-info-modify.html")
     public String delete_user(Authentication authentication, Model model){

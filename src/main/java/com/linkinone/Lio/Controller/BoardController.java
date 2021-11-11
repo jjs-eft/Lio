@@ -1,9 +1,8 @@
 package com.linkinone.Lio.Controller;
 
 
-import com.linkinone.Lio.domain.entity.BoardEntity;
+
 import com.linkinone.Lio.dto.BoardDto;
-import com.linkinone.Lio.dto.BoardTechDto;
 import com.linkinone.Lio.dto.CommentDto;
 import com.linkinone.Lio.dto.TechDto;
 import com.linkinone.Lio.service.BoardService;
@@ -14,8 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import lombok.AllArgsConstructor;
 import org.springframework.ui.Model;
-
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @AllArgsConstructor
@@ -565,9 +564,6 @@ public class BoardController {
 
         return "redirect:/project-find.html";
     }
-
-
-
 
 }
 
