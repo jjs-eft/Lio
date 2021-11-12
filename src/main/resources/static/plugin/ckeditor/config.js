@@ -11,8 +11,8 @@ CKEDITOR.editorConfig = function( config ) {
 	config.htmlEncodeOutput = false;
 	config.basicEntities = false;
 	config.fillEmptyBlocks = false;
-	config.filebrowserImageUploadUrl = '/upload.do';
-
+	config.filebrowserImageUploadUrl = '/fileupload';
+	config.allowedContent = true;
 
 
 	// Define changes to default configuration here.
@@ -46,4 +46,5 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
+
 };

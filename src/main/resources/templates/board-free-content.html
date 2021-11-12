@@ -7,7 +7,12 @@
     <title>Link In One</title>
     <link rel="stylesheet" href="../CSS/reset.css" />
     <link rel="stylesheet" href="../CSS/style.css" />
-    <style></style>
+    <script src="../plugin/ckeditor/ckeditor.js"></script>
+    <script>
+      var ckedtior_config = {
+        resize_enable : false,
+      };
+    </script>
   </head>
   <body>
     <!-- start login-modal -->
@@ -309,9 +314,9 @@
         </div>
         <!-- 실제 글 내용 -->
         <article class="content__article">
-          <div th:text="${boardDto.content}" ></div>
-
+          <div name="content" id="content_textarea" th:utext="${boardDto.content}" ></div>
         </article>
+
 
         <div class="content__article-recommend">
           <a th:with = "baseUrl=@{../ChatListServlet?toID=}" th:href="${baseUrl + boardDto.writer}" class="more-btn">작성자에게 메세지</a>
