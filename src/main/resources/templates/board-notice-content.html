@@ -304,7 +304,7 @@
           </div>
 
           <div>
-            <a th:href="@{'/board-notice-update.html/' + ${boardDto.postid}}" class="content__btn">글 수정/삭제</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/board-notice-update.html/' + ${boardDto.postid}}" class="content__btn">글 수정/삭제</a>
           </div>
         </div>
         <!-- 실제 글 내용 -->

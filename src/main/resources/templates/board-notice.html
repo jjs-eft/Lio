@@ -279,7 +279,7 @@
       <div class="main-preview">
         <div class="main-group-head group-head">
           <h2 class="group-head-title underline underline_size-3">공지 사항</h2>
-          <a href="/board-notice-write.html" class="more-btn">글 쓰기</a>
+          <a sec:authorize="hasRole('ROLE_ADMIN')" href="/board-notice-write.html" class="more-btn">글 쓰기</a>
         </div>
         <!-- start filter-bar -->
         <form action="/board-notice.html/search" method="GET">
