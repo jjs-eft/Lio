@@ -334,12 +334,12 @@
         <div class="card-group">
           <div th:each="board : ${boardList2}" class="card-item card-item_main">
             <div class="card-ly1">
-              <a th:href="@{'/study-content.html/' + ${board.postid}}"   class="card card_big">
+              <a th:href="@{'/study-content.html/' + ${board.postid}}"   class="card card_big" style="width:100%;">
                 <h3 class="card__head fs_28"><span th:text="${board.title}"></span></h3>
                 <span class="card__date" th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
-                <div class="card__content">
+                <div class="card__content" style="width:100%;">
                   <p class="card__p">
-                    <span th:text="${board.content}"></span>
+                    <span th:utext="${board.content}"></span>
                   </p>
                   <ul class="bulletien-info">
                     <li class="bulletien-info__item">- 작성자: <span th:text="${board.writer}"></span></li>
@@ -372,12 +372,12 @@
         <div class="card-group">
           <div th:each="board : ${boardList3}"  class="card-item card-item_main">
             <div class="card-ly1">
-              <a  th:href="@{'/project-content.html/' + ${board.postid}}"  class="card card_big">
+              <a  th:href="@{'/project-content.html/' + ${board.postid}}"  class="card card_big" style="width:100%;">
                 <h3 class="card__head fs_28"><span th:text="${board.title}"></span></h3>
                 <span class="card__date" th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
-                <div class="card__content">
+                <div class="card__content" style="width:100%;">
                   <p class="card__p">
-                    <span th:text="${board.content}"></span>
+                    <span th:utext="${board.content}"></span>
                   </p>
                   <ul class="bulletien-info">
                     <li class="bulletien-info__item">- 작성자: <span th:text="${board.writer}"></span></li>
