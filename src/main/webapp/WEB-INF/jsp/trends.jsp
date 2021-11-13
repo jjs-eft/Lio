@@ -307,10 +307,10 @@
 
 					<select onchange="mySubmit(this.value)">
 						<option value="">-선택-</option>
-					    <option value="graph/userTrend.jsp">이용자들이 습득한 언어</option>
-					    <option value="graph/boardTrend.jsp">이용자들이 필요하는 언어</option>
-					    <option value="graph/langUserTrend.jsp">시간별 배운 언어 트랜드</option>
-					    <option value="graph/langBoardTrend.jsp">시간별 필요로 하는 언어</option>
+					    <option value="graph/userTrend.jsp">개발자들이 선택한 언어 비율</option>
+					    <option value="graph/boardTrend.jsp">개발자들이 필요로 하는 언어 비율</option>
+					    <option value="graph/langUserTrend.jsp">개발자들의 시간별 언어 트렌드</option>
+					    <option value="graph/langBoardTrend.jsp">개발자들의 시간별 필요로 하는 언어 트렌드</option>
 					</select>
 				</td>
 			</tr>	

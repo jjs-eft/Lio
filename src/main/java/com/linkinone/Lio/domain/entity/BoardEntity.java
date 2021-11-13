@@ -47,9 +47,12 @@ public class BoardEntity extends TimeEntity {
     @Column(length = 10, nullable = true)
     private Integer NOP;
 
+    @Column(length = 10)
+    private String tech;
+
 
     @Builder
-    public BoardEntity(Long postid, String boardtype, String writer, String title, String content, String tag, Integer hits, Integer recommend, Integer NOP) {
+    public BoardEntity(Long postid, String boardtype, String writer, String title, String content, String tag, Integer hits, Integer recommend, Integer NOP, String tech) {
         this.postid = postid;
         this.boardtype = boardtype;
         this.writer = writer;
@@ -59,6 +62,7 @@ public class BoardEntity extends TimeEntity {
         this.hits = hits;
         this.recommend = recommend;
         this.NOP = NOP;
+        this.tech = tech;
 
     }
 

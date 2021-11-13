@@ -444,6 +444,7 @@ public class BoardService {
                 .NOP(boardEntity.getNOP())
                 .writer(boardEntity.getWriter())
                 .createdDate(boardEntity.getCreatedDate())
+                .tech(boardEntity.getTech())
                 .build();
     }
 

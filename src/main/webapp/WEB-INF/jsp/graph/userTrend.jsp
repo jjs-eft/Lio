@@ -24,7 +24,7 @@
 			var data = new google.visualization.DataTable(${json});
 			
 			var options = {
-				title: '이용자들이 습득한 언어',
+				title: '개발자들이 선택한 언어 비율',
 				sliceVisibilityThreshold: .05, //5%이하의 언어는 other로 포함시킴 
 				width:'100%',
 				height: '100%'

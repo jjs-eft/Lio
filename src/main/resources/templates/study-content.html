@@ -289,7 +289,7 @@
             <!-- 유저 닉네임 -->
             <span th:text="${boardDto.writer}"></span>
             <!-- 작성 날짜 -->
-            <span th:inline="text">작성일 : [[${#temporals.format(boardDto.createdDate, 'yyyy-MM-dd HH:mm')}]] </span>
+            <span th:inline="text"> 작성일 : [[${#temporals.format(boardDto.createdDate, 'yyyy-MM-dd HH:mm')}]] </span>
           </div>
           <div class="content__tag-group">
             <span class="tag"><span th:text="${boardDto.tag}"></span>
@@ -317,7 +317,7 @@
         <div class="content__article-end">
           <div class="content__article-end__left">
             <span>모집인원: <span th:text="${boardDto.NOP}"></span></span>
-            <span>언어: <span>python</span></span>
+            <span>언어: <span th:text="${boardDto.tech}"></span></span>
           </div>
           <div class="content__article-end__right">
             <img src="../img/visibility_black_24dp.svg" alt="" />

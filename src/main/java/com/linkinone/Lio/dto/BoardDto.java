@@ -20,6 +20,7 @@ public class BoardDto {
     private Integer hits;
     private Integer recommend;
     private Integer NOP;
+    private String tech;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 
@@ -36,13 +37,14 @@ public class BoardDto {
                 .hits(hits)
                 .recommend(recommend)
                 .NOP(NOP)
+                .tech(tech)
                 .build();
         return build;
 
     }
 
     @Builder
-    public BoardDto(Long postid, String boardtype, String title, String writer, String content, String tag, Integer hits, Integer recommend, Integer NOP, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+    public BoardDto(Long postid, String boardtype, String title, String writer, String content, String tag, Integer hits, Integer recommend, Integer NOP, LocalDateTime createdDate, LocalDateTime modifiedDate, String tech) {
         this.postid = postid;
         this.boardtype = boardtype;
         this.title = title;
@@ -54,6 +56,7 @@ public class BoardDto {
         this.NOP = NOP;
         this.createdDate = createdDate;
         this.modifiedDate = modifiedDate;
+        this.tech = tech;
 
     }
 

@@ -21,10 +21,13 @@ public class MemberController {
     private ConfirmationTokenService confirmationTokenService;
 
     //이메일 인증
+    @ResponseBody
     @GetMapping("/confirm-email")
     public String viewConfirmEmail(@Valid @RequestParam String token) throws Exception {
 
-        return "redirect:/";
+        String resultmsg="<script>alert('입력한 이메일로 전송된 URL을 통해 회원가입을 완료하신후 로그인해주세요.');location.href='/#open-login-modal'</script>";
+
+        return resultmsg;
     }
 
     @GetMapping("/recently-trend.html")
