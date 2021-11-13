@@ -25,7 +25,7 @@ public class MemberController {
     @GetMapping("/confirm-email")
     public String viewConfirmEmail(@Valid @RequestParam String token) throws Exception {
 
-        String resultmsg="<script>alert('입력한 이메일로 전송된 URL을 통해 회원가입을 완료하신후 로그인해주세요.');location.href='/#open-login-modal'</script>";
+        String resultmsg="<script>alert('회원가입이 완료되셨습니다. 가입하신 이메일로 로그인 해주세요');location.href='/#open-login-modal'</script>";
 
         return resultmsg;
     }

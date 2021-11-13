@@ -4,10 +4,8 @@ package com.linkinone.Lio.service;
 import com.linkinone.Lio.domain.entity.BoardEntity;
 import com.linkinone.Lio.domain.entity.TechEntity;
 import com.linkinone.Lio.domain.repository.BoardRepository;
-import com.linkinone.Lio.domain.repository.BoardTechRepository;
 import com.linkinone.Lio.domain.repository.TechRepository;
 import com.linkinone.Lio.dto.BoardDto;
-import com.linkinone.Lio.dto.BoardTechDto;
 import com.linkinone.Lio.dto.TechDto;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,7 +23,6 @@ import java.util.Optional;
 public class BoardService {
 
     private BoardRepository boardRepository;
-    private BoardTechRepository boardTechRepository;
     private TechRepository techRepository;
 
     private static final int BLOCK_PAGE_NUM_COUNT = 4;  // 블럭에 존재하는 페이지 번호 수
@@ -394,11 +391,6 @@ public class BoardService {
 
 
     @Transactional
-    public int saveTech(BoardTechDto boardTechDto) {
-        return boardTechRepository.save(boardTechDto.toEntity()).getPostID();
-    }
-
-    @Transactional
     public List<TechDto> getTech() {
         List<TechEntity> techEntities = techRepository.findAll();
         List<TechDto> techDtolist =  new ArrayList<>();
@@ -423,14 +415,43 @@ public class BoardService {
         return boardRepository.decreaseHits(postid);
     }
 
-
-
     @Transactional
     public int increaseRecom(Long postid){
         return boardRepository.increaseRecom(postid);
     }
 
 
+    @Transactional
+    public List<BoardDto> study_searchPosts(String keyword, String techkeyword) {
+        String BT = "study";
+        List<BoardEntity> boardEntities =
+                boardRepository.findByTitleContainingAndBoardtypeAndTech(keyword, BT, techkeyword);
+        List<BoardDto> boardDtoList4 = new ArrayList<>();
+
+        if (boardEntities.isEmpty()) return boardDtoList4;
+
+        for (BoardEntity boardEntity : boardEntities) {
+            boardDtoList4.add(this.convertEntityToDto(boardEntity));
+        }
+
+        return boardDtoList4;
+    }
+
+    @Transactional
+    public List<BoardDto> project_searchPosts(String keyword, String techkeyword) {
+        String BT = "project";
+        List<BoardEntity> boardEntities =
+                boardRepository.findByTitleContainingAndBoardtypeAndTech(keyword, BT, techkeyword);
+        List<BoardDto> boardDtoList5 = new ArrayList<>();
+
+        if (boardEntities.isEmpty()) return boardDtoList5;
+
+        for (BoardEntity boardEntity : boardEntities) {
+            boardDtoList5.add(this.convertEntityToDto(boardEntity));
+        }
+
+        return boardDtoList5;
+    }
 
     private BoardDto convertEntityToDto(BoardEntity boardEntity) {
         return BoardDto.builder()

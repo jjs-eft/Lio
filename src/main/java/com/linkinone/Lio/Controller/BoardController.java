@@ -366,6 +366,9 @@ public class BoardController {
         model.addAttribute("boardList", boardList4);
         model.addAttribute("pageList", pageList);
 
+        List<TechDto> techlist = boardService.getTech();
+        model.addAttribute("techlist", techlist);
+
         return "/study-find.html";
     }
 
@@ -391,12 +394,12 @@ public class BoardController {
     //상세조회 ( 스터디 )
     @GetMapping("/study-content.html/{no}")
     public String study_detail(@PathVariable("no") Long no, Model model, Authentication authentication) {
+
         model.addAttribute("view", boardService.increaseHits(no));
         BoardDto boardDTO = boardService.getPost(no);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         model.addAttribute("author",userDetails.getUsername());
         model.addAttribute("boardDto", boardDTO);
-
 
         List<CommentDto> commentList = commentService.getComment(no);
         model.addAttribute("commentDto", commentList);
@@ -463,6 +466,19 @@ public class BoardController {
     }
 
 
+    //스터디 게시판 검색
+    @GetMapping("/study-find.html/search")
+    public String study_search(@RequestParam(value="keyword") String keyword, @RequestParam(value="techkeyword") String techkeyword, Model model) {
+        List<BoardDto> boardDtoList4 = boardService.study_searchPosts(keyword, techkeyword);
+
+
+        model.addAttribute("boardList", boardDtoList4);
+
+        return "/study-find.html";
+    }
+
+
+
 
     //프로젝트 찾기 게시판
     @GetMapping("/project-find.html")
@@ -473,8 +489,12 @@ public class BoardController {
         model.addAttribute("boardList", boardList5);
         model.addAttribute("pageList", pageList);
 
+        List<TechDto> techlist = boardService.getTech();
+        model.addAttribute("techlist", techlist);
+
         return "/project-find.html";
     }
+
     //글 작성
     @GetMapping("/project-recruit.html")
     public String project_recruit(Model model, Authentication authentication) {
@@ -491,7 +511,7 @@ public class BoardController {
     public String project_recruitEx(BoardDto boardDto) {
 
         boardService.savePost(boardDto);
-//        boardService.saveTech(boardTechDto);
+
 
         return "redirect:/project-find.html";
     }
@@ -564,6 +584,18 @@ public class BoardController {
 
         return "redirect:/project-find.html";
     }
+
+    //프로젝트 게시판 검색
+    @GetMapping("/project-find.html/search")
+    public String project_search(@RequestParam(value="keyword") String keyword, @RequestParam(value="techkeyword") String techkeyword, Model model) {
+        List<BoardDto> boardDtoList5 = boardService.project_searchPosts(keyword, techkeyword);
+
+        model.addAttribute("boardList", boardDtoList5);
+
+        return "/project-find.html";
+    }
+
+
 
 }
 

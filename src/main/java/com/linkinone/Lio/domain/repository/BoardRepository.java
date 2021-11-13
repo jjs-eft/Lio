@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
+    List<BoardEntity> findByTitleContainingAndBoardtypeAndTech(String keyword, String BT, String tech);
     List<BoardEntity> findByTitleContainingAndBoardtype(String keyword, String BT);
     Page<BoardEntity> findAllByBoardtype(String BT, Pageable pageable);
     Long countByBoardtype(String BT);
@@ -27,6 +28,8 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Long> {
     @Modifying
     @Query("update BoardEntity p set p.recommend = p.recommend + 1 where p.postid = :postid")
     int increaseRecom(@Param("postid") Long postid);
+
+
 
 
 }

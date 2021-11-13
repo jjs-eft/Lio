@@ -326,6 +326,7 @@
                 </ul>
               </a>
         </div>
+          </div>
         <!-- end card-group -->
             <!-- start pagenation -->
             <div class="pagenation">
@@ -342,7 +343,7 @@
               <ul class="pagenation-list">
             <span th:each="pageNum : ${pageList}" th:inline="text">
               <li class="pagenation-list__item pagenation-list__item_active">
-              <a th:href="@{'/board-question.html/?page=' + ${pageNum}}">[[${pageNum}]]</a>
+                 <a th:href="@{'/board-question.html/?page=' + ${pageNum}}">[[${#numbers.formatInteger(pageNum, 2)}]]</a>
             </span>
                 </li>
               </ul>
@@ -358,7 +359,6 @@
               />
             </div>
             <!-- end pagenation -->
-      </div>
     </div>
     <!-- footer -->
     <script src="../JS/footer.js"></script>

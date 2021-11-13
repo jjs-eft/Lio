@@ -265,12 +265,12 @@
       <div class="tab-ly">
         <ul class="tab">
           <li class="tab__item">
-            <a href="/study-find.html" class="tab__link tab__link_active"
+            <a href="/study-find.html" class="tab__link"
             >스터디 찾기</a
             >
           </li>
           <li class="tab__item">
-            <a href="/project-find.html" class="tab__link">프로젝트 찾기</a>
+            <a href="/project-find.html" class="tab__link tab__link_active" >프로젝트 찾기</a>
           </li>
         </ul>
       </div>
@@ -284,7 +284,7 @@
           <a href="../project-recruit.html" class="more-btn">프로젝트 모집</a>
         </div>
         <!-- start filter-bar -->
-        <form action="">
+        <form action="/project-find.html/search" method="GET">
           <div class="filter-bar">
             <img
                     src="../img/filter_list_white_24dp.svg"
@@ -292,19 +292,12 @@
                     class="filter-bar__filter-ico"
             />
             <span class="vertical-line"></span>
-            <select name="NOP" id="" class="filter-bar__select">
-              <option value="">인원</option>
-              <option value="">1</option>
-              <option value="">2</option>
-            </select>
-            <select name="" id="" class="filter-bar__select">
-              <option value="">언어</option>
-              <option value="">python</option>
-              <option value="">java</option>
+            <select name="techkeyword" id="" class="filter-bar__select">
+              <option th:each="tech : ${techlist}" th:text="${tech.techName}"></option>
             </select>
             <input
-                    type="search"
-                    name=""
+                    type="text"
+                    name="keyword"
                     id=""
                     class="filter-bar__search-field"
             />
@@ -322,14 +315,12 @@
         <!-- start card-group -->
         <ul class="card-group">
           <li th:each="board : ${boardList}"  class="card-item">
-            <div  class="card-ly1">
-              <a th:href="@{'/project-content.html/' + ${board.postid}}"  class="card card_big">
+            <div class="card-ly1">
+              <a th:href="@{'/project-content.html/' + ${board.postid}}"  class="card card_big" style="width:100%;" >
                 <h3 class="card__head fs_28"><span th:text="${board.title}"></span></h3>
                 <span class="card__date" th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
-                <div class="card__content">
-                  <p class="card__p">
-                    <span th:text="${board.content}"></span>
-                  </p>
+                <div class="card__content" style="width:100%;">
+                  <p class="card__p" th:utext="${board.content}"></p>
                   <ul class="bulletien-info">
                     <li class="bulletien-info__item">- 작성자: <span th:text="${board.writer}"></span></li>
                     <li class="bulletien-info__item">- 추천수: <span th:text="${board.recommend}" ></span></li>
@@ -359,7 +350,7 @@
           <ul class="pagenation-list">
             <span th:each="pageNum : ${pageList}" th:inline="text">
               <li class="pagenation-list__item pagenation-list__item_active">
-              <a th:href="@{'/project-find.html/?page=' + ${pageNum}}">[[${pageNum}]]</a>
+                 <a th:href="@{'/project-find.html/?page=' + ${pageNum}}">[[${#numbers.formatInteger(pageNum, 2)}]]</a>
             </span>
             </li>
           </ul>

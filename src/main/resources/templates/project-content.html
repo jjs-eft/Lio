@@ -287,9 +287,9 @@
           </h3>
           <div class="content__info">
             <!-- 유저 닉네임 -->
-            <span th:text="${boardDto.writer}"></span>
+            작성자 : <span th:text="${boardDto.writer}" style="margin-left: 5px;" > </span>
             <!-- 작성 날짜 -->
-            <span th:inline="text">작성일 : [[${#temporals.format(boardDto.createdDate, 'yyyy-MM-dd HH:mm')}]] </span>
+            <span th:inline="text" style="margin-left: 15px;"> 작성일 : [[${#temporals.format(boardDto.createdDate, 'yyyy-MM-dd HH:mm')}]] </span>
           </div>
           <div class="content__tag-group">
             <span class="tag"><span th:text="${boardDto.tag}"></span>
