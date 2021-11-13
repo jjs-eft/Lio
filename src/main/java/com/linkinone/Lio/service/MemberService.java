@@ -3,7 +3,9 @@ package com.linkinone.Lio.service;
 
 import com.linkinone.Lio.domain.Role;
 import com.linkinone.Lio.domain.entity.BoardEntity;
+import com.linkinone.Lio.domain.entity.ConfirmationToken;
 import com.linkinone.Lio.domain.entity.MemberEntity;
+import com.linkinone.Lio.domain.repository.ConfirmationTokenRepository;
 import com.linkinone.Lio.domain.repository.MemberRepository;
 import com.linkinone.Lio.dto.BoardDto;
 import com.linkinone.Lio.dto.MemberDto;
@@ -30,6 +32,12 @@ import java.util.Optional;
 @AllArgsConstructor
 public class MemberService implements UserDetailsService {
     private MemberRepository memberRepository;
+    private static ConfirmationTokenService confirmationTokenService;
+
+    public static void confirmEmail(String token) throws Exception {
+        ConfirmationToken findConfirmationToken = confirmationTokenService.findByIdAndExpirationDateAfterAndExpired(token);
+        findConfirmationToken.useToken();
+    }
 
     @Transactional
     public long joinUser(MemberDto memberDto) {

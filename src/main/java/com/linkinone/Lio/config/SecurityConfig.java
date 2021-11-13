@@ -63,6 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoringAntMatchers("/ResearchAddServlet")
                 .ignoringAntMatchers("/ResearchListServlet")
                 .ignoringAntMatchers("/fileupload")
+                .ignoringAntMatchers("/confirm-email")
                 .ignoringAntMatchers("/user-info-modify.html");
 
     }

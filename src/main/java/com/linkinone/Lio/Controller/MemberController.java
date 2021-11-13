@@ -2,18 +2,30 @@ package com.linkinone.Lio.Controller;
 
 import com.linkinone.Lio.dto.BoardDto;
 import com.linkinone.Lio.dto.MemberDto;
+import com.linkinone.Lio.service.ConfirmationTokenService;
 import com.linkinone.Lio.service.MemberService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @AllArgsConstructor
 public class MemberController {
     private MemberService memberService;
+    private ConfirmationTokenService confirmationTokenService;
+
+    //이메일 인증
+    @GetMapping("/confirm-email")
+    public String viewConfirmEmail(@Valid @RequestParam String token) throws Exception {
+
+        return "redirect:/";
+    }
 
     @GetMapping("/recently-trend.html")
     public String trend() {
@@ -32,6 +44,7 @@ public class MemberController {
     public String execSignup(MemberDto memberDto) {
 
         memberService.joinUser(memberDto);
+        confirmationTokenService.createEmailConfirmationToken(memberDto);
         String resultmsg="<script>alert('입력한 이메일로 전송된 URL을 통해 회원가입을 완료하신후 로그인해주세요.');location.href='/#open-login-modal'</script>";
 
         return resultmsg;
