@@ -9,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,16 +18,6 @@ import javax.validation.Valid;
 public class MemberController {
     private MemberService memberService;
     private ConfirmationTokenService confirmationTokenService;
-
-    //이메일 인증
-    @ResponseBody
-    @GetMapping("/confirm-email")
-    public String viewConfirmEmail(@Valid @RequestParam String token) throws Exception {
-
-        String resultmsg="<script>alert('회원가입이 완료되셨습니다. 가입하신 이메일로 로그인 해주세요');location.href='/#open-login-modal'</script>";
-
-        return resultmsg;
-    }
 
     @GetMapping("/recently-trend.html")
     public String trend() {
@@ -81,14 +70,35 @@ public class MemberController {
     }
 
     @ResponseBody
+    @GetMapping("/confirm-email")
+    public String viewConfirmEmail(@Valid @RequestParam String token) throws Exception {
+
+        String resultmsg="<script>alert('회원가입이 완료되셨습니다. 가입하신 이메일로 로그인 해주세요');location.href='/#open-login-modal'</script>";
+
+        return resultmsg;
+    }
+
+    @ResponseBody
     @DeleteMapping("/user-info-modify.html")
-    public String delete_user(Authentication authentication, Model model){
+    public String delete_user(Authentication authentication){
         String email;
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         email = userDetails.getUsername();
 
         memberService.deleteUser(email);
         String resultmsg="<script>alert('서비스 이용해주셔서 감사합니다.');location.href='/'</script>";
+
+        return resultmsg;
+    }
+
+    @ResponseBody
+    @PostMapping("/login-modal-find")
+    public String find_password(@RequestParam String email) {
+
+
+        memberService.find_password(email);
+
+        String resultmsg="<script>alert('입력하신 이메일로 임시 비밀번호가 발급되었습니다! 확인하신 후 로그인해주세요');location.href='/'</script>";
 
         return resultmsg;
     }
