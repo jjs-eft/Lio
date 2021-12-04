@@ -1,0 +1,16 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: lio.email.service@gmail.com
+    password: lio1232email
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000

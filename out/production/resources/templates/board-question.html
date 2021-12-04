@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link In One</title>
+    <link rel="stylesheet" href="../CSS/reset.css" />
+    <link rel="stylesheet" href="../CSS/style.css" />
+  </head>
+  <body>
+    <!-- start login-modal -->
+    <form action="/open-login-modal" method="POST">
+      <input
+        type="hidden"
+        th:name="${_csrf.parameterName}"
+        th:value="${_csrf.token}"
+      />
+      <div class="login-modal" id="open-login-modal">
+        <div class="login-modal__content modal-content">
+          <a href="#">
+            <img
+              class="modal-content__close"
+              src="/img/close_white_24dp.svg"
+              alt="modal-close"
+            />
+          </a>
+          <input
+            type="email"
+            name="username"
+            placeholder="이메일"
+            class="modal-content__input"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="비밀번호"
+            class="modal-content__input"
+          />
+          <div class="modal-content_ly1">
+            <a
+              href="#login-modal-find"
+              class="modal-content__box modal-content__box_small"
+              >비밀번호 찾기</a
+            >
+            <a
+              href="#login-modal-signup"
+              class="modal-content__box modal-content__box_small"
+              >회원가입</a
+            >
+          </div>
+          <input
+            type="submit"
+            class="
+              modal-content__box
+              modal-content__box_big
+              modal-content__first-big-btn
+            "
+            value="로그인"
+          />
+          <a
+<!--            href=""
+            class="
+              modal-content__box modal-content__box_big modal-content__google
+            "
+            >구글로 로그인</a
+          >
+          <a
+            href=""
+            class="
+              modal-content__box modal-content__box_big modal-content__naver
+            "
+            >네이버로 로그인</a
+          >-->
+        </div>
+      </div>
+    </form>
+    <form action="" method="POST">
+      <div class="login-modal" id="login-modal-find">
+        <div class="login-modal__content modal-content">
+          <a href="#open-login-modal">
+            <img
+              class="modal-content__prev"
+              src="/img/keyboard_arrow_left_white_24dp.svg"
+              alt="modal-prev"
+            />
+          </a>
+          <a href="#">
+            <img
+              class="modal-content__close"
+              src="/img/close_white_24dp.svg"
+              alt="modal-close"
+            />
+          </a>
+          <input
+            type="email"
+            placeholder="이메일"
+            class="modal-content__input"
+          />
+          <input
+            type="submit"
+            class="
+              modal-content__box
+              modal-content__box_big
+              modal-content__first-big-btn
+            "
+            value="비밀번호 초기화"
+          />
+        </div>
+      </div>
+    </form>
+    <form action="/login-modal-signup" method="POST">
+      <input
+        type="hidden"
+        th:name="${_csrf.parameterName}"
+        th:value="${_csrf.token}"
+      />
+      <div class="login-modal" id="login-modal-signup">
+        <div class="login-modal__content modal-content">
+          <a href="#open-login-modal">
+            <img
+              class="modal-content__prev"
+              src="/img/keyboard_arrow_left_white_24dp.svg"
+              alt="modal-prev"
+            />
+          </a>
+          <a href="#">
+            <img
+              class="modal-content__close"
+              src="/img/close_white_24dp.svg"
+              alt="modal-close"
+            />
+          </a>
+          <input
+            type="email"
+            name="email"
+            placeholder="이메일"
+            class="modal-content__input"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="비밀번호"
+            class="modal-content__input"
+          />
+          <input
+            type="text"
+            name="name"
+            placeholder="이름"
+            class="modal-content__input"
+          />
+          <input
+            type="text"
+            name="nickname"
+            placeholder="닉네임"
+            class="modal-content__input"
+          />
+          <input
+            type="submit"
+            class="
+              modal-content__box
+              modal-content__box_big
+              modal-content__first-big-btn
+            "
+            value="회원가입"
+          />
+        </div>
+      </div>
+    </form>
+    <form action="" method="POST">
+      <div class="login-modal" id="tech-modal">
+        <div class="login-modal__content modal-content">
+          <a href="#">
+            <img
+              class="modal-content__close"
+              src="/img/close_white_24dp.svg"
+              alt="modal-close"
+            />
+          </a>
+          <p class="modal-content__p">
+            <span class="font-weight_600">사용자</span>의 팀 찾기 매핑을
+            위한<span class="font-weight_600">기술</span>을 등록해주세요.
+          </p>
+          <label for="tech" class="modal-content__label">언어</label>
+          <!-- tech select -->
+          <select name="tech" id="tech" class="modal-content__input">
+            <option value="선택없음">선택없음</option>
+            <option value="Python">Python</option>
+            <option value="Java">Java</option>
+          </select>
+          <div class="">
+            <span class="tag"
+              >Python<img
+                src="/img/close_white_24dp.svg"
+                class="tag__close-btn"
+            /></span>
+            <span class="tag"
+              >Java<img src="/img/close_white_24dp.svg" class="tag__close-btn"
+            /></span>
+          </div>
+          <input
+            type="submit"
+            class="
+              modal-content__box
+              modal-content__box_big
+              modal-content__first-big-btn
+            "
+            value="등록"
+          />
+        </div>
+      </div>
+    </form>
+    <form action="" method="POST">
+      <div class="login-modal" id="modify-pw-modal">
+        <div class="login-modal__content modal-content">
+          <a href="#">
+            <img
+              class="modal-content__close"
+              src="/img/close_white_24dp.svg"
+              alt="modal-close"
+            />
+          </a>
+          <p class="modal-content__p">
+            <span class="font-weight_600">비밀번호</span>를
+            <span class="font-weight_600">변경</span>하시겠습니까?
+          </p>
+          <input
+            type="password"
+            placeholder="기존 비밀번호 입력"
+            class="modal-content__input"
+          />
+          <input
+            type="password"
+            placeholder="변경 비밀번호 입력"
+            class="modal-content__input"
+          />
+          <input
+            type="password"
+            placeholder="변경 비밀번호 확인"
+            class="modal-content__input"
+          />
+          <input
+            type="submit"
+            class="
+              modal-content__box
+              modal-content__box_big
+              modal-content__first-big-btn
+            "
+            value="비밀번호 변경"
+          />
+        </div>
+      </div>
+    </form>
+    <!-- end login-modal -->
+    <!-- start header -->
+    <script sec:authorize="isAnonymous()" src="../JS/header.js"></script>
+    <script
+      sec:authorize="isAuthenticated()"
+      src="../JS/header-logined.js"
+    ></script>
+    <!-- end header -->
+    <!-- start main -->
+    <div class="main">
+      <div class="tab-ly">
+        <ul class="tab">
+          <li class="tab__item">
+            <a href="../board-free.html" class="tab__link">자유 게시판</a>
+          </li>
+          <li class="tab__item">
+            <a href="../board-question.html" class="tab__link tab__link_active"
+              >질문 게시판</a
+            >
+          </li>
+          <li class="tab__item">
+            <a href="../board-notice.html" class="tab__link">공지 사항</a>
+          </li>
+        </ul>
+      </div>
+      <div class="main-preview">
+        <div class="main-group-head group-head">
+          <h2 class="group-head-title underline underline_size-1">
+            질문 게시판
+          </h2>
+          <a href="../board-question-write.html" class="more-btn"
+            >글 쓰기</a
+          >
+        </div>
+        <!-- start filter-bar -->
+        <form action="/board-question.html/search" method="GET">
+          <div class="filter-bar">
+            <input
+                    type="text"
+                    name="keyword"
+                    id=""
+                    class="filter-bar__search-field"
+            />
+            <label for="search-btn">
+              <img
+                src="../img/search_white_24dp.svg"
+                alt="search-ico"
+                class="filter-bar__search-ico"
+              />
+            </label>
+            <input type="submit" value="search" id="search-btn" />
+          </div>
+        </form>
+        <!-- end filter-bar -->
+        <!-- start board-group -->
+
+          <div class="card-group" >
+            <div th:each="board : ${boardList}" class="card-item card-item_board-ly" >
+              <a th:href="@{'/board-question.html/' + ${board.postid}}" class="card card_board-ly card_board-border">
+                <div class="">
+                  <h3 class="card__head card__head_board_ly">
+                    <span th:text="${board.title}"></span>
+                  </h3>
+                  <span th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+                  <div class="tag-group">
+                    <span th:text="${board.tag}"></span>
+                  </div>
+                </div>
+                <ul class="bulletien-info bulletien-info_board_ly">
+                  <li class="bulletien-info__item">-  <span th:text="${board.writer}"></span></li>
+                  <li class="bulletien-info__item">- 추천수: <span th:text="${board.recommend}" ></span></li>
+                  <li class="bulletien-info__item">- 조회수: <span th:text="${board.hits}" ></span></li>
+                </ul>
+              </a>
+        </div>
+          </div>
+        <!-- end card-group -->
+            <!-- start pagenation -->
+            <div class="pagenation">
+              <img
+                      src="../img/pagenation-left-end.svg"
+                      alt=""
+                      class="pagenation__btn"
+              />
+              <img
+                      src="../img/pagenation-left.svg"
+                      alt=""
+                      class="pagenation__btn"
+              />
+              <ul class="pagenation-list">
+            <span th:each="pageNum : ${pageList}" th:inline="text">
+              <li class="pagenation-list__item pagenation-list__item_active">
+                 <a th:href="@{'/board-question.html/?page=' + ${pageNum}}">[[${#numbers.formatInteger(pageNum, 2)}]]</a>
+            </span>
+                </li>
+              </ul>
+              <img
+                      src="../img/pagenation-right.svg"
+                      alt=""
+                      class="pagenation__btn"
+              />
+              <img
+                      src="../img/pagenation-right-end.svg"
+                      alt=""
+                      class="pagenation__btn"
+              />
+            </div>
+            <!-- end pagenation -->
+    </div>
+    <!-- footer -->
+    <script src="../JS/footer.js"></script>
+  </body>
+</html>

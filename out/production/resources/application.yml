@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/liodb?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: lio1232
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      format_sql: true
+      ddl-auto: update
+  logging:
+    level:
+      org:
+        hibernate:
+          SQL: DEBUG
+          type:
+            descriptor:
+              sql:
+                BasicBinder: TRACE
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  profiles:
+    include: oauth
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+
+

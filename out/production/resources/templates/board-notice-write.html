@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="" xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link In One</title>
+    <link rel="stylesheet" href="../CSS/reset.css" />
+    <link rel="stylesheet" href="../CSS/style.css" />
+    <script src="../plugin/ckeditor/ckeditor.js"></script>
+    <script>
+      var ckedtior_config = {
+        resize_enaleb : false,
+      };
+    </script>
+  </head>
+  <body>
+    <!-- start login-modal -->
+    <form action="/open-login-modal" method="POST">
+      <input
+        type="hidden"
+        th:name="${_csrf.parameterName}"
+        th:value="${_csrf.token}"
+      />
+      <div class="login-modal" id="open-login-modal">
+        <div class="login-modal__content modal-content">
+          <a href="#">
+            <img
+              class="modal-content__close"
+              src="/img/close_white_24dp.svg"
+              alt="modal-close"
+            />
+          </a>
+          <input
+            type="email"
+            name="username"
+            placeholder="이메일"
+            class="modal-content__input"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="비밀번호"
+            class="modal-content__input"
+          />
+          <div class="modal-content_ly1">
+            <a
+              href="#login-modal-find"
+              class="modal-content__box modal-content__box_small"
+              >비밀번호 찾기</a
+            >
+            <a
+              href="#login-modal-signup"
+              class="modal-content__box modal-content__box_small"
+              >회원가입</a
+            >
+          </div>
+          <input
+            type="submit"
+            class="
+              modal-content__box
+              modal-content__box_big
+              modal-content__first-big-btn
+            "
+            value="로그인"
+          />
+  <!--        <a
+            href=""
+            class="
+              modal-content__box modal-content__box_big modal-content__google
+            "
+            >구글로 로그인</a
+          >
+          <a
+            href=""
+            class="
+              modal-content__box modal-content__box_big modal-content__naver
+            "
+            >네이버로 로그인</a
+          >-->
+        </div>
+      </div>
+    </form>
+    <form action="" method="POST">
+      <div class="login-modal" id="login-modal-find">
+        <div class="login-modal__content modal-content">
+          <a href="#open-login-modal">
+            <img
+              class="modal-content__prev"
+              src="/img/keyboard_arrow_left_white_24dp.svg"
+              alt="modal-prev"
+            />
+          </a>
+          <a href="#">
+            <img
+              class="modal-content__close"
+              src="/img/close_white_24dp.svg"
+              alt="modal-close"
+            />
+          </a>
+          <input
+            type="email"
+            placeholder="이메일"
+            class="modal-content__input"
+          />
+          <input
+            type="submit"
+            class="
+              modal-content__box
+              modal-content__box_big
+              modal-content__first-big-btn
+            "
+            value="비밀번호 초기화"
+          />
+        </div>
+      </div>
+    </form>
+    <form action="/login-modal-signup" method="POST">
+      <input
+        type="hidden"
+        th:name="${_csrf.parameterName}"
+        th:value="${_csrf.token}"
+      />
+      <div class="login-modal" id="login-modal-signup">
+        <div class="login-modal__content modal-content">
+          <a href="#open-login-modal">
+            <img
+              class="modal-content__prev"
+              src="/img/keyboard_arrow_left_white_24dp.svg"
+              alt="modal-prev"
+            />
+          </a>
+          <a href="#">
+            <img
+              class="modal-content__close"
+              src="/img/close_white_24dp.svg"
+              alt="modal-close"
+            />
+          </a>
+          <input
+            type="email"
+            name="email"
+            placeholder="이메일"
+            class="modal-content__input"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="비밀번호"
+            class="modal-content__input"
+          />
+          <input
+            type="text"
+            name="name"
+            placeholder="이름"
+            class="modal-content__input"
+          />
+          <input
+            type="text"
+            name="nickname"
+            placeholder="닉네임"
+            class="modal-content__input"
+          />
+          <input
+            type="submit"
+            class="
+              modal-content__box
+              modal-content__box_big
+              modal-content__first-big-btn
+            "
+            value="회원가입"
+          />
+        </div>
+      </div>
+    </form>
+    <form action="" method="POST">
+      <div class="login-modal" id="tech-modal">
+        <div class="login-modal__content modal-content">
+          <a href="#">
+            <img
+              class="modal-content__close"
+              src="/img/close_white_24dp.svg"
+              alt="modal-close"
+            />
+          </a>
+          <p class="modal-content__p">
+            <span class="font-weight_600">사용자</span>의 팀 찾기 매핑을
+            위한<span class="font-weight_600">기술</span>을 등록해주세요.
+          </p>
+          <label for="tech" class="modal-content__label">언어</label>
+          <!-- tech select -->
+          <select name="tech" id="tech" class="modal-content__input">
+            <option value="선택없음">선택없음</option>
+            <option value="Python">Python</option>
+            <option value="Java">Java</option>
+          </select>
+          <div class="">
+            <span class="tag"
+              >Python<img
+                src="/img/close_white_24dp.svg"
+                class="tag__close-btn"
+            /></span>
+            <span class="tag"
+              >Java<img src="/img/close_white_24dp.svg" class="tag__close-btn"
+            /></span>
+          </div>
+          <input
+            type="submit"
+            class="
+              modal-content__box
+              modal-content__box_big
+              modal-content__first-big-btn
+            "
+            value="등록"
+          />
+        </div>
+      </div>
+    </form>
+    <form action="" method="POST">
+      <div class="login-modal" id="modify-pw-modal">
+        <div class="login-modal__content modal-content">
+          <a href="#">
+            <img
+              class="modal-content__close"
+              src="/img/close_white_24dp.svg"
+              alt="modal-close"
+            />
+          </a>
+          <p class="modal-content__p">
+            <span class="font-weight_600">비밀번호</span>를
+            <span class="font-weight_600">변경</span>하시겠습니까?
+          </p>
+          <input
+            type="password"
+            placeholder="기존 비밀번호 입력"
+            class="modal-content__input"
+          />
+          <input
+            type="password"
+            placeholder="변경 비밀번호 입력"
+            class="modal-content__input"
+          />
+          <input
+            type="password"
+            placeholder="변경 비밀번호 확인"
+            class="modal-content__input"
+          />
+          <input
+            type="submit"
+            class="
+              modal-content__box
+              modal-content__box_big
+              modal-content__first-big-btn
+            "
+            value="비밀번호 변경"
+          />
+        </div>
+      </div>
+    </form>
+    <!-- end login-modal -->
+    <!-- start header -->
+    <script sec:authorize="isAnonymous()" src="../JS/header.js"></script>
+    <script
+      sec:authorize="isAuthenticated()"
+      src="../JS/header-logined.js"
+    ></script>
+    <!-- end header -->
+    <!-- start main -->
+    <div class="main">
+      <!-- start tab -->
+      <div class="tab-ly">
+        <ul class="tab">
+          <li class="tab__item">
+            <a href="./board-free.html" class="tab__link">자유 게시판</a>
+          </li>
+          <li class="tab__item">
+            <a href="./board-question.html" class="tab__link">질문 게시판</a>
+          </li>
+          <li class="tab__item">
+            <a href="./board-notice.html" class="tab__link tab__link_active"
+              >공지 사항</a
+            >
+          </li>
+        </ul>
+      </div>
+      <!-- end tab -->
+      <div class="main-preview">
+        <h2 class="group-head-title group-head underline underline_size-5">
+          공지 사항 작성
+        </h2>
+        <form action="/board-notice-write.html" class="recruit" method="post">
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+          <h3 class="recruit__header">공지 사항 작성</h3>
+          <div class="recruit-content">
+            <label for="" class="recruit-content__label">제목</label>
+            <input
+              type="text"
+              name="title"
+              placeholder="ex) 자유롭게 작성해주세요."
+              class="recruit-content__input recruit-content__input_full"
+            />
+            <label for="" class="recruit-content__label">태그</label>
+            <input
+                    type="text"
+                    name="tag"
+                    id=""
+                    value=""
+                    class="recruit-content__input"
+                    placeholder="태그1, 태그2 ..."
+            />
+
+
+
+            <input type="hidden" name="writer" class="form-control" id="inputAuthor" th:value="${author}">
+            <input type="hidden" name="boardtype" th:value="notice">
+            <label for="" class="recruit-content__label">내용</label>
+            <textarea name="content" id="content_textarea"  cols="30" rows="10" ></textarea>
+            <script>
+              CKEDITOR.replace("content_textarea", ckedtior_config);
+            </script>
+
+            <div class="recruit-content__btn-group">
+              <input
+                      type="submit"
+                      class="recruit-content__btn recruit-content__btn_submit"
+                      value="등록"
+                      id="submit"
+              />
+              <a
+                      href="/board-notice.html"
+                      class="recruit-content__btn recruit-content__btn_cancel"
+              >취소</a
+              >
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- footer -->
+    <script src="../JS/footer.js"></script>
+  </body>
+</html>
